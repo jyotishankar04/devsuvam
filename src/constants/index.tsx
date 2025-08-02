@@ -76,7 +76,7 @@ export const ABOUT_DATA: AboutData = {
         downloadCV: {
             text: "Download CV",
             icon: <Download className="w-4 h-4" />,
-            href: "/resume.pdf"
+            href: "https://drive.google.com/file/d/1GA9icfWLqSa4TF9L5egiwuGljV6oah9j/view?usp=sharing"
         },
         readMore: {
             expandedText: "Show Less",

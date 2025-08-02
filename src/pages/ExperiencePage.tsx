@@ -157,7 +157,7 @@ const ExperiencePage = () => {
                 className="mt-16 text-center"
             >
                 <Button size="lg" asChild>
-                    <a href="/resume.pdf" download className="flex items-center gap-2">
+                    <a href="https://drive.google.com/file/d/1GA9icfWLqSa4TF9L5egiwuGljV6oah9j/view?usp=sharing" download className="flex items-center gap-2">
                         <Download className="w-5 h-5" />
                         Download Full Resume
                     </a>
