@@ -133,27 +133,25 @@ const LeftCard = () => {
 
                 {/* Theme Selector */}
                 <div className="flex items-center space-x-3">
-                    <Sun className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">Theme</span>
+                    <Sun className="w-5 h-5" />
+                    <span className="font-medium">Theme</span>
                     <Select
                         defaultValue={theme === "light" ? "light" : "dark"}
                         onValueChange={(e) => {
                             setTheme(e as "light" | "dark")
                         }}
                     >
-                        <SelectTrigger className="w-24 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                        <SelectTrigger className="w-24dark:text-gray-300">
                             <SelectValue />
                         </SelectTrigger>
-                        <SelectContent className="dark:bg-gray-800 dark:border-gray-600">
+                        <SelectContent>
                             <SelectItem
                                 value="light"
-                                className="dark:hover:bg-gray-700 dark:focus:bg-gray-700"
                             >
                                 Light
                             </SelectItem>
                             <SelectItem
                                 value="dark"
-                                className="dark:hover:bg-gray-700 dark:focus:bg-gray-700"
                             >
                                 Dark
                             </SelectItem>
