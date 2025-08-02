@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, Github, Linkedin,  ExternalLink } from "lucide-react"
+import { Mail, Github, Linkedin, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
@@ -18,12 +18,13 @@ const Footer = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                     {/* Branding */}
                     <div className="flex flex-col items-center md:items-start">
-                        <Link to="/" className="flex items-center gap-2 mb-2">
-                            <span className="text-xl font-bold text-primary">JP</span>
-                            <span className="text-sm text-muted-foreground">Portfolio</span>
+                        <Link to="/" className="flex items-center  mb-2">
+                            <span className="text-muted-foreground">DEV</span>
+                            <span className="text-muted-foreground">.</span>
+                            <span className="font-bold text-primary text-lg">SUVAM</span>
                         </Link>
                         <p className="text-sm text-muted-foreground text-center md:text-left">
-                            Full-Stack Developer from Balasore, India
+                            Full-Stack Developer with a passion for creating user-friendly web applications.
                         </p>
                     </div>
 
@@ -62,6 +63,9 @@ const Footer = () => {
                 >
                     <p>© {new Date().getFullYear()} Jyotishankar Patra. All rights reserved.</p>
                     <p className="mt-1">Built with Next.js, Tailwind CSS, and Framer Motion</p>
+                    <p className="mt-1">
+                        Inspiration from{" www.amerfathullah.com "}
+                    </p>
                 </motion.div>
             </div>
         </motion.footer>

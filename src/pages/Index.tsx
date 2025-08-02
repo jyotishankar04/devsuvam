@@ -19,7 +19,7 @@ const Index = () => {
     // Simulate loading for 2 seconds
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 6000)
+    }, 1000)
 
     return () => clearTimeout(timer)
   }, [])
@@ -33,7 +33,7 @@ const Index = () => {
     >
       {/* Initial Loader */}
       <AnimatePresence>
-        {isLoading && <InitialLoader onComplete={() => setIsLoading(false)} />}
+        {isLoading && <InitialLoader  />}
 
       </AnimatePresence>
 
