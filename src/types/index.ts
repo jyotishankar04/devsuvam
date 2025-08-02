@@ -147,3 +147,17 @@ export interface ProjectDetails extends Project {
         learnings?: string[]
     }
 }
+
+export type StoryPhase =
+    | "profileIntro"
+    | "journeyStart"
+    | "learningPhase"
+    | "firstBreakthrough"
+    | "skillMastery"
+    | "projectBuilding"
+    | "aiDiscovery"
+    | "professionalGrowth"
+    | "currentAchievements"
+    | "futureVision"
+    | "scrollPrompt"
+    | "complete";

@@ -28,7 +28,7 @@ const EducationSection = ({ education, title = "Education" }: EducationSectionPr
     return (
         <motion.div
         id="education"
-            className="mb-12"
+            className="mb-12 mx-4"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}

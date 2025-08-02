@@ -2,13 +2,17 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Mail, Linkedin, Github,  ArrowRight, Twitter, Instagram, Phone} from "lucide-react"
+import { Mail, Linkedin, Github, ArrowRight, Twitter, Instagram, Phone, Play } from "lucide-react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { ABOUT_PAGE_DATA } from "@/constants/index"
+import CareerStory from "@/components/custom/StoryIntro"
+import { useState } from "react"
 
 const AboutPage = () => {
+    const [showStory, setShowStory] = useState(false)
+
     const {
         header,
         intro,
@@ -84,6 +88,13 @@ const AboutPage = () => {
                                 </a>
                             </Button>
                         ))}
+                        <Button
+                            onClick={() => setShowStory(true)}
+                            className="w-full cursor-pointer  px-4 py-2 my-2"
+                        >
+                            <Play className="w-5 h-5" />
+                            Watch My Journey
+                        </Button>
                     </div>
 
                     <div className="flex gap-3 pt-2">
@@ -251,6 +262,9 @@ const AboutPage = () => {
                     </Button>
                 </div>
             </motion.section>
+
+            {showStory && <CareerStory onComplete={() => setShowStory(false)} />}
+
         </motion.div>
     )
 }

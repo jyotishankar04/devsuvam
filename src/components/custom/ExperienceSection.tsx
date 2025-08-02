@@ -19,13 +19,13 @@ const ExperienceSection = ({ experiences, title = "Experience" }: ExperienceSect
     }
 
     return (
-        <section className="max-w-3xl mx-auto" id="experience">
+        <section className="w-full" id="experience">
             <motion.h2
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
                 viewport={{ once: true }}
-                className="text-3xl font-semibold text-primary mb-12 group"
+                className=" font-semibold text-primary mb-12 group text-3xl"
                 whileHover={{
                    
                     transition: { duration: 0.3 }
@@ -132,7 +132,7 @@ const ExperienceSection = ({ experiences, title = "Experience" }: ExperienceSect
                                 <Badge
                                     key={skill}
                                     variant="outline"
-                                    className="text-primary hover:bg-primary/10 transition-colors"
+                                    className="text-primary "
                                 >
                                     {skill}
                                 </Badge>

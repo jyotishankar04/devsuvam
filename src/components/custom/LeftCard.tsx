@@ -1,4 +1,4 @@
-import { MapPin, Sun, Mail,  Linkedin, Github, ChevronDown, Home, User, Briefcase, BookOpen, Code, Twitter, Instagram } from "lucide-react"
+import { MapPin, Sun, Mail,  Linkedin, Github, ChevronDown, Home, User, Briefcase, BookOpen, Code, Twitter, Instagram, Play } from "lucide-react"
 import { Button } from "../ui/button"
 import { useTheme } from "../theme-provider"
 import {
@@ -9,9 +9,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import {  Link } from "react-router-dom"
+import CareerStory from "./StoryIntro"
+import { useState } from "react"
 
 const LeftCard = () => {
     const { setTheme, theme } = useTheme()
+    const [showStory, setShowStory] = useState(false)
 
     const navLinks = [
         { name: "Home", path: "/", icon: <Home className="w-4 h-4" /> },
@@ -23,7 +26,7 @@ const LeftCard = () => {
     ]
 
     return (
-        <div className="min-h-screen bg-background pt-10 px-4">
+        <div className="md:min-h-screen  bg-background p-10 px-4">
             <div className="flex flex-col items-start">
                 {/* Profile Photo */}
                 <div className="flex mb-6">
@@ -51,9 +54,15 @@ const LeftCard = () => {
                     <MapPin className="w-4 h-4 mr-2" />
                     <span>Balasore, Odisha, India</span>
                 </div>
-
+                <Button
+                    onClick={() => setShowStory(true)}
+                    className="w-full cursor-pointer  px-4 py-2 my-2"
+                >
+                    <Play className="w-5 h-5" />
+                    Watch My Journey
+                </Button>
                 {/* Navigation Dropdown */}
-                <div className="w-full mb-8">
+                <div className="w-full mb-8 hidden md:block" >
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button
@@ -152,6 +161,8 @@ const LeftCard = () => {
                     </Select>
                 </div>
             </div>
+            {showStory && <CareerStory onComplete={() => setShowStory(false)} />}
+
         </div>
     )
 }

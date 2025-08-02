@@ -14,7 +14,7 @@ const Footer = () => {
             transition={{ duration: 0.4 }}
             className="border-t py-8 mt-4"
         >
-            <div className="container max-w-4xl mx-auto px-4">
+            <div className=" mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                     {/* Branding */}
                     <div className="flex flex-col items-center md:items-start">
