@@ -1,4 +1,4 @@
-import { MapPin, Sun, Mail,  Linkedin, Github, ChevronDown, Home, User, Briefcase, BookOpen, Code, Twitter, Instagram, Play } from "lucide-react"
+import { MapPin, Sun, Mail, Linkedin, Github, ChevronDown, Home, User, Briefcase, BookOpen, Code, Twitter, Instagram, Play } from "lucide-react"
 import { Button } from "../ui/button"
 import { useTheme } from "../theme-provider"
 import {
@@ -8,9 +8,10 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
-import {  Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import CareerStory from "./StoryIntro"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
 const LeftCard = () => {
     const { setTheme, theme } = useTheme()
@@ -30,13 +31,16 @@ const LeftCard = () => {
             <div className="flex flex-col items-start">
                 {/* Profile Photo */}
                 <div className="flex mb-6">
-                    <div className="w-32 h-32 rounded-2xl border-2 border-primary overflow-hidden">
+                    <motion.div
+                        layoutId="profile-hero-image"
+                        transition={{ duration: 0.5 }}
+                        className="w-32 h-32 z-40 rounded-2xl border-2 border-primary overflow-hidden">
                         <img
                             src="/dp.png"
                             alt="Profile"
                             className="w-full h-full object-cover object-start"
                         />
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Name and Title */}
@@ -98,12 +102,12 @@ const LeftCard = () => {
                 {/* Social Links */}
                 <div className="flex gap-4 mb-8">
                     {[
-                      
-                    {name: "GitHub", href: "https://github.com/jyotishankar04", icon: Github },
-                    {name: "LinkedIn", href: "https://linkedin.com/in/jyotishankar-patra", icon: Linkedin},
-                    {name: "Twitter", href: "https://twitter.com/devsuvam1", icon: Twitter },
-                    {name: "Instagram", href: "https://instagram.com/dev.suvam", icon: Instagram },
-                    {name: "Email", href: "mailto:jyotipatra.subham@gmail.com", icon: Mail },
+
+                        { name: "GitHub", href: "https://github.com/jyotishankar04", icon: Github },
+                        { name: "LinkedIn", href: "https://linkedin.com/in/jyotishankar-patra", icon: Linkedin },
+                        { name: "Twitter", href: "https://twitter.com/devsuvam1", icon: Twitter },
+                        { name: "Instagram", href: "https://instagram.com/dev.suvam", icon: Instagram },
+                        { name: "Email", href: "mailto:jyotipatra.subham@gmail.com", icon: Mail },
                     ].map(({ icon: Icon, href }) => (
                         <Button
                             key={href}

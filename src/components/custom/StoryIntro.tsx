@@ -10,25 +10,25 @@ import { allProjects } from "@/constants/index"
 const STORY_PHASES = [
     {
         title: "The Beginning",
-        subtitle: "First lines of code (2020)",
+        subtitle: "First lines of code (2023)",
         description: "Wrote my first 'Hello World' and discovered the magic of programming",
         icon: <Rocket className="w-8 h-8" />,
         duration: 2500
     },
     {
         title: "Learning Phase",
-        subtitle: "Building foundations (2020-2021)",
+        subtitle: "Building foundations (2023- mid 2024)",
         description: "Mastered core programming concepts and web technologies",
         icon: <GraduationCap className="w-8 h-8" />,
-        skills: ["HTML", "CSS", "JavaScript", "Python", "Git"],
+        skills: ["HTML", "CSS", "JavaScript", "C++", "Networking", "Algorithms", "Data Structures"],
         duration: 3000
     },
     {
-        title: "First Project",
-        subtitle: "Full-stack breakthrough (2022)",
+        title: "First Project - A Blogging App",
+        subtitle: "Full-stack breakthrough (2024)",
         description: "Built my first complete web application with React and Node.js",
         icon: <Zap className="w-8 h-8" />,
-        skills: ["React", "Node.js", "Express", "MongoDB"],
+        skills: ["React", "Node.js", "Express", "PostgreSQL", "Tailwind CSS", "REST APIs", "Cloudinary", "JWT"],
         duration: 3000
     },
     {
@@ -36,32 +36,32 @@ const STORY_PHASES = [
         subtitle: "Modern web stack (2023)",
         description: "Adopted modern frameworks and tools for production apps",
         icon: <Star className="w-8 h-8" />,
-        skills: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
+        skills: ["Next.js", "TypeScript", "AWS", "Nginx", "Git", "GitHub", "Docker", "Prisma", "Tailwind CSS", "Shadcn UI", "Redux Toolkit", "React Query", "Caching", "WebSockets", "Redis", "Kafka"],
         duration: 3000
     },
     {
-        title: "Project Portfolio",
-        subtitle: "Real-world solutions (2023-2024)",
+        title: "Full Stack Projects",
+        subtitle: "Real-world solutions (2024-2025)",
         description: "Developed multiple full-stack applications solving actual problems",
         icon: <Code className="w-8 h-8" />,
         stats: [
             { label: "Projects", value: allProjects.length },
             { label: "Technologies", value: "15+" },
-            { label: "Code Lines", value: "50K+" }
+            { label: "Code Lines", value: "70K+" }
         ],
         duration: 3500
     },
     {
         title: "AI Exploration",
-        subtitle: "Next frontier (2024)",
+        subtitle: "Next frontier (2025)",
         description: "Integrated AI capabilities into modern web applications",
         icon: <Brain className="w-8 h-8" />,
-        skills: ["LangChain", "Gemini API", "Vector DBs"],
+        skills: ["Gen AI", ],
         duration: 3500
     },
     {
         title: "Professional Growth",
-        subtitle: "Industry experience (2025)",
+        subtitle: "Industry experience (2025) 2 months",
         description: "Joined Ansmake Technology as Full Stack Developer Intern",
         icon: <Briefcase className="w-8 h-8" />,
         skills: ["Teamwork", "Agile", "Code Reviews"],
@@ -75,13 +75,13 @@ const STORY_PHASES = [
         stats: [
             { label: "Total Skills", value: getSkillsStats().totalSkills },
             { label: "Expert Level", value: getSkillsStats().expertSkills },
-            { label: "Years Exp", value: "3+" }
+            { label: "Years Exp", value: "1+" }
         ],
         duration: 4000
     }
 ]
 
-export default function CareerStory({ onComplete }:any) {
+export default function CareerStory({ onComplete }: any) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [phaseComplete, setPhaseComplete] = useState(false)
     const currentPhase = STORY_PHASES[currentIndex]
