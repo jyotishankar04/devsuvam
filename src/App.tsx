@@ -6,6 +6,7 @@ import OtherLayout from "./layouts/OtherLayout"
 import AboutPage from "./pages/AboutPage"
 import ExperiencePage from "./pages/ExperiencePage"
 import SkillsPage from "./pages/SkillsPage"
+import ChatLayout from "./layouts/ChatLayout"
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/about" element={<OtherLayout children={<AboutPage/> } />} />
         <Route path="/experience" element={<OtherLayout children={<ExperiencePage /> } />} />
         <Route path="/skills" element={<OtherLayout children={<SkillsPage />} />} />
+        <Route path="/chat" element={<ChatLayout />} />
         <Route path="*" element={<IndexLayout />} />
       </Routes>
     </div>

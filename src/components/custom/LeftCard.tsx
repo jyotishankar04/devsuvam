@@ -1,4 +1,4 @@
-import { MapPin, Sun, Mail, Linkedin, Github, ChevronDown, Home, User, Briefcase, BookOpen, Code, Twitter, Instagram, Play } from "lucide-react"
+import { MapPin, Sun, Mail, Linkedin, Github, ChevronDown, Home, User, Briefcase, BookOpen, Code, Twitter, Instagram, Play, Sparkle } from "lucide-react"
 import { Button } from "../ui/button"
 import { useTheme } from "../theme-provider"
 import {
@@ -8,14 +8,16 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import CareerStory from "./StoryIntro"
 import { useState } from "react"
 import { motion } from "framer-motion"
+import { Badge } from "../ui/badge"
 
 const LeftCard = () => {
     const { setTheme, theme } = useTheme()
     const [showStory, setShowStory] = useState(false)
+    const navigate = useNavigate()
 
     const navLinks = [
         { name: "Home", path: "/", icon: <Home className="w-4 h-4" /> },
@@ -24,6 +26,7 @@ const LeftCard = () => {
         { name: "Projects", path: "/projects", icon: <Code className="w-4 h-4" /> },
         { name: "Skills", path: "/skills", icon: <BookOpen className="w-4 h-4" /> },
         { name: "Contact", path: "/about", icon: <Mail className="w-4 h-4" /> },
+        { name: "Chat With Me", path: "/chat", icon: <Play className="w-4 h-4" /> },
     ]
 
     return (
@@ -58,6 +61,18 @@ const LeftCard = () => {
                     <MapPin className="w-4 h-4 mr-2" />
                     <span>Balasore, Odisha, India</span>
                 </div>
+                <Button
+                    onClick={()=>{
+                        navigate("/chat")
+                    }}
+                    className="w-full cursor-pointer px-4 py-2 my-2 flex items-center justify-center gap-2"
+                >
+                    <Sparkle className="w-5 h-5" />
+                    Chat With Me
+                    <Badge variant="secondary" className="text-xs font-semibold">
+                        New
+                    </Badge>
+                </Button>
                 <Button
                     onClick={() => setShowStory(true)}
                     className="w-full cursor-pointer  px-4 py-2 my-2"

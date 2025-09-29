@@ -1,3 +1,4 @@
+import { FloatingChatButton } from "@/components/custom/chat/FloatChatButton"
 import Footer from "@/components/custom/Footer"
 import NavBar from "@/components/custom/NavBar"
 
@@ -9,6 +10,11 @@ const OtherLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <div className="flex-1 w-full h-full overflow-auto">
                     {children}
                     <Footer />
+                    <FloatingChatButton
+                        href="/chat"
+                        label="Open chat"
+                        position="right"
+                    />
                 </div>
             </div>
         </>

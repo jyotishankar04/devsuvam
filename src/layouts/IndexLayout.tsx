@@ -1,3 +1,4 @@
+import { FloatingChatButton } from "@/components/custom/chat/FloatChatButton"
 import Footer from "@/components/custom/Footer"
 import LeftCard from "@/components/custom/LeftCard"
 import NavBar from "@/components/custom/NavBar"
@@ -18,6 +19,11 @@ const IndexLayout = () => {
                     <Index />
                 </div>
             </div>
+            <FloatingChatButton
+                href="/chat"
+                label="Open chat"
+                position="right"
+            />
             <Footer />
         </div>
 
