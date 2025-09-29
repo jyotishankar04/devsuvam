@@ -8,10 +8,12 @@ import ChatMessages, { type Message } from "@/components/custom/chat/ChatMessage
 import { useChat } from "@/hooks/useChat"
 import { useState } from "react"
 import SiteNavbar from "@/components/custom/chat/SiteNavbar"
+import BetaWarningModal from "@/components/custom/BetaWarningModel"
 
 const ChatLayout = () => {
   const { messages, sendMessage, handleSuggestionClick, isLoading } = useChat()
   const [inputValue, setInputValue] = useState("")
+  const [showBetaModal, setShowBetaModal] = useState(true)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,14 +31,23 @@ const ChatLayout = () => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-screen flex flex-col">
       <SiteNavbar />
-
-      <div className="mx-auto flex w-full max-w-6xl h-full flex-1 flex-col">
-        <ChatMessages messages={messages as Message[]} isLoading={isLoading} onSuggestionClick={handleSuggestionClick} />
-
+      <BetaWarningModal
+        isOpen={showBetaModal}
+        onOpenChange={setShowBetaModal}
+      />
+      <div className="flex-1 flex flex-col min-h-0"> {/* Added min-h-0 to prevent overflow */}
+        <div className="mx-auto w-full max-w-6xl flex-1 flex flex-col min-h-0"> {/* Added flex-1 and min-h-0 */}
+          <ChatMessages
+            messages={messages as Message[]}
+            isLoading={isLoading}
+            onSuggestionClick={handleSuggestionClick}
+          />
+        </div>
       </div>
-      <div className="sticky bottom-0 z-10 w-full border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+
+      <div className="w-full border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 shrink-0"> {/* Added shrink-0 */}
         <div className="mx-auto w-full max-w-3xl p-4">
           <form onSubmit={handleSubmit}>
             <div className="relative flex items-end">

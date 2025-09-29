@@ -15,6 +15,7 @@ const NavBar = () => {
     { name: "Projects", path: "/projects", icon: <Code className="w-4 h-4" /> },
     { name: "Skills", path: "/skills", icon: <BookOpen className="w-4 h-4" /> },
     { name: "Contact", path: "/about", icon: <Mail className="w-4 h-4" /> },
+    { name: "Chat With Me", path: "/chat", icon: <Mail className="w-4 h-4" /> },
   ]
 
   return (

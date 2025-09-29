@@ -24,6 +24,16 @@ export const experienceData: ExperienceItem[] = [
 
 export const educationData: EducationItem[] = [
     {
+       id: "4",
+        degree: "Master in Computer Application",
+        institution: "Kalinga Institute of Industrial Technology, BBSR",
+        institutionUrl: "https://kiit.ac.in/",
+        year: "2025 - 2027",
+        gpa: "",
+        description: "Currently Pursuing",
+        courses: ["Data Structures and Algorithms", "Web Development", "Database Management", "Operating Systems", "Computer Networks", "Computer Architecture"]
+    },
+    {
         id: "1",
         degree: "Bachelor of Science in Computer Science",
         institution: "Fakir Mohan Autonomous College",
@@ -41,13 +51,14 @@ export const educationData: EducationItem[] = [
         gpa: "79%",
         description: "Completed with distinction",
         courses: ["Physics", "Chemistry", "Mathematics", "MIL", "English", "Computer Science"]
-    }, {
-        id: "3",
-        degree: "10th in Science",
-        institution: "Matiali Nodal High School",
-        year: "2018 - 2020",
-        gpa: "66%",
-    }
+    },
+    //  {
+    //     id: "3",
+    //     degree: "10th in Science",
+    //     institution: "Matiali Nodal High School",
+    //     year: "2018 - 2020",
+    //     gpa: "66%",
+    // }
 
 ];
 
@@ -139,7 +150,7 @@ export const ABOUT_PAGE_DATA: AboutPageData = {
             {
                 text: "Download CV",
                 icon: <Download className="w-4 h-4" />,
-                href: "https://drive.google.com/file/d/1GA9icfWLqSa4TF9L5egiwuGljV6oah9j/view?usp=sharing",
+                href: "https://drive.google.com/file/d/1kXm8JRK7yYNwG-k9B_dvmNdNU6R-kaJ9/view?usp=sharing",
                 variant: "outline" as const,
             },
             {
