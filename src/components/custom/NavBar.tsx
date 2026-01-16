@@ -1,67 +1,49 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Home, User, Briefcase, BookOpen, Code, Mail, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import {
+  Home,
+  User,
+  Briefcase,
+  Code,
+  Mail,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false)
 
   const navLinks = [
     { name: "Home", path: "/", icon: <Home className="w-4 h-4" /> },
     { name: "About", path: "/about", icon: <User className="w-4 h-4" /> },
-    { name: "Experience", path: "/experience", icon: <Briefcase className="w-4 h-4" /> },
+    {
+      name: "Experience",
+      path: "/experience",
+      icon: <Briefcase className="w-4 h-4" />,
+    },
     { name: "Projects", path: "/projects", icon: <Code className="w-4 h-4" /> },
-    { name: "Skills", path: "/skills", icon: <BookOpen className="w-4 h-4" /> },
     { name: "Contact", path: "/about", icon: <Mail className="w-4 h-4" /> },
     { name: "Chat With Me", path: "/chat", icon: <Mail className="w-4 h-4" /> },
-  ]
+  ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
-      <div className="container flex items-center justify-between py-3 px-4">
-        {/* Logo */}
-        <a href="/" className="flex items-center gap-2">
-          <span className="font-bold text-primary text-lg">JP</span>
-        </a>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Button asChild variant="ghost" size="sm" key={link.name}>
-              <a href={link.path} className="flex items-center gap-1">
-                {link.icon}
-                <span>{link.name}</span>
+    <div className="w-full p-4">
+      <div className="flex justify-between items-center">
+        <div>
+          <div className="rouned-full overflow-hidden">
+            <img src="/dp.png" alt="Logo" className="w-12 h-12 rounded-full object-center object-cover" />
+          </div>
+        </div>
+        <div className="flex gap-2">
+          {navLinks.map((link, index) => (
+            <Button variant={"link"} key={index} asChild>
+              <a href={link.path}>
+                {link.name}
               </a>
             </Button>
           ))}
         </div>
-
-        {/* Mobile Dropdown */}
-        <div className="md:hidden">
-          <DropdownMenu onOpenChange={setIsOpen}>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="flex items-center gap-1">
-                <span>Menu</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              {navLinks.map((link) => (
-                <DropdownMenuItem key={link.name} asChild>
-                  <a href={link.path} className="flex items-center gap-2 cursor-pointer">
-                    {link.icon}
-                    <span>{link.name}</span>
-                  </a>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
       </div>
-    </nav>
-  )
-}
+    </div>
+  );
+};
 
-export default NavBar
+export default NavBar;

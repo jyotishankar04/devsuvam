@@ -1,12 +1,12 @@
 "use client"
 
 import { ArrowUpRight, Github, ChevronDown, ChevronUp } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { allProjects } from "@/constants/index"
+import { useState } from "react"
 
 const ProjectsPage = () => {
     const [expandedProject, setExpandedProject] = useState<string | null>(null)
@@ -96,7 +96,7 @@ const ProjectsPage = () => {
                             className="bg-background border rounded-xl overflow-hidden hover:shadow-md transition-all"
                         >
                             {/* Project Image */}
-                            <div className="h-48 bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
+                            <div className="h-48 bg-linear-to-br from-primary/10 to-secondary/10 overflow-hidden">
                                 <div className="w-full h-full flex items-center justify-center">
                                     {project.image ? (
                                         <img

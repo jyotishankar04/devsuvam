@@ -1,23 +1,16 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router"
 import IndexLayout from "./layouts/IndexLayout"
-import ProjectsPage from "./pages/ProjectsPage"
-import ProjectDetailsPage from "./pages/ProjectDetailsPage"
-import OtherLayout from "./layouts/OtherLayout"
-import AboutPage from "./pages/AboutPage"
-import ExperiencePage from "./pages/ExperiencePage"
-import SkillsPage from "./pages/SkillsPage"
 import ChatLayout from "./layouts/ChatLayout"
+import Index from "./pages/Index"
 
 const App = () => {
   return (
-    <div className="w-full h-screen bg-background">
+    <div className="w-full  h-screen bg-background">
+
       <Routes>
-        <Route path="/" element={<IndexLayout />} />
-        <Route path="/projects" element={<OtherLayout children={<ProjectsPage />} />} />
-        <Route path="/projects/:id" element={<OtherLayout children={<ProjectDetailsPage />} />} />
-        <Route path="/about" element={<OtherLayout children={<AboutPage/> } />} />
-        <Route path="/experience" element={<OtherLayout children={<ExperiencePage /> } />} />
-        <Route path="/skills" element={<OtherLayout children={<SkillsPage />} />} />
+        <Route path="/" element={<IndexLayout ></IndexLayout>} >
+          <Route path="/" element={<Index />} />
+         </Route>    
         <Route path="/chat" element={<ChatLayout />} />
         <Route path="*" element={<IndexLayout />} />
       </Routes>

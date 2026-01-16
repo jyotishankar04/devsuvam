@@ -4,7 +4,7 @@ import { ArrowUpRight, Github, ChevronLeft } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router"
 import { getProjectDetails } from "@/constants/index"
 
 const ProjectDetailsPage = () => {
