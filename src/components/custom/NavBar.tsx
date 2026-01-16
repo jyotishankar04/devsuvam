@@ -8,6 +8,7 @@ import {
   Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "../theme-toggle";
 
 const NavBar = () => {
 
@@ -40,6 +41,7 @@ const NavBar = () => {
               </a>
             </Button>
           ))}
+          <ThemeToggle/>
         </div>
       </div>
     </div>

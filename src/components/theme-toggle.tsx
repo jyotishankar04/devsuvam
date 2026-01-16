@@ -10,12 +10,12 @@ export default function ThemeToggle() {
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size="icon"
       onClick={()=>{
         setTheme(theme === "dark" ? "light" : "dark")
       }}
-      className="text-foreground"
+      className="text-foreground cursor-pointer"
     >
       {theme === "dark" ? (
         <Moon className="h-5 w-5" aria-hidden="true" />

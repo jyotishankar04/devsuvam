@@ -23,16 +23,6 @@ export interface EducationItem {
     courses?: string[];
 }
 
-export interface Project {
-    id: string
-    title: string
-    description: string
-    tags: string[]
-    link?: string // optional live demo link
-    github?: string // optional GitHub link
-    image?: string // optional image URL
-}
-
 export interface PersonalInfoItem {
     label: string;
     value: string;
@@ -126,27 +116,7 @@ export interface ProjectLink {
     github?: string
 }
 
-export interface Project {
-    id: string
-    title: string
-    description: string
-    year: string
-    tags: string[]
-    links: ProjectLink
-}
 
-export interface ProjectDetails extends Project {
-    content: {
-        overview: string
-        problem: string
-        solution: string
-        features: string[]
-        technologies: string[]
-        images: string[]
-        challenges?: string[]
-        learnings?: string[]
-    }
-}
 
 export type StoryPhase =
     | "profileIntro"
@@ -161,3 +131,26 @@ export type StoryPhase =
     | "futureVision"
     | "scrollPrompt"
     | "complete";
+
+export interface Blog {
+    id: string;
+    slug: string;
+    title: string;
+    description: string;
+    date: string;
+    tags: string[];
+    image: string;
+    readTime?: string;
+}
+
+export interface Project {
+    id: string;
+    slug: string;
+    title: string;
+    description: string;
+    tags: string[];
+    image: string;
+    liveUrl?: string;
+    githubUrl?: string;
+    featured?: boolean;
+}

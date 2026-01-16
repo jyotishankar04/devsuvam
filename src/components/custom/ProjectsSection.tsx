@@ -1,190 +1,110 @@
-"use client"
+"use client";
 
-import { ArrowUpRight, Github, ChevronDown, ChevronUp } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
-import type { Project } from "@/types"
-import { allProjects } from "@/constants/index"
+import { useState } from "react";
+import type { Project } from "@/types";
+import { Link } from "react-router";
+import { ProjectList } from "./projects/ProjectList";
 
-const ProjectItem = ({
-    project,
-    isLast
-}: {
-    project: Project,
-    isLast: boolean
-}) => {
-    const [expanded, setExpanded] = useState(false)
+type DisplayMode = "linear" | "stack";
+
+interface ProjectSectionProps {
+    projects: Project[];
+    showViewAll?: boolean;
+    limit?: number;
+    title?: string;
+    description?: string;
+    defaultDisplayMode?: DisplayMode;
+    showToggle?: boolean;
+}
+
+const displayModeIcons: Record<DisplayMode, React.ReactNode> = {
+    linear: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    ),
+    stack: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+    ),
+};
+
+export const ProjectSection = ({
+    projects,
+    showViewAll = true,
+    limit = 4,
+    title = "Featured Projects",
+    description = "Some of the projects I've worked on, from APIs to distributed systems.",
+    defaultDisplayMode = "linear",
+    showToggle = true,
+}: ProjectSectionProps) => {
+    const [displayMode, setDisplayMode] = useState<DisplayMode>(defaultDisplayMode);
+    const [hoveredMode, setHoveredMode] = useState<DisplayMode | null>(null);
+
+    const displayModes: DisplayMode[] = ["stack", "linear"];
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="relative pl-8 pb-8"
-        >
-            {/* Timeline indicator */}
-            <div className="absolute left-0 top-1 w-4 h-4 rounded-full bg-primary border-4 border-background" />
-            {!isLast && (
-                <div className="absolute left-[6px] top-5 bottom-0 w-px bg-border" />
-            )}
+        <section className="py-16">
+            <div className="flex flex-col gap-8">
+                {/* Header */}
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                    <div>
+                        <h2 className="text-3xl font-bold text-foreground">{title}</h2>
+                        <p className="text-muted-foreground mt-2">{description}</p>
+                    </div>
 
-            <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="text-xs">
-                        {project.year}
-                    </Badge>
-                    <Tooltip>
-                        <TooltipTrigger>
-                            <Link
-                                to={`/projects/${project.id}`}
-                                className="text-lg font-semibold hover:text-primary transition-colors"
-                            >
-                                {project.title}
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            Click to view details
-                        </TooltipContent>
-                    </Tooltip>
-                </div>
-
-                <p className="text-muted-foreground text-sm">
-                    {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mt-2">
-                    {project.tags.map(tag => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
-                        </Badge>
-                    ))}
-                </div>
-
-                <div className="flex gap-3 mt-3">
-                    {project.links.live && (
-                        <a
-                            href={project.links.live}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-                        >
-                            <ArrowUpRight className="w-4 h-4" />
-                            <span>Live Demo</span>
-                        </a>
-                    )}
-                    {project.links.github && (
-                        <a
-                            href={project.links.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-                        >
-                            <Github className="w-4 h-4" />
-                            <span>Code</span>
-                        </a>
-                    )}
-                </div>
-
-                <Button
-                    variant="ghost"
-                    size="sm"
-                    className="mt-2 px-0 h-auto text-muted-foreground hover:text-primary"
-                    onClick={() => setExpanded(!expanded)}
-                >
-                    {expanded ? (
-                        <>
-                            <ChevronUp className="w-4 h-4 mr-1" />
-                            Show less
-                        </>
-                    ) : (
-                        <>
-                            <ChevronDown className="w-4 h-4 mr-1" />
-                            Show more
-                        </>
-                    )}
-                </Button>
-
-                <AnimatePresence>
-                    {expanded && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden"
-                        >
-                            <div className="pt-4 space-y-4">
-                                <div>
-                                    <h4 className="text-sm font-medium mb-2">Key Features</h4>
-                                    <ul className="space-y-2 text-sm text-muted-foreground">
-                                        {/* These would come from project details */}
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary mt-1">•</span>
-                                            <span>Dynamic quiz generation based on topic/difficulty</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary mt-1">•</span>
-                                            <span>Performance analytics dashboard</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary mt-1">•</span>
-                                            <span>40% faster API response time through Redis caching</span>
-                                        </li>
-                                    </ul>
-                                </div>
+                    <div className="flex items-center gap-4">
+                        {/* Display Mode Toggle */}
+                        {showToggle && (
+                            <div className="flex items-center gap-1 p-1 bg-muted rounded-xl">
+                                {displayModes.map((mode) => (
+                                    <button
+                                        key={mode}
+                                        onClick={() => setDisplayMode(mode)}
+                                        onMouseEnter={() => setHoveredMode(mode)}
+                                        onMouseLeave={() => setHoveredMode(null)}
+                                        className={`p-2 rounded-lg transition-all duration-200 ${displayMode === mode
+                                                ? "bg-background text-foreground shadow-sm"
+                                                : hoveredMode === mode
+                                                    ? "bg-accent text-accent-foreground"
+                                                    : "text-muted-foreground"
+                                            }`}
+                                        aria-label={`${mode} view`}
+                                        title={mode.charAt(0).toUpperCase() + mode.slice(1)}
+                                    >
+                                        {displayModeIcons[mode]}
+                                    </button>
+                                ))}
                             </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                        )}
+
+                        {showViewAll && (
+                            <Link
+                                to="/projects"
+                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors duration-200 group"
+                            >
+                                View all
+                                <svg
+                                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </Link>
+                        )}
+                    </div>
+                </div>
+
+                {/* Project List */}
+                <ProjectList
+                    projects={projects}
+                    displayMode={displayMode}
+                    showFeatured={displayMode === "linear"}
+                />
             </div>
-        </motion.div>
-    )
-}
-
-const ProjectsSection = () => {
-    const visibleProjects = allProjects.slice(0, 2)
-
-    return (
-        <section id="projects" className="py-12 px-4 max-w-4xl mx-auto">
-            <div className="mb-8">
-                <h2 className="text-3xl font-bold mb-2">
-                    Selected <span className="text-primary">Works</span>
-                </h2>
-                <p className="text-muted-foreground">
-                    Here are a few projects I've worked on recently.
-                </p>
-            </div>
-
-            <div className="space-y-1">
-                {visibleProjects.map((project, index) => (
-                    <ProjectItem
-                        key={project.id}
-                        project={project}
-                        isLast={index === visibleProjects.length - 1}
-                    />
-                ))}
-            </div>
-
-            <Link to={"/projects"}>
-                <Button
-                    variant="outline"
-                >
-
-                    <ChevronDown className="w-4 h-4 mr-2" />
-                    Show All Projects ({allProjects.length})
-
-                </Button>
-            </Link>
         </section>
-    )
-}
-
-export default ProjectsSection
+    );
+};
