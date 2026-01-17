@@ -7,7 +7,7 @@ import { Link } from "react-router";
 
 export default function Footer() {
     return (
-        <footer className="border-t border-border/60 bg-background">
+        <footer className="border-t sticky border-border/60 bg-background">
             <div className=" py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* Left: Profile */}

@@ -6,7 +6,7 @@ import HeroSection from "@/components/custom/HeroSection";
 import { Newsletter } from "@/components/custom/NewsLetter";
 import { ProjectSection } from "@/components/custom/ProjectsSection";
 import SkillsSection from "@/components/custom/SkillsSection";
-import { blogs, projects } from "@/constants/data";
+import { projects } from "@/constants/data";
 
 
 const Index = () => {
@@ -21,7 +21,7 @@ const Index = () => {
       />
       <EducationSection />
       <SkillsSection />
-      <BlogSection blogs={blogs} />
+      <BlogSection />
       <ConnectSection />
       <Newsletter />
     </div>

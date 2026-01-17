@@ -30,7 +30,7 @@ export default function ProjectPage() {
                 <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-80 object-cover rounded-2xl border border-border shadow-sm"
+                    className="w-full  object-cover rounded-2xl border border-border shadow-sm"
                 />
 
                 <div className="mt-8">

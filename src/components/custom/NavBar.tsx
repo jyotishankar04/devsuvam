@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "../theme-toggle";
+import { Link } from "react-router";
 
 const NavBar = () => {
 
@@ -36,9 +37,9 @@ const NavBar = () => {
         <div className="flex gap-2">
           {navLinks.map((link, index) => (
             <Button variant={"link"} key={index} asChild>
-              <a href={link.path}>
+              <Link to={link.path}>
                 {link.name}
-              </a>
+              </Link>
             </Button>
           ))}
           <ThemeToggle/>

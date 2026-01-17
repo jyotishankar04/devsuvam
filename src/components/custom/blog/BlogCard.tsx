@@ -47,9 +47,9 @@ export const BlogCard = ({ blog, layout = "horizontal" }: BlogCardProps) => {
 
     return (
         <Link to={`/blogs/${blog.slug}`} className="group block">
-            <article className="flex flex-col md:flex-row gap-6 py-6 border-b border-border last:border-b-0">
+            <article className="flex flex-col md:flex-row items-start gap-6 py-6 border-b border-border last:border-b-0">
                 {/* Image */}
-                <div className="relative w-full md:w-64 lg:w-72 aspect-video md:aspect-[4/3] flex-shrink-0 overflow-hidden rounded-xl">
+                <div className="relative w-full md:w-64 lg:w-72 aspect-video md:aspect-4/3 shrink-0 overflow-hidden rounded-xl">
                     <img
                         src={blog.image}
                         alt={blog.title}
@@ -61,12 +61,15 @@ export const BlogCard = ({ blog, layout = "horizontal" }: BlogCardProps) => {
                 <div className="flex flex-col justify-center gap-3">
                     {/* Meta info */}
                     <div className="flex flex-wrap items-center gap-2 text-sm">
-                        <time className="text-muted-foreground">{blog.date}</time>
-                        {blog.tags.map((tag) => (
-                            <Badge key={tag} variant="outline" className="text-xs">
-                                {tag}
-                            </Badge>
-                        ))}
+                        <time className="text-muted-foreground">{new Date(blog.createdAt).toDateString()}</time>
+                        {
+                            blog?.tags && blog.tags.length > 0 &&
+                            blog.tags.map((tag) => (
+                                <Badge key={tag} variant="outline" className="text-xs">
+                                    {tag}
+                                </Badge>
+                            ))
+                        }
                     </div>
 
                     {/* Title */}

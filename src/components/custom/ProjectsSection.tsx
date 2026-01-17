@@ -30,7 +30,6 @@ const displayModeIcons: Record<DisplayMode, React.ReactNode> = {
 export const ProjectSection = ({
     projects,
     showViewAll = true,
-    limit = 4,
     title = "Featured Projects",
     description = "Some of the projects I've worked on, from APIs to distributed systems.",
     defaultDisplayMode = "linear",

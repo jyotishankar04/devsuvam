@@ -1,32 +1,29 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
-    Twitter,
     Linkedin,
     Instagram,
     Mail,
     ExternalLink,
-    ArrowUpRight,
 } from "lucide-react";
+import TweetCard from "../kokonutui/tweet-card";
 
 export default function ConnectSection() {
     const socialLinks = [
         {
             name: "LinkedIn",
             username: "suvam-patra",
-            url: "https://linkedin.com/in/suvam-patra",
+            url: "https://linkedin.com/in/jyotishankar-patra",
             icon: Linkedin,
         },
         {
             name: "Instagram",
             username: "@devsuvam",
-            url: "https://instagram.com/devsuvam",
+            url: "https://instagram.com/dev.suvam",
             icon: Instagram,
         },
         {
             name: "Email",
-            username: "hello@suvam.dev",
-            url: "mailto:hello@suvam.dev",
+            username: "jyotipatra.subham@gmail.com",
+            url: "mailto:jyotipatra.subham@gmail.com",
             icon: Mail,
         },
     ];
@@ -46,47 +43,28 @@ export default function ConnectSection() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Primary Card */}
-                <Card className="group relative overflow-hidden border-border/60 transition-all hover:-translate-y-1 hover:shadow-lg">
-                    <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                    <CardContent className="relative p-6">
-                        <div className="flex items-start justify-between mb-5">
-                            <div className="flex items-center gap-3">
-                                <div className="h-12 w-12 rounded-xl bg-muted flex items-center justify-center text-muted-foreground group-hover:text-primary transition-colors">
-                                    <Twitter  />
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold text-foreground">
-                                        X (Twitter)
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        Primary Contact
-                                    </p>
-                                </div>
-                            </div>
-
-                            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                                Most Active
-                            </span>
-                        </div>
-
-                        <p className="text-sm text-muted-foreground mb-6">
-                            I share my coding journey, insights, and quick
-                            thoughts here. Best place to reach me for casual
-                            conversations.
-                        </p>
-
-                        <div className="flex items-center justify-between">
-                            <span className="font-medium text-foreground">
-                                @devsuvam
-                            </span>
-                            <Button size="sm" variant="outline" className="gap-2">
-                                Follow
-                                <ArrowUpRight />
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
+                <div>
+                    <TweetCard
+                        authorHandle="@devsuvam1"
+                        authorName="Jyotishankar Patra"
+                        authorImage="https://res.cloudinary.com/djby1yfko/image/upload/v1768664060/Gemini_Generated_Image_bx5n91bx5n91bx5n_ctyhf1.png?w=800&h=600&fit=crop"
+                        content={[
+                            "I'm looking for a role as a Full Stack Web Developer. If you think I'm a good fit, let's connect! 🚀",
+                            "#FullStack #WebDevelopment #JavaScript #React #NodeJS",
+                        ]}
+                        timestamp="1 day ago"
+                        isVerified
+                        reply={{
+                            authorHandle: "@dev",
+                            authorName: "Dev",
+                            authorImage: "https://res.cloudinary.com/djby1yfko/image/upload/v1768664109/IMG_20251208_165303878_1_bg5nr2.jpg",
+                            content: " @devsuvam1 Thanks for reaching out! Let's have a chat about your project.",
+                            isVerified: true,
+                            timestamp: "1 day ago",
+                        }}
+                    />
+                </div>
 
                 {/* Other Platforms */}
                 <div>
@@ -131,7 +109,7 @@ export default function ConnectSection() {
                                     </div>
                                 </div>
 
-                                <ExternalLink  />
+                                <ExternalLink />
                             </a>
                         ))}
                     </div>

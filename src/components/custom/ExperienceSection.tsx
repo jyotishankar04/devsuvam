@@ -3,20 +3,25 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
     {
-        company: "Optimus AI Lab",
-        role: "Mid-level Frontend Engineer",
-        period: "Nov 2024 – Jan 2025",
+        company: "Ansmake Technology",
+        role: "Full Stack Developer Intern",
+        period: "Jun 2025 - Aug 2025",
         works: [
-            "Collaborated with cross-functional teams to develop and deploy web applications using Next.js, React, and TypeScript.",
-            "Implemented responsive layouts, optimizing user experience, and ensuring accessibility.",
-            "Participated in code reviews and provided constructive feedback to others, fostering a collaborative environment.",
+            "Developed and optimized RESTful APIs using FASTAPI, improving response times by 30%",
+            "Implemented frontend components with Next.js, Tanstack Query, and Redix UI, enhancing user experience",
+            "Collaborated with cross-functional teams to deliver SaaS product features on schedule",
         ],
         skills: [
-            "Next.js", "React", "TypeScript", "Tailwind CSS", "Git",
-            "GitHub", "Docker", "Nginx", "Prisma", "Shadcn UI",
-            "Redux Toolkit", "React Query", "WebSockets", "Redis", "Kafka"
+            "FastAPI",
+            "Next.js",
+            "React",
+            "TypeScript",
+            "PostgreSQL",
+            "Tailwind CSS",
+            "Language: Python",
+            "Version Control: Git",
+            "Database: PostgreSQL",
         ],
-        icon: "",
     }
 ];
 

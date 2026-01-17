@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 const posts = [
     {
         id: 1,
-        image: "https://placehold.co/800x800/png",
+        image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768675934/Snapchat-136706696_mwiu1y.jpg",
         caption: "Locking in. Quiet nights, loud goals.",
         mood: "Focused",
         date: "Jan 2026",
@@ -14,28 +14,28 @@ const posts = [
     },
     {
         id: 2,
-        image: "https://placehold.co/800x600/png",
+        image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768675716/Snapchat-1197930273_bzrsrn.jpg",
         caption: "Sunlight fixes more than we think.",
         mood: "Calm",
         date: "Dec 2025",
     },
     {
         id: 3,
-        image: "https://placehold.co/600x900/png",
+        image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768664101/IMG_20251208_165343292_jlvexy.jpg",
         caption: "Head down. World muted.",
         mood: "Locked in",
         date: "Nov 2025",
     },
     {
         id: 4,
-        image: "https://placehold.co/900x600/png",
+        image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768676100/IMG_0032_zv1pf9.jpg",
         caption: "Progress doesn’t need permission.",
         mood: "Inspired",
         date: "Oct 2025",
     },
     {
         id: 5,
-        image: "https://placehold.co/600x600/png",
+        image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768675939/Snapchat-1287290365_g0it96.jpg",
         caption: "Just showing up matters.",
         mood: "Reflective",
         date: "Sep 2025",

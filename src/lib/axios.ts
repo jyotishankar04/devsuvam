@@ -18,4 +18,18 @@ const useGetBlogs = () => {
     });
 };
 
-export { useGetBlogs };
+const useGetABlog = (slug: string) => {
+    return useQuery({
+        queryKey: ["blog", slug],
+        queryFn: async () => {
+            const response = await api.get(`/blogs/${slug}`);
+            return response.data;
+        },
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        enabled: !!slug
+    });
+};
+
+export { useGetBlogs, useGetABlog };

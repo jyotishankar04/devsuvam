@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { BlogList } from "./blog/BlogList";
 import { ArrowRight } from "lucide-react";
 import { useGetBlogs } from "@/lib/axios";
+import Loader from "./Loader";
 
 interface BlogSectionProps {
     showViewAll?: boolean;
@@ -16,9 +17,11 @@ export const BlogSection = ({
     title = "From the blog",
     description = "Discover valuable insights on backend development, system design, and more.",
 }: BlogSectionProps) => {
-    const { data: blogs, isLoading: loading, isError: error } = useGetBlogs();
+    const { data: blogs, isLoading: loading } = useGetBlogs();
     if (loading) {
-        return <div>Loading...</div>
+        return <div className="flex w-full items-center justify-center py-10">
+            <Loader  />
+        </div>
     }
     return (
         <section className="py-16">
