@@ -59,6 +59,42 @@ export const projects: Project[] = [
         liveUrl: "https://demo.example.com",
         githubUrl: "https://github.com/example/task-queue",
         featured: true,
+        content: `# Building Modern Web Applications: A Complete Guide to React, Next.js, and TypeScript
+
+![Hero Image](https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=400&fit=crop)
+
+*Published on January 17, 2026 | 15 min read*
+
+---
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Understanding Modern Web Development](#understanding-modern-web-development)
+3. [Setting Up Your Development Environment](#setting-up-your-development-environment)
+4. [Building Your First React Application](#building-your-first-react-application)
+5. [Advanced TypeScript Patterns](#advanced-typescript-patterns)
+6. [Next.js App Router Deep Dive](#nextjs-app-router-deep-dive)
+7. [State Management Strategies](#state-management-strategies)
+8. [Performance Optimization Techniques](#performance-optimization-techniques)
+9. [Conclusion](#conclusion)
+
+---
+
+## Introduction
+
+The landscape of web development has evolved dramatically over the past decade. What started as simple HTML pages with basic JavaScript has transformed into complex, highly interactive applications that rival native desktop software. In this comprehensive guide, we'll explore the modern web development stack, focusing on React, Next.js, and TypeScript.
+
+> "The web is more a social creation than a technical one. I designed it for a social effect — to help people work together — and not as a technical toy." — Tim Berners-Lee
+
+### Why This Stack?
+
+- **React**: Component-based architecture for building reusable UI elements
+- **Next.js**: Framework for production-ready React applications with SSR/SSG
+- **TypeScript**: Type safety that catches errors before runtime
+
+![Development Stack](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1000&h=500&fit=crop)
+`
     },
     {
         id: "2",
@@ -70,6 +106,42 @@ export const projects: Project[] = [
         image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop",
         githubUrl: "https://github.com/example/api-gateway",
         featured: true,
+        content: `# Building Modern Web Applications: A Complete Guide to React, Next.js, and TypeScript
+
+![Hero Image](https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=400&fit=crop)
+
+*Published on January 17, 2026 | 15 min read*
+
+---
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Understanding Modern Web Development](#understanding-modern-web-development)
+3. [Setting Up Your Development Environment](#setting-up-your-development-environment)
+4. [Building Your First React Application](#building-your-first-react-application)
+5. [Advanced TypeScript Patterns](#advanced-typescript-patterns)
+6. [Next.js App Router Deep Dive](#nextjs-app-router-deep-dive)
+7. [State Management Strategies](#state-management-strategies)
+8. [Performance Optimization Techniques](#performance-optimization-techniques)
+9. [Conclusion](#conclusion)
+
+---
+
+## Introduction
+
+The landscape of web development has evolved dramatically over the past decade. What started as simple HTML pages with basic JavaScript has transformed into complex, highly interactive applications that rival native desktop software. In this comprehensive guide, we'll explore the modern web development stack, focusing on React, Next.js, and TypeScript.
+
+> "The web is more a social creation than a technical one. I designed it for a social effect — to help people work together — and not as a technical toy." — Tim Berners-Lee
+
+### Why This Stack?
+
+- **React**: Component-based architecture for building reusable UI elements
+- **Next.js**: Framework for production-ready React applications with SSR/SSG
+- **TypeScript**: Type safety that catches errors before runtime
+
+![Development Stack](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1000&h=500&fit=crop)
+`
     },
     {
         id: "3",
@@ -81,6 +153,42 @@ export const projects: Project[] = [
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
         liveUrl: "https://analytics.example.com",
         githubUrl: "https://github.com/example/analytics",
+        content: `# Building Modern Web Applications: A Complete Guide to React, Next.js, and TypeScript
+
+![Hero Image](https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=400&fit=crop)
+
+*Published on January 17, 2026 | 15 min read*
+
+---
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Understanding Modern Web Development](#understanding-modern-web-development)
+3. [Setting Up Your Development Environment](#setting-up-your-development-environment)
+4. [Building Your First React Application](#building-your-first-react-application)
+5. [Advanced TypeScript Patterns](#advanced-typescript-patterns)
+6. [Next.js App Router Deep Dive](#nextjs-app-router-deep-dive)
+7. [State Management Strategies](#state-management-strategies)
+8. [Performance Optimization Techniques](#performance-optimization-techniques)
+9. [Conclusion](#conclusion)
+
+---
+
+## Introduction
+
+The landscape of web development has evolved dramatically over the past decade. What started as simple HTML pages with basic JavaScript has transformed into complex, highly interactive applications that rival native desktop software. In this comprehensive guide, we'll explore the modern web development stack, focusing on React, Next.js, and TypeScript.
+
+> "The web is more a social creation than a technical one. I designed it for a social effect — to help people work together — and not as a technical toy." — Tim Berners-Lee
+
+### Why This Stack?
+
+- **React**: Component-based architecture for building reusable UI elements
+- **Next.js**: Framework for production-ready React applications with SSR/SSG
+- **TypeScript**: Type safety that catches errors before runtime
+
+![Development Stack](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1000&h=500&fit=crop)
+`
     },
     {
         id: "4",
@@ -91,6 +199,42 @@ export const projects: Project[] = [
         tags: ["Node.js", "PostgreSQL", "JWT", "OAuth2"],
         image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=600&fit=crop",
         githubUrl: "https://github.com/example/auth-service",
+        content: `# Building Modern Web Applications: A Complete Guide to React, Next.js, and TypeScript
+
+![Hero Image](https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=400&fit=crop)
+
+*Published on January 17, 2026 | 15 min read*
+
+---
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Understanding Modern Web Development](#understanding-modern-web-development)
+3. [Setting Up Your Development Environment](#setting-up-your-development-environment)
+4. [Building Your First React Application](#building-your-first-react-application)
+5. [Advanced TypeScript Patterns](#advanced-typescript-patterns)
+6. [Next.js App Router Deep Dive](#nextjs-app-router-deep-dive)
+7. [State Management Strategies](#state-management-strategies)
+8. [Performance Optimization Techniques](#performance-optimization-techniques)
+9. [Conclusion](#conclusion)
+
+---
+
+## Introduction
+
+The landscape of web development has evolved dramatically over the past decade. What started as simple HTML pages with basic JavaScript has transformed into complex, highly interactive applications that rival native desktop software. In this comprehensive guide, we'll explore the modern web development stack, focusing on React, Next.js, and TypeScript.
+
+> "The web is more a social creation than a technical one. I designed it for a social effect — to help people work together — and not as a technical toy." — Tim Berners-Lee
+
+### Why This Stack?
+
+- **React**: Component-based architecture for building reusable UI elements
+- **Next.js**: Framework for production-ready React applications with SSR/SSG
+- **TypeScript**: Type safety that catches errors before runtime
+
+![Development Stack](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1000&h=500&fit=crop)
+`
     },
     {
         id: "5",
@@ -101,5 +245,41 @@ export const projects: Project[] = [
         tags: ["Rust", "Elasticsearch", "S3", "Docker"],
         image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop",
         githubUrl: "https://github.com/example/log-aggregator",
+        content: `# Building Modern Web Applications: A Complete Guide to React, Next.js, and TypeScript
+
+![Hero Image](https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=400&fit=crop)
+
+*Published on January 17, 2026 | 15 min read*
+
+---
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Understanding Modern Web Development](#understanding-modern-web-development)
+3. [Setting Up Your Development Environment](#setting-up-your-development-environment)
+4. [Building Your First React Application](#building-your-first-react-application)
+5. [Advanced TypeScript Patterns](#advanced-typescript-patterns)
+6. [Next.js App Router Deep Dive](#nextjs-app-router-deep-dive)
+7. [State Management Strategies](#state-management-strategies)
+8. [Performance Optimization Techniques](#performance-optimization-techniques)
+9. [Conclusion](#conclusion)
+
+---
+
+## Introduction
+
+The landscape of web development has evolved dramatically over the past decade. What started as simple HTML pages with basic JavaScript has transformed into complex, highly interactive applications that rival native desktop software. In this comprehensive guide, we'll explore the modern web development stack, focusing on React, Next.js, and TypeScript.
+
+> "The web is more a social creation than a technical one. I designed it for a social effect — to help people work together — and not as a technical toy." — Tim Berners-Lee
+
+### Why This Stack?
+
+- **React**: Component-based architecture for building reusable UI elements
+- **Next.js**: Framework for production-ready React applications with SSR/SSG
+- **TypeScript**: Type safety that catches errors before runtime
+
+![Development Stack](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1000&h=500&fit=crop)
+`
     },
 ];

@@ -103,7 +103,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
                         >
                             {aboutData.personalInfo.map((info, index) => (
                                 <div key={index} className="flex items-start gap-4">
-                                    <span className="font-medium w-24 flex-shrink-0">{info.label}</span>
+                                    <span className="font-medium w-24 shrink-0">{info.label}</span>
                                     <span className="text-muted-foreground">{info.value}</span>
                                 </div>
                             ))}
@@ -172,12 +172,12 @@ const AboutSection: React.FC<AboutSectionProps> = ({
                             >
                                 {expanded ? (
                                     <>
-                                        <ChevronDown className="w-4 h-4 rotate-180 transition-transform" />
+                                        <ChevronDown  />
                                         {aboutData.buttons.readMore.expandedText}
                                     </>
                                 ) : (
                                     <>
-                                        <ChevronDown className="w-4 h-4 transition-transform" />
+                                        <ChevronDown />
                                         {aboutData.buttons.readMore.collapsedText}
                                     </>
                                 )}

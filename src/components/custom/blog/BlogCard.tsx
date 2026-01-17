@@ -21,9 +21,8 @@ export const BlogCard = ({ blog, layout = "horizontal" }: BlogCardProps) => {
                     </div>
                     <div className="flex flex-col gap-2">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <time>{blog.date}</time>
+                            <time>{new Date(blog.createdAt).toDateString()}</time>
                             <span>•</span>
-                            <span>{blog.readTime || "5 min read"}</span>
                         </div>
                         <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
                             {blog.title}
@@ -32,11 +31,13 @@ export const BlogCard = ({ blog, layout = "horizontal" }: BlogCardProps) => {
                             {blog.description}
                         </p>
                         <div className="flex flex-wrap gap-2 mt-2">
-                            {blog.tags.slice(0, 3).map((tag) => (
-                                <Badge key={tag} variant="secondary">
-                                    {tag}
-                                </Badge>
-                            ))}
+                            { blog?.tags && blog.tags.length > 0 &&
+                                blog.tags.map((tag) => (
+                                    <Badge key={tag} variant="outline" className="text-xs">
+                                        {tag}
+                                    </Badge>
+                                ))
+                            }
                         </div>
                     </div>
                 </article>

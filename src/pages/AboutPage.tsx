@@ -1,272 +1,230 @@
-"use client"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+    CheckCircle2,
+    Code2,
+    Server,
+    Database,
+    GraduationCap,
+    ArrowUpRight,
+    Sparkles,
+} from "lucide-react";
+import { GallerySection } from "@/components/custom/GalerySection";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Mail, Linkedin, Github, ArrowRight, Twitter, Instagram, Phone, Play } from "lucide-react"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { ABOUT_PAGE_DATA } from "@/constants/index"
-import CareerStory from "@/components/custom/StoryIntro"
-import { useState } from "react"
-
-const AboutPage = () => {
-    const [showStory, setShowStory] = useState(false)
-
-    const {
-        header,
-        intro,
-        profile,
-        details,
-        journey,
-        callToAction,
-        socialLinks
-    } = ABOUT_PAGE_DATA
-
+export default function AboutPage() {
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="py-12 px-4 max-w-6xl mx-auto"
-        >
-            {/* Hero Section */}
-            <section className="flex flex-col lg:flex-row gap-12 items-center mb-20">
-                <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="lg:w-2/5 relative"
-                >
-                    <div className="relative w-full aspect-square rounded-3xl overflow-hidden border-4 border-primary/20 group">
-                        <img
-                            src={profile.imageUrl}
-                            alt={profile.altText}
-                            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <motion.div
-                                initial={{ y: 20 }}
-                                whileHover={{ y: 0 }}
-                                className="transition-transform duration-300"
-                            >
-                                <h3 className="text-xl font-bold">{details.personalInfo[0].value}</h3>
-                                <p className="text-muted-foreground">Full-Stack Developer</p>
-                            </motion.div>
-                        </div>
-                    </div>
-                </motion.div>
+        <section className=" py-16 md:py-24">
+            {/* Subtle background glow */}
+            <div className="pointer-events-none absolute inset-0 -z-10">
+                <div className="mx-auto h-75 max-w-3xl rounded-full bg-primary/5 blur-3xl" />
+            </div>
 
-                <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="lg:w-3/5 space-y-6"
-                >
-                    <Badge variant="secondary" className="text-sm px-3 py-1">
-                        Professional Profile
+            {/* Hero */}
+            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 mb-20">
+                {/* Avatar */}
+                <div className="relative">
+                    <div className="relative h-36 w-36 overflow-hidden rounded-2xl border border-border bg-muted shadow-lg">
+                        <img
+                            src="https://placehold.co/300x300/png"
+                            alt="Suvam"
+                            className="h-full w-full object-cover"
+                        />
+                    </div>
+
+                    <div className="absolute -bottom-3 -right-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary shadow-md">
+                        <Sparkles />
+                    </div>
+                </div>
+
+                {/* Intro */}
+                <div className="flex-1 text-center lg:text-left">
+                    <Badge variant="outline" className="mb-4 gap-1">
+                        <CheckCircle2 />
+                        Available for work
                     </Badge>
-                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                        {header.title} <span className="text-primary">{header.highlightedTitle}</span>
+
+                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+                        Hi, I&apos;m <span className="text-primary">Suvam</span>
                     </h1>
-                    <p className="text-lg text-muted-foreground">
-                        {intro.description}
+
+                    <p className="mt-3 text-xl text-muted-foreground">
+                        Full-Stack Software Engineer
                     </p>
 
-                    <div className="flex flex-wrap gap-3">
-                        {callToAction.buttons.slice(0, 2).map((button, index) => (
-                            <Button
-                                key={index}
-                                variant={button.variant}
-                                asChild
-                                className="gap-2"
-                            >
-                                <a href={button.href}>
-                                    {button.icon}
-                                    {button.text}
-                                </a>
-                            </Button>
-                        ))}
-                        <Button
-                            onClick={() => setShowStory(true)}
-                            className="w-full cursor-pointer  px-4 py-2 my-2"
-                        >
-                            <Play className="w-5 h-5" />
-                            Watch My Journey
+                    <p className="mt-5 max-w-2xl text-base text-muted-foreground">
+                        Backend-focused developer passionate about building scalable systems,
+                        clean APIs, and production-ready applications with strong architecture.
+                    </p>
+
+                    <div className="mt-7 flex flex-wrap gap-3 justify-center lg:justify-start">
+                        <Button size="lg" className="gap-2">
+                            Let&apos;s Connect
+                            <ArrowUpRight />
+                        </Button>
+                        <Button size="lg" variant="outline">
+                            View Projects
                         </Button>
                     </div>
+                </div>
+            </div>
 
-                    <div className="flex gap-3 pt-2">
-                        {socialLinks.map((social, index) => {
-                            const Icon = social.icon === 'Github' ? Github :
-                                social.icon === 'Linkedin' ? Linkedin :
-                                    social.icon === 'Twitter' ? Twitter :
-                                        social.icon === 'Instagram' ? Instagram :
-                                            social.icon === 'Mail' ? Mail :
-                                                social.icon === 'Phone' ? Phone :
-                                                    null;
-                            return Icon ? (
-                                <Button
-                                    key={index}
-                                    variant="ghost"
-                                    size="icon"
-                                    asChild
-                                    className="rounded-full"
-                                >
-                                    <a
-                                        href={social.url}
-                                        target="_blank"
-                                        aria-label={social.name}
-                                    >
-                                        <Icon className="w-5 h-5" />
-                                    </a>
-                                </Button>
-                            ) : null;
-                        })}
+            <Separator className="my-14" />
+
+            {/* Content */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                {/* About */}
+                <div className="lg:col-span-2 space-y-10">
+                    <div className=""> 
+                        <h2 className="text-2xl font-semibold text-foreground mb-4">
+                            About Me
+                        </h2>
+
+                        {/* Subtle gradient overlay */}
+                        <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
+                            <p>
+                                I&apos;m{" "}
+                                <span className="font-medium text-foreground">
+                                    Jyotishankar Patra (Suvam)
+                                </span>
+                                , a self-taught full-stack developer with a strong
+                                focus on backend engineering and system design.
+                            </p>
+                            <p>
+                                I enjoy building real-world applications—everything
+                                from authentication systems and APIs to real-time
+                                apps and AI-powered platforms.
+                            </p>
+
+                            <div className="flex gap-3 rounded-xl border border-border bg-muted/30 p-4">
+                                <GraduationCap />
+                                <p className="text-sm">
+                                    Currently pursuing a{" "}
+                                    <span className="font-medium text-foreground">
+                                        B.Sc. in Computer Science
+                                    </span>{" "}
+                                    while continuously learning through hands-on
+                                    projects and shipping production-level features.
+                                </p>
+                            </div>
+
+                            <p>
+                                Most of my experience comes from building and
+                                deploying full-stack products using modern tools
+                                like Next.js, PostgreSQL, Docker, and cloud
+                                infrastructure.
+                            </p>
+                        </div>
                     </div>
-                </motion.div>
-            </section>
 
-            {/* Content Sections */}
-            <section className="grid md:grid-cols-3 gap-8 mb-20">
-                <div className="md:col-span-2 space-y-10">
-                    {/* Bio */}
-                    <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                    >
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-4 h-4 rounded-full bg-primary"></div>
-                            <h2 className="text-2xl font-semibold">{journey.title}</h2>
-                        </div>
-                        <div className="space-y-4 text-muted-foreground">
-                            <p>{journey.description}</p>
-                            {journey.milestones && (
-                                <ul className="space-y-2 pl-5 list-disc">
-                                    {journey.milestones.map((milestone, index) => (
-                                        <li key={index}>
-                                            <span className="font-medium">{milestone.year}:</span> {milestone.event}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
-                    </motion.div>
+                    {/* Strengths */}
+                    <div>
+                        <h3 className="text-xl font-semibold text-foreground mb-6">
+                            Key Strengths
+                        </h3>
 
-                    {/* Skills */}
-                    <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.8 }}
-                    >
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-4 h-4 rounded-full bg-primary"></div>
-                            <h2 className="text-2xl font-semibold">Technical Skills</h2>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {details.skills.map((skill, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.9 + (index * 0.1) }}
-                                    className="border-l-2 border-primary pl-4 py-2 hover:bg-accent/50 transition-colors"
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            {[
+                                {
+                                    icon: Code2,
+                                    title: "Full-Stack Development",
+                                    desc: "Built multiple production-grade applications",
+                                },
+                                {
+                                    icon: Server,
+                                    title: "Backend Focus",
+                                    desc: "System design & architecture expertise",
+                                },
+                                {
+                                    icon: Database,
+                                    title: "Production Ready",
+                                    desc: "Auth, subscriptions & deployments",
+                                },
+                                {
+                                    icon: CheckCircle2,
+                                    title: "End-to-End Ownership",
+                                    desc: "From idea to deployment",
+                                },
+                            ].map((item) => (
+                                <Card
+                                    key={item.title}
+                                    className="group border-border/60 bg-card/60 transition-all hover:-translate-y-1 hover:shadow-lg"
                                 >
-                                    <h3 className="font-semibold">{skill.name}</h3>
-                                    <p className="text-sm text-muted-foreground">{skill.technologies}</p>
-                                </motion.div>
+                                    <CardContent className="p-5 flex gap-4">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                                            <item.icon />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-medium text-foreground">
+                                                {item.title}
+                                            </h4>
+                                            <p className="mt-1 text-sm text-muted-foreground">
+                                                {item.desc}
+                                            </p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
                             ))}
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
 
-                {/* Sidebar */}
-                <motion.div
-                    className="space-y-8"
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.7 }}
-                >
-                    <Card className="hover:border-primary/50 transition-colors">
-                        <CardHeader className="pb-3">
-                            <h3 className="font-semibold text-primary">Personal Info</h3>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {details.personalInfo.map((info, index) => (
-                                <div key={index} className="group">
-                                    <div className="flex items-center gap-3">
-                                        {info.icon}
-                                        <div>
-                                            <h4 className="font-medium group-hover:text-primary transition-colors">
-                                                {info.label}
-                                            </h4>
-                                            <p className="text-sm text-muted-foreground">{info.value}</p>
-                                        </div>
+                {/* Side Card */}
+                <div className="lg:col-span-1">
+                    <Card className="sticky top-8 border-border bg-card shadow-sm">
+                        <CardContent className="p-6 text-center">
+                            <div className="mx-auto mb-4 h-20 w-20 overflow-hidden rounded-full border border-border">
+                                <img
+                                    src="https://placehold.co/200x200/png"
+                                    alt="Profile"
+                                    className="h-full w-full object-cover"
+                                />
+                            </div>
+
+                            <h3 className="text-lg font-semibold text-foreground">
+                                @devsuvam
+                            </h3>
+                            <p className="text-sm text-muted-foreground mb-6">
+                                Full-Stack Developer
+                            </p>
+
+                            <div className="space-y-5 text-left">
+                                <div>
+                                    <h4 className="text-sm font-medium text-foreground mb-2">
+                                        Focus Areas
+                                    </h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        <Badge variant="secondary">Backend</Badge>
+                                        <Badge variant="secondary">APIs</Badge>
+                                        <Badge variant="secondary">System Design</Badge>
+                                        <Badge variant="secondary">DevOps</Badge>
                                     </div>
-                                    {index < details.personalInfo.length - 1 && <Separator className="my-3" />}
                                 </div>
-                            ))}
-                        </CardContent>
-                    </Card>
 
-                    <Card className="hover:border-primary/50 transition-colors">
-                        <CardHeader className="pb-3">
-                            <h3 className="font-semibold text-primary">Education</h3>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {details.personalInfo
-                                .filter(info => info.label === "Education:")
-                                .map((edu, index) => (
-                                    <div key={index} className="group">
-                                        <h4 className="font-medium group-hover:text-primary transition-colors">
-                                            {edu.value}
-                                        </h4>
-                                        <p className="text-sm text-muted-foreground">University of Odisha</p>
-                                        <p className="text-xs text-muted-foreground">2016 - 2020</p>
+                                <Separator />
+
+                                <div>
+                                    <h4 className="text-sm font-medium text-foreground mb-2">
+                                        Current Status
+                                    </h4>
+                                    <div className="flex items-center gap-2">
+                                        <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                                        <span className="text-sm text-muted-foreground">
+                                            Open to opportunities
+                                        </span>
                                     </div>
-                                ))}
+                                </div>
+                            </div>
+
+                            <Button size="lg" className="mt-6 w-full">
+                                Let&apos;s Collaborate
+                            </Button>
                         </CardContent>
                     </Card>
-                </motion.div>
-            </section>
-
-            {/* Contact CTA */}
-            <motion.section
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.4 }}
-                className="bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-2xl p-8 md:p-12 text-center border border-primary/20"
-            >
-                <Badge variant="secondary" className="mb-4">
-                    Let's Connect
-                </Badge>
-                <h2 className="text-2xl md:text-3xl font-semibold mb-4">Ready to Start a Project?</h2>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                    I'm currently available for freelance work and full-time opportunities.
-                    If you have a project that needs creative solutions, let's make it happen!
-                </p>
-                <div className="flex flex-wrap justify-center gap-4">
-                    <Button size="lg" className="gap-2" asChild>
-                        <a href={`mailto:${details.personalInfo[2].value}`}>
-                            <Mail className="w-4 h-4" />
-                            Get In Touch
-                        </a>
-                    </Button>
-                    <Button variant="outline" size="lg" className="gap-2" asChild>
-                        <a href={callToAction.buttons[2].href}>
-                            View Projects
-                            <ArrowRight className="w-4 h-4" />
-                        </a>
-                    </Button>
                 </div>
-            </motion.section>
-
-            {showStory && <CareerStory onComplete={() => setShowStory(false)} />}
-
-        </motion.div>
-    )
+            </div>
+            <GallerySection />
+        </section>
+    );
 }
-
-export default AboutPage

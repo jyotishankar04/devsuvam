@@ -13,20 +13,20 @@ import ThemeToggle from "../theme-toggle";
 const NavBar = () => {
 
   const navLinks = [
-    { name: "Home", path: "/", icon: <Home className="w-4 h-4" /> },
-    { name: "About", path: "/about", icon: <User className="w-4 h-4" /> },
+    { name: "Home", path: "/", icon: <Home  /> },
+    { name: "Blogs", path: "/blogs", icon: <Home  /> },
+    { name: "About", path: "/about", icon: <User  /> },
     {
       name: "Experience",
       path: "/experience",
-      icon: <Briefcase className="w-4 h-4" />,
+      icon: <Briefcase/>,
     },
-    { name: "Projects", path: "/projects", icon: <Code className="w-4 h-4" /> },
-    { name: "Contact", path: "/about", icon: <Mail className="w-4 h-4" /> },
-    { name: "Chat With Me", path: "/chat", icon: <Mail className="w-4 h-4" /> },
+    { name: "Projects", path: "/projects", icon: <Code /> },
+    { name: "Chat With Me", path: "/chat", icon: <Mail /> },
   ];
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full p-4 sticky top-0 z-40 bg-background/80 backdrop-blur ">
       <div className="flex justify-between items-center">
         <div>
           <div className="rouned-full overflow-hidden">
