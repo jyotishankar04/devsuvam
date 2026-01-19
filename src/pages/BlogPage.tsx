@@ -17,7 +17,7 @@ const BlogDetailPage = () => {
         );
     }
 
-    if (!blog) {
+    if (!blog || blog.length === 0) {
         return (
             <div className="py-20 text-center text-muted-foreground">
                 Blog not found

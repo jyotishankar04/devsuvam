@@ -6,7 +6,7 @@ interface ProjectListProps {
     showAll?: boolean;
     limit?: number;
     showFeatured?: boolean;
-    displayMode?: "grid" | "linear" | "spotlight" | "bento" | "stack" | "tilt" | "masonry";
+    displayMode?: "linear" |  "stack" ;
 }
 
 export const ProjectList = ({
@@ -14,7 +14,7 @@ export const ProjectList = ({
     showAll = false,
     limit = 4,
     showFeatured = true,
-    displayMode = "grid",
+    displayMode = "linear",
 }: ProjectListProps) => {
     const featuredProjects = projects.filter((p) => p.featured);
     const regularProjects = projects.filter((p) => !p.featured);
@@ -30,39 +30,7 @@ export const ProjectList = ({
 
     const allDisplayed = [...displayedFeatured, ...displayedRegular];
 
-    // ==========================================
-    // SPOTLIGHT - Full-width cinematic cards
-    // ==========================================
-    if (displayMode === "spotlight") {
-        return (
-            <div className="flex flex-col gap-8">
-                {allDisplayed.map((project) => (
-                    <ProjectCard
-                        key={project.id}
-                        project={project}
-                        layout="spotlight"
-                    />
-                ))}
-            </div>
-        );
-    }
-
-    // ==========================================
-    // BENTO - Asymmetric grid layout
-    // ==========================================
-    if (displayMode === "bento") {
-        return (
-            <div className="flex flex-col gap-6">
-                {allDisplayed.map((project, index) => (
-                    <ProjectCard
-                        key={project.id}
-                        project={project}
-                        layout="bento"
-                    />
-                ))}
-            </div>
-        );
-    }
+    
 
     // ==========================================
     // STACK - Layered card effect
@@ -81,40 +49,7 @@ export const ProjectList = ({
         );
     }
 
-    // ==========================================
-    // TILT - 3D perspective cards
-    // ==========================================
-    if (displayMode === "tilt") {
-        return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {allDisplayed.map((project) => (
-                    <ProjectCard
-                        key={project.id}
-                        project={project}
-                        layout="tilt"
-                    />
-                ))}
-            </div>
-        );
-    }
 
-    // ==========================================
-    // MASONRY - Pinterest-style layout
-    // ==========================================
-    if (displayMode === "masonry") {
-        return (
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                {allDisplayed.map((project, index) => (
-                    <div key={project.id} className="break-inside-avoid">
-                        <ProjectCard
-                            project={project}
-                            layout={index % 3 === 0 ? "stack" : "card"}
-                        />
-                    </div>
-                ))}
-            </div>
-        );
-    }
 
     // ==========================================
     // LINEAR - Minimal list view

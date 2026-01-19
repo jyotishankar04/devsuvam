@@ -1,8 +1,8 @@
-import { Link } from "react-router";
 import { BlogList } from "./blog/BlogList";
 import { ArrowRight } from "lucide-react";
 import { useGetBlogs } from "@/lib/axios";
 import Loader from "./Loader";
+import { Link } from "react-router";
 
 interface BlogSectionProps {
     showViewAll?: boolean;
@@ -42,9 +42,19 @@ export const BlogSection = ({
                         </Link>
                     )}
                 </div>
-
+                {
+                    blogs.length === 0 && (
+                        <div className="flex w-full items-center justify-center py-10">
+                            <p className="text-muted-foreground">No posts found.</p>
+                        </div>
+                    )
+                }
                 {/* Blog List */}
-                <BlogList blogs={blogs} limit={limit} />
+               {
+                    blogs.length > 0 && (
+                        <BlogList blogs={blogs.slice(0, limit)} />
+                    )
+                }
             </div>
         </section>
     );

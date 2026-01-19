@@ -15,7 +15,7 @@ export default function SiteNavbar() {
             aria-label="Back to home"
             title="Back"
           >
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            <ArrowLeft aria-hidden="true" />
           </Link>
 
           {/* Brand: SUVAM */}

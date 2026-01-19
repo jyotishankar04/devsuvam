@@ -18,9 +18,9 @@ export default function ThemeToggle() {
       className="text-foreground cursor-pointer"
     >
       {theme === "dark" ? (
-        <Moon className="h-5 w-5" aria-hidden="true" />
+        <Moon  aria-hidden="true" />
       ) : (
-        <Sun className="h-5 w-5" aria-hidden="true" />
+        <Sun  aria-hidden="true" />
       )}
     </Button>
   )

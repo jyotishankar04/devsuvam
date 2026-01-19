@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Project } from "@/types";
 import { Link } from "react-router";
 import { Badge } from "@/components/ui/badge";
-import { Github, GithubIcon, Link2Icon } from "lucide-react";
+import {  GithubIcon, Link2Icon } from "lucide-react";
 
 interface ProjectCardProps {
     project: Project;

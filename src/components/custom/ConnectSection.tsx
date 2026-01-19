@@ -10,13 +10,13 @@ export default function ConnectSection() {
     const socialLinks = [
         {
             name: "LinkedIn",
-            username: "suvam-patra",
+            username: "jyotishankar-patra",
             url: "https://linkedin.com/in/jyotishankar-patra",
             icon: Linkedin,
         },
         {
             name: "Instagram",
-            username: "@devsuvam",
+            username: "@dev.suvam",
             url: "https://instagram.com/dev.suvam",
             icon: Instagram,
         },
@@ -46,23 +46,21 @@ export default function ConnectSection() {
 
                 <div>
                     <TweetCard
-                        authorHandle="@devsuvam1"
-                        authorName="Jyotishankar Patra"
-                        authorImage="https://res.cloudinary.com/djby1yfko/image/upload/v1768664060/Gemini_Generated_Image_bx5n91bx5n91bx5n_ctyhf1.png?w=800&h=600&fit=crop"
-                        content={[
-                            "I'm looking for a role as a Full Stack Web Developer. If you think I'm a good fit, let's connect! 🚀",
-                            "#FullStack #WebDevelopment #JavaScript #React #NodeJS",
-                        ]}
-                        timestamp="1 day ago"
-                        isVerified
-                        reply={{
-                            authorHandle: "@dev",
-                            authorName: "Dev",
-                            authorImage: "https://res.cloudinary.com/djby1yfko/image/upload/v1768664109/IMG_20251208_165303878_1_bg5nr2.jpg",
-                            content: " @devsuvam1 Thanks for reaching out! Let's have a chat about your project.",
-                            isVerified: true,
-                            timestamp: "1 day ago",
-                        }}
+                        username="devsuvam1"
+                        bio="Backend Full-Stack Developer
+I talk about DSA, advanced systems & AI
+Sharing tech updates, building in public"
+                        displayName="SUVAM"
+                        followersCount={100}
+                        followingCount={100}
+                        profileImage="https://pbs.twimg.com/profile_images/2009337254926589952/VboDuiOZ_400x400.jpg"
+                        bannerImage="https://pbs.twimg.com/profile_banners/1881591018971332609/1767947464/1500x500"
+                        isVerified={true}
+                        isPrivate={false}
+                        twitterUrl="https://twitter.com/devsuvam1"
+                        joinedDate="Joined January 2025"
+                        location="Odisha, India"
+                        website="suvam.qwikish.com"
                     />
                 </div>
 

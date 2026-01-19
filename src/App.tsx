@@ -6,8 +6,8 @@ import ProjectsPage from "./pages/ProjectsPage"
 import AboutPage from "./pages/AboutPage"
 import ExperiencePage from "./pages/ExperiencePage"
 import ProjectPage from "./pages/ProjectPage"
-import { BlogSection } from "./components/custom/BlogSection"
 import BlogPage from "./pages/BlogPage"
+import BlogsPage from "./pages/BlogsPage"
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="projects/:id" element={<ProjectPage />} />
           <Route path="about" element={<AboutPage />} />
-          <Route path="blogs" element={<BlogSection />} />
+          <Route path="blogs" element={<BlogsPage />} />
           <Route path="blogs/:slug" element={<BlogPage />} />
           <Route path="experience" element={<ExperiencePage />} />
          </Route>    

@@ -4,10 +4,12 @@ import { Outlet } from "react-router";
 
 const IndexLayout = () => {
   return (
-    <div className="max-w-5xl w-full h-full mx-auto flex flex-col">
+    <div className="max-w-5xl w-full h-full mx-auto flex  flex-col">
       <NavBar />
-      <Outlet />
-      <Footer />
+      <div className="px-4 md:px-0 ">
+        <Outlet />
+        <Footer />
+      </div>
     </div>
   );
 };
