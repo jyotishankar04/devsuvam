@@ -41,7 +41,7 @@ const BetaWarningModal = ({
         <DialogHeader className="flex flex-col items-center text-center relative">
           
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100 dark:bg-yellow-900/20 mb-4">
-            <AlertTriangle className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
+            <AlertTriangle  />
           </div>
           <DialogTitle className="text-xl flex items-center gap-2">
             <span className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-md text-sm font-medium">

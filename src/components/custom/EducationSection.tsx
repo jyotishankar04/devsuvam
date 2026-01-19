@@ -1,143 +1,107 @@
-import type { EducationItem } from "@/types";
-import { GraduationCap, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { GraduationCap, Calendar } from "lucide-react";
+import { Badge } from "../ui/badge";
 
-interface EducationSectionProps {
-    education: EducationItem[];
-    title?: string;
-}
+const educationData = [
+    {
+        degree: "Master of Computer Applications (MCA)",
+        duration: "Aug 2025 - Present",
+        gpa: "",
+        institution: "Kalinga Institute of Industrial Technology, Bhubaneswar",
+        institutionUrl: "https://www.kiit.ac.in/",
+        isCurrent: true
+    }, {
+        degree: "Bachelor of Science in Computer Science (BSCS)",
+        duration: "Aug 2022 - May 2025",
+        gpa: "7.03",
+        institution: "Fakir Mohan Autonomous College, Balasore",
+        institutionUrl: "https://www.fmcollege.nic.in/",
+        isCurrent: false
+    }, {
+        degree: "12th (PCM)",
+        duration: "Aug 2020 - May 2022",
+        gpa: "79 %",
+        institution: "Ramarani Institute of engineering and technology, Balasore",
+        institutionUrl: "",
+        isCurrent: false
+    }
+];
 
-const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            staggerChildren: 0.15,
-            delayChildren: 0.2,
-        },
-    },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-};
-
-const EducationSection = ({ education, title = "Education" }: EducationSectionProps) => {
+const EducationSection = () => {
     return (
-        <motion.div
-        id="education"
-            className="mb-12 mx-4"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={containerVariants}
-        >
-            <motion.h2
-                className="text-3xl font-semibold text-primary mb-6"
-                variants={itemVariants}
-            >
-                {title}
-            </motion.h2>
+        <section className="w-full py-8 md:py-16 px-2 sm:px-4 ">
+            {/* Heading */}
+            <div className="mb-8 md:mb-10">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+                    Education
+                </h2>
+                <p className="text-muted-foreground mt-2 max-w-md">
+                    My academic background and formal learning journey.
+                </p>
+            </div>
 
-            <motion.div className="space-y-6">
-                {education.map((edu) => (
-                    <motion.div
-                        key={edu.id}
-                        className="group relative pl-6"
-                        variants={itemVariants}
-                        whileHover="hover"
+            <div className="space-y-4 sm:space-y-6">
+                {educationData.map((edu, i) => (
+                    <div
+                        key={i}
+                        className="hover:bg-primary/5 transition-colors rounded-lg sm:rounded-xl py-4 sm:p-6 border border-transparent hover:border-primary/10"
                     >
-                        {/* Static base border */}
-                        <motion.div
-                            className="absolute left-0 top-0 w-0.5 h-full bg-muted rounded-full"
-                            transition={{ duration: 0.2 }}
-                        />
-                        <motion.div
-                            className="absolute left-0 top-0 w-0.5 bg-muted rounded-full"
-                            initial={{ height: 0 }} // Start with 0 height
-                            variants={{
-                                hover: {
-                                    height: "100%", // Animate to full height
-                                    backgroundColor: "var(--primary)",
-                                    transition: {
-                                        duration: 0.6,
-                                        ease: "easeOut"
-                                    }
-                                }
-                            }}
-                            transition={{ duration: 0.2 }}
-                        />
-                        {/* Animated border on hover */}
-                        <motion.div
-                            className="absolute left-0 top-0 w-0.5 bg-primary rounded-full"
-                            initial={{ scaleY: 0, transformOrigin: "top" }}
-                            variants={{
-                                hover: {
-                                    scaleY: 1,
-                                    transition: {
-                                        duration: 0.4,
-                                        ease: "easeOut"
-                                    }
-                                }
-                            }}
-                        />
+                        <div className={`flex flex-col sm:flex-row items-start gap-4 ${edu.isCurrent ? "text-green-500" : ""}`}>
+                            {/* Icon */}
+                            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-primary/10">
+                                <GraduationCap  />
+                            </div>
 
-                        {/* Content */}
-                        <div className="flex justify-between items-start p-2">
-                            <div>
-                                <h3 className="font-medium text-lg text-foreground">
-                                    {edu.degree}
-                                </h3>
-                                <div className="flex items-center mt-1 text-sm text-primary/70">
-                                    <GraduationCap className="w-4 h-4 mr-1.5" />
-                                    {edu.institution} 
-                                    {edu.institutionUrl && (
+                            {/* Content */}
+                            <div className="flex-1 w-full">
+                                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
+                                    <div className="flex-1">
+                                        <h3 className="text-lg sm:text-xl font-semibold">
+                                            {edu.degree}
+                                        </h3>
+
                                         <a
                                             href={edu.institutionUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="ml-1.5"
+                                            className={`text-muted-foreground mt-1 hover:underline hover:text-foreground block text-sm sm:text-base ${!edu.institutionUrl ? "cursor-default hover:no-underline" : ""}`}
                                         >
-                                            <ExternalLink className="w-3 h-3 text-muted-foreground hover:text-foreground transition-colors" />
+                                            {edu.institution}
                                         </a>
+                                    </div>
+
+                                    <Badge
+                                        variant="secondary"
+                                        className="text-xs sm:text-sm flex items-center gap-2 self-start sm:self-auto"
+                                    >
+                                        {edu.isCurrent && (
+                                            <div className="w-2 h-2 animate-pulse bg-green-500 rounded-full"></div>
+                                        )}
+                                        {edu.isCurrent ? "Current" : "Graduated"}
+                                    </Badge>
+                                </div>
+
+                                {/* Duration and GPA Row */}
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5 mt-3 sm:mt-4">
+                                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                        <Calendar />
+                                        <span className="text-xs sm:text-sm">{edu.duration}</span>
+                                    </div>
+
+                                    {edu.gpa && (
+                                        <div className="text-sm text-muted-foreground flex items-center">
+                                            <span className="hidden sm:inline">•</span>
+                                            <span className="sm:ml-5 text-xs sm:text-sm">
+                                                {edu.gpa.includes('%') ? `Percentage: ${edu.gpa}` : `GPA: ${edu.gpa}`}
+                                            </span>
+                                        </div>
                                     )}
                                 </div>
                             </div>
-                            <span className="text-sm text-muted-foreground">
-                                {edu.year}
-                            </span>
                         </div>
-
-                        {edu.gpa && (
-                            <div className="mt-2 text-sm text-muted-foreground">
-                                GPA: {edu.gpa}
-                            </div>
-                        )}
-
-                        {edu.description && (
-                            <p className="mt-2 text-sm text-muted-foreground">
-                                {edu.description}
-                            </p>
-                        )}
-
-                        {edu.courses && edu.courses.length > 0 && (
-                            <div className="mt-3">
-                                <div className="text-xs text-muted-foreground mb-1">
-                                    Courses:
-                                </div>
-                                <div className="text-sm text-muted-foreground">
-                                    {edu.courses.slice(0, 4).join(", ")}
-                                    {edu.courses.length > 4 &&
-                                        ` +${edu.courses.length - 4} more`}
-                                </div>
-                            </div>
-                        )}
-                    </motion.div>
+                    </div>
                 ))}
-            </motion.div>
-        </motion.div>
+            </div>
+        </section>
     );
 };
 

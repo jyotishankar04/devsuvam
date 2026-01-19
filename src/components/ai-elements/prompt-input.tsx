@@ -98,7 +98,7 @@ export function PromptInputAttachment({
         />
       ) : (
         <div className="flex size-full items-center justify-center text-muted-foreground">
-          <PaperclipIcon className="size-4" />
+          <PaperclipIcon  />
         </div>
       )}
       <Button
@@ -109,7 +109,7 @@ export function PromptInputAttachment({
         type="button"
         variant="outline"
       >
-        <XIcon className="h-3 w-3" />
+        <XIcon />
       </Button>
     </div>
   );
@@ -183,7 +183,7 @@ export const PromptInputActionAddAttachments = ({
         attachments.openFileDialog();
       }}
     >
-      <ImageIcon className="mr-2 size-4" /> {label}
+      <ImageIcon  /> {label}
     </DropdownMenuItem>
   );
 };
@@ -572,7 +572,7 @@ export const PromptInputActionMenuTrigger = ({
 }: PromptInputActionMenuTriggerProps) => (
   <DropdownMenuTrigger asChild>
     <PromptInputButton className={className} {...props}>
-      {children ?? <PlusIcon className="size-4" />}
+      {children ?? <PlusIcon  />}
     </PromptInputButton>
   </DropdownMenuTrigger>
 );
@@ -612,14 +612,14 @@ export const PromptInputSubmit = ({
   children,
   ...props
 }: PromptInputSubmitProps) => {
-  let Icon = <SendIcon className="size-4" />;
+  let Icon = <SendIcon  />;
 
   if (status === "submitted") {
-    Icon = <Loader2Icon className="size-4 animate-spin" />;
+    Icon = <div className="animate-spin"> <Loader2Icon /></div>;
   } else if (status === "streaming") {
-    Icon = <SquareIcon className="size-4" />;
+    Icon = <SquareIcon  />;
   } else if (status === "error") {
-    Icon = <XIcon className="size-4" />;
+    Icon = <XIcon />;
   }
 
   return (

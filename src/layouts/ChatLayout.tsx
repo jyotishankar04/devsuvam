@@ -47,7 +47,7 @@ const ChatLayout = () => {
         </div>
       </div>
 
-      <div className="w-full border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 shrink-0"> {/* Added shrink-0 */}
+      <div className="w-full border-t bg-background/80 backdrop-blur  shrink-0"> {/* Added shrink-0 */}
         <div className="mx-auto w-full max-w-3xl p-4">
           <form onSubmit={handleSubmit}>
             <div className="relative flex items-end">
@@ -56,7 +56,7 @@ const ChatLayout = () => {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Type your message..."
-                className="min-h-[48px] rounded-2xl resize-none p-4 pr-14 shadow-sm"
+                className="min-h-12 rounded-2xl resize-none p-4 pr-14 shadow-sm"
                 disabled={isLoading}
               />
               <Button
@@ -70,7 +70,7 @@ const ChatLayout = () => {
                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
                 ) : (
                   // send icon
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
                     <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" />
                   </svg>
                 )}

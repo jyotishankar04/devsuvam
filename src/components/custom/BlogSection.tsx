@@ -1,0 +1,61 @@
+import { BlogList } from "./blog/BlogList";
+import { ArrowRight } from "lucide-react";
+import { useGetBlogs } from "@/lib/axios";
+import Loader from "./Loader";
+import { Link } from "react-router";
+
+interface BlogSectionProps {
+    showViewAll?: boolean;
+    limit?: number;
+    title?: string;
+    description?: string;
+}
+
+export const BlogSection = ({
+    showViewAll = true,
+    limit = 3,
+    title = "From the blog",
+    description = "Discover valuable insights on backend development, system design, and more.",
+}: BlogSectionProps) => {
+    const { data: blogs, isLoading: loading } = useGetBlogs();
+    if (loading) {
+        return <div className="flex w-full items-center justify-center py-10">
+            <Loader  />
+        </div>
+    }
+    return (
+        <section className="py-16">
+            <div className="flex flex-col gap-8">
+                {/* Header */}
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                    <div>
+                        <h2 className="text-3xl font-bold text-foreground">{title}</h2>
+                        <p className="text-muted-foreground mt-2">{description}</p>
+                    </div>
+                    {showViewAll && (
+                        <Link
+                            to="/blogs"
+                            className="inline-flex items-center gap-2  text-primary hover:underline font-medium"
+                        >
+                            View all posts
+                            <ArrowRight />
+                        </Link>
+                    )}
+                </div>
+                {
+                    blogs.length === 0 && (
+                        <div className="flex w-full items-center justify-center py-10">
+                            <p className="text-muted-foreground">No posts found.</p>
+                        </div>
+                    )
+                }
+                {/* Blog List */}
+               {
+                    blogs.length > 0 && (
+                        <BlogList blogs={blogs.slice(0, limit)} />
+                    )
+                }
+            </div>
+        </section>
+    );
+};
