@@ -2,6 +2,7 @@ import { BlogSection } from "@/components/custom/BlogSection";
 import ConnectSection from "@/components/custom/ConnectSection";
 import EducationSection from "@/components/custom/EducationSection";
 import ExperienceSection from "@/components/custom/ExperienceSection";
+import GitHubContributionGraph from "@/components/custom/GithubGraph";
 import HeroSection from "@/components/custom/HeroSection";
 import { Newsletter } from "@/components/custom/NewsLetter";
 import { ProjectSection } from "@/components/custom/ProjectsSection";
@@ -13,6 +14,7 @@ const Index = () => {
   return (
     <div className="w-full ">
       <HeroSection />
+      <GitHubContributionGraph />
       <ExperienceSection />
       <ProjectSection
         projects={projects}
