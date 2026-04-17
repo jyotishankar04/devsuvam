@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @source "../node_modules/streamdown/dist/*.js";
 
 
@@ -170,7 +169,7 @@
 }
 body {
   letter-spacing: var(--tracking-normal);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-sans);
 }
 
 @theme inline {
@@ -196,5 +195,14 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
