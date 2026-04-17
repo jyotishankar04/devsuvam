@@ -94,7 +94,7 @@ export default function GitHubContributionGraph() {
     );
 }
 
-export function YearSelect({ value, onChange }: YearSelectProps) {
+function YearSelect({ value, onChange }: YearSelectProps) {
     return (
         <Select
             value={value.toString()}

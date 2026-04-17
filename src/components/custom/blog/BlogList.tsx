@@ -14,6 +14,7 @@ export const BlogList = ({
     showAll = false,
     limit = 3,
 }: BlogListProps) => {
+    if (!Array.isArray(blogs)) return null;
     const displayedBlogs = showAll ? blogs : blogs.slice(0, limit);
 
     if (layout === "grid") {

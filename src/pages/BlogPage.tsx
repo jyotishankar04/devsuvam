@@ -17,7 +17,7 @@ const BlogDetailPage = () => {
         );
     }
 
-    if (!blog || blog.length === 0) {
+    if (!blog || !blog.id) {
         return (
             <div className="py-20 text-center text-muted-foreground">
                 Blog not found
@@ -52,7 +52,11 @@ const BlogDetailPage = () => {
                                 {new Date(blog.createdAt).toDateString()}
                             </span>
                             <span>•</span>
-                            <span>6 min read</span>
+                            <span>
+                                {Math.max(1, Math.ceil(
+                                    (blog.content || "").split(/\s+/).length / 200
+                                ))} min read
+                            </span>
                         </div>
                     </div>
                 </div>

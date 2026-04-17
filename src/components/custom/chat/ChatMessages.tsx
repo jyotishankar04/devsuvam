@@ -1,9 +1,9 @@
-"use client"
 
 import { useEffect, useRef } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import AiLoader from "./AiLoader"
 import { Response } from "@/components/ai-elements/response"
+import { cn } from "@/lib/utils"
 
 export interface Message {
   id: string
@@ -83,12 +83,12 @@ export default function ChatMessages({ messages, onSuggestionClick, isLoading }:
                 )}
 
                 <div
-                  className={[
-                    "max-w-[90%] px-2 py-2 md:max-w-[80%]",
+                  className={cn(
+                    "max-w-[90%] px-3 py-2.5 md:max-w-[80%]",
                     isUser
-                      ? "bg-primary text-primary-foreground rounded-br-md rounded-2xl"
-                      : "",
-                  ].join(" ")}
+                      ? "bg-primary text-primary-foreground rounded-2xl rounded-br-md"
+                      : "bg-muted text-foreground rounded-2xl rounded-bl-md"
+                  )}
                 >
                   <Response className="w-full overflow-x-auto">{message.content}</Response>
                 </div>

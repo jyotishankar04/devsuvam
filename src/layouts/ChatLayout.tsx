@@ -1,9 +1,9 @@
-"use client"
 
 import type React from "react"
 
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
+import { Send } from "lucide-react"
 import ChatMessages, { type Message } from "@/components/custom/chat/ChatMessages"
 import { useChat } from "@/hooks/useChat"
 import { useState } from "react"
@@ -11,7 +11,7 @@ import SiteNavbar from "@/components/custom/chat/SiteNavbar"
 import BetaWarningModal from "@/components/custom/BetaWarningModel"
 
 const ChatLayout = () => {
-  const { messages, sendMessage, handleSuggestionClick, isLoading } = useChat()
+  const { messages, sendMessage, handleSuggestionClick, isLoading, error } = useChat()
   const [inputValue, setInputValue] = useState("")
   const [showBetaModal, setShowBetaModal] = useState(true)
 
@@ -37,8 +37,15 @@ const ChatLayout = () => {
         isOpen={showBetaModal}
         onOpenChange={setShowBetaModal}
       />
-      <div className="flex-1 flex flex-col min-h-0"> {/* Added min-h-0 to prevent overflow */}
-        <div className="mx-auto w-full max-w-6xl flex-1 flex flex-col min-h-0"> {/* Added flex-1 and min-h-0 */}
+      <div className="flex-1 flex flex-col min-h-0">
+        {error && (
+          <div className="mx-auto w-full max-w-3xl px-4 pt-4">
+            <div className="rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+              {error}
+            </div>
+          </div>
+        )}
+        <div className="mx-auto w-full max-w-6xl flex-1 flex flex-col min-h-0">
           <ChatMessages
             messages={messages as Message[]}
             isLoading={isLoading}
@@ -47,7 +54,7 @@ const ChatLayout = () => {
         </div>
       </div>
 
-      <div className="w-full border-t bg-background/80 backdrop-blur  shrink-0"> {/* Added shrink-0 */}
+      <div className="w-full border-t bg-background/80 backdrop-blur shrink-0">
         <div className="mx-auto w-full max-w-3xl p-4">
           <form onSubmit={handleSubmit}>
             <div className="relative flex items-end">
@@ -69,10 +76,7 @@ const ChatLayout = () => {
                 {isLoading ? (
                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
                 ) : (
-                  // send icon
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
-                    <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" />
-                  </svg>
+                  <Send size={18} />
                 )}
                 <span className="sr-only">Send message</span>
               </Button>

@@ -89,7 +89,7 @@ export function PromptInputAttachment({
       {...props}
     >
       {data.mediaType?.startsWith("image/") && data.url ? (
-        <img
+        <img loading="lazy"
           alt={data.filename || "attachment"}
           className="size-full rounded-md object-cover"
           height={56}

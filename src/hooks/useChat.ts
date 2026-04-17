@@ -1,4 +1,3 @@
-"use client"
 
 // hooks/useChat.ts
 import { useMutation } from "@tanstack/react-query"
@@ -13,19 +12,13 @@ export const useChat = () => {
 
   const mutation = useMutation({
     mutationFn: (message: string) => chatService.sendMessage({ message, configId }),
-    onSuccess: (data ) => {
-      // Add assistant's response to messages
+    onSuccess: (data) => {
       const assistantMessage: Message = {
         id: uuidv4(),
         role: "assistant",
         content: data.content,
       }
-
       setMessages((prev) => [...prev, assistantMessage])
-    },
-    onError: (error) => {
-      console.error("Failed to send message:", error)
-      // You can add error handling here, like showing a toast notification
     },
   })
 
@@ -50,6 +43,6 @@ export const useChat = () => {
     sendMessage,
     handleSuggestionClick,
     isLoading: mutation.isPending,
-    error: mutation.error,
+    error: mutation.error ? "Failed to get response. Please try again." : null,
   }
 }

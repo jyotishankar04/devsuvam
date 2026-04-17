@@ -6,6 +6,7 @@ import { Link } from "react-router";
 
 interface BlogSectionProps {
     showViewAll?: boolean;
+    showAll?: boolean;
     limit?: number;
     title?: string;
     description?: string;
@@ -13,6 +14,7 @@ interface BlogSectionProps {
 
 export const BlogSection = ({
     showViewAll = true,
+    showAll = false,
     limit = 3,
     title = "From the blog",
     description = "Discover valuable insights on backend development, system design, and more.",
@@ -23,6 +25,7 @@ export const BlogSection = ({
             <Loader  />
         </div>
     }
+    const displayedBlogs = showAll ? blogs : (blogs || []).slice(0, limit);
     return (
         <section className="py-16">
             <div className="flex flex-col gap-8">
@@ -52,7 +55,7 @@ export const BlogSection = ({
                 {/* Blog List */}
                {
                     blogs.length > 0 && (
-                        <BlogList blogs={blogs.slice(0, limit)} />
+                        <BlogList blogs={displayedBlogs} showAll={showAll} />
                     )
                 }
             </div>

@@ -1,14 +1,22 @@
-import { projects } from "@/constants/data";
-import { useLocation } from "react-router";
+import { useParams } from "react-router";
+import { useGetProject } from "@/lib/api";
+import Loader from "@/components/custom/Loader";
 import { Streamdown } from "streamdown";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 export default function ProjectPage() {
-    const location = useLocation();
-    const slug = location.pathname.split("/").pop();
-    const project = projects.find((p) => p.slug === slug);
+    const { id } = useParams();
+    const { data: project, isLoading } = useGetProject(id);
+
+    if (isLoading) {
+        return (
+            <div className="flex w-full items-center justify-center py-20">
+                <Loader />
+            </div>
+        );
+    }
 
     if (!project) {
         return (
@@ -17,7 +25,7 @@ export default function ProjectPage() {
                     Project not found
                 </h2>
                 <p className="mt-2 text-muted-foreground">
-                    The project you’re looking for doesn’t exist.
+                    The project you're looking for doesn't exist.
                 </p>
             </div>
         );
@@ -27,7 +35,7 @@ export default function ProjectPage() {
         <section className="py-16">
             {/* Hero */}
             <div className="mb-12">
-                <img
+                <img loading="lazy"
                     src={project.image}
                     alt={project.title}
                     className="w-full  object-cover rounded-2xl border border-border shadow-sm"
@@ -84,7 +92,7 @@ export default function ProjectPage() {
             {/* Markdown Content */}
             <article className="prose prose-neutral dark:prose-invert max-w-none">
                 <Streamdown>
-                    {project.content}
+                    {project.content || ""}
                 </Streamdown>
             </article>
         </section>
