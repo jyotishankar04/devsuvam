@@ -5,9 +5,15 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 
+const socialLinks = [
+    { id: "1", icon: Github, url: "https://github.com/jyotishankar04" },
+    { id: "2", icon: Linkedin, url: "https://linkedin.com/in/jyotishankar-patra" },
+    { id: "3", icon: Twitter, url: "https://twitter.com/devsuvam1" },
+];
+
 export default function Footer() {
     return (
-        <footer className="border-t sticky border-border/60 bg-background">
+        <footer className="border-t border-border/60 bg-background">
             <div className=" py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* Left: Profile */}
@@ -20,31 +26,20 @@ export default function Footer() {
                         </p>
 
                         <div className="flex items-center gap-4 pt-2">
-                            <Link
-                                to="https://github.com/devsuvam"
-                                target="_blank"
-                                className="text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                <Github  />
-                            </Link>
-                            <Link
-                                to="https://linkedin.com/in/suvam-patra"
-                                target="_blank"
-                                className="text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                <Linkedin  />
-                            </Link>
-                            <Link
-                                to="https://twitter.com/devsuvam"
-                                target="_blank"
-                                className="text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                <Twitter  />
-                            </Link>
+                            {socialLinks.map((link) => (
+                                <Link
+                                    key={link.id}
+                                    to={link.url}
+                                    target="_blank"
+                                    className="text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-110 hover:-translate-y-0.5"
+                                >
+                                    <link.icon />
+                                </Link>
+                            ))}
                         </div>
 
                         <p className="pt-4 text-xs text-muted-foreground">
-                            © {new Date().getFullYear()} Suvam. All rights reserved.
+                            &copy; {new Date().getFullYear()} Suvam. All rights reserved.
                         </p>
                     </div>
 
@@ -55,9 +50,9 @@ export default function Footer() {
                         </h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
                             <li><Link to="/" className="hover:text-foreground">Home</Link></li>
-                            <li><Link to="/creating" className="hover:text-foreground">Creating</Link></li>
-                            <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
-                            <li><Link to="/resume" className="hover:text-foreground">Resume</Link></li>
+                            <li><Link to="/about" className="hover:text-foreground">About</Link></li>
+                            <li><Link to="/projects" className="hover:text-foreground">Projects</Link></li>
+                            <li><Link to="/experience" className="hover:text-foreground">Experience</Link></li>
                         </ul>
                     </div>
 
@@ -67,10 +62,9 @@ export default function Footer() {
                             Writing
                         </h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li><Link to="/blog" className="hover:text-foreground">Blog</Link></li>
-                            <li><Link to="/snippets" className="hover:text-foreground">Snippets</Link></li>
-                            <li><Link to="/guestbook" className="hover:text-foreground">Guestbook</Link></li>
-                            <li><Link to="/uses" className="hover:text-foreground">Uses</Link></li>
+                            <li><Link to="/blogs" className="hover:text-foreground">Blog</Link></li>
+                            <li><a href="https://github.com/jyotishankar04" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">GitHub</a></li>
+                            <li><a href="https://linkedin.com/in/jyotishankar-patra" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">LinkedIn</a></li>
                         </ul>
                     </div>
 

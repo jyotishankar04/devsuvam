@@ -1,6 +1,5 @@
-"use client";
-
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   Home,
   User,
@@ -13,20 +12,21 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "../theme-toggle";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { name: "Home", path: "/", icon: <Home size={20} /> },
+  { name: "Blogs", path: "/blogs", icon: <BookOpen size={20} /> },
+  { name: "About", path: "/about", icon: <User size={20} /> },
+  { name: "Experience", path: "/experience", icon: <Briefcase size={20} /> },
+  { name: "Projects", path: "/projects", icon: <Code size={20} /> },
+  { name: "Chat", path: "/chat", icon: <Mail size={20} /> },
+];
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { name: "Home", path: "/", icon: <Home size={20} /> },
-    { name: "Blogs", path: "/blogs", icon: <BookOpen size={20} /> },
-    { name: "About", path: "/about", icon: <User size={20} /> },
-    { name: "Experience", path: "/experience", icon: <Briefcase size={20} /> },
-    { name: "Projects", path: "/projects", icon: <Code size={20} /> },
-    { name: "Chat", path: "/chat", icon: <Mail size={20} /> },
-  ];
+  const location = useLocation();
 
   return (
     <>
@@ -35,7 +35,7 @@ const NavBar = () => {
           {/* Logo/Profile */}
           <Link to="/" className="flex items-center gap-3">
             <div className="rounded-full overflow-hidden">
-              <img
+              <img loading="lazy"
                 src="/dp.png"
                 alt="Logo"
                 className="w-10 h-10 md:w-12 md:h-12 rounded-full object-center object-cover border-2 border-primary/20"
@@ -48,17 +48,23 @@ const NavBar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link, index) => (
-              <Button
-                variant="ghost"
-                size="sm"
-                key={index}
-                asChild
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <Link to={link.path}>{link.name}</Link>
-              </Button>
-            ))}
+            {navLinks.map((link, index) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  key={index}
+                  asChild
+                  className={cn(
+                    "text-muted-foreground hover:text-foreground",
+                    isActive && "bg-accent text-foreground font-medium"
+                  )}
+                >
+                  <Link to={link.path}>{link.name}</Link>
+                </Button>
+              );
+            })}
             <ThemeToggle />
           </div>
 
@@ -78,20 +84,28 @@ const NavBar = () => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed  inset-0 z-50 md:hidden">
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-
-          {/* Menu Panel */}
-          <div className="absolute right-0 top-0 h-full w-70 bg-background border-l shadow-lg animate-in slide-in-from-right-5">
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div
+              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.div
+              className="fixed right-0 top-0 z-50 h-full w-70 bg-background border-l shadow-lg md:hidden"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
             <div className="flex flex-col h-full p-6">
               {/* Profile Section */}
               <div className="flex items-center gap-4 mb-8 p-3 rounded-lg bg-muted/30">
-                <img
+                <img loading="lazy"
                   src="/dp.png"
                   alt="Profile"
                   className="w-14 h-14 rounded-full object-cover"
@@ -106,19 +120,23 @@ const NavBar = () => {
 
               {/* Navigation Links */}
               <nav className="flex-1 space-y-2">
-                {navLinks.map((link, index) => (
-                  <Link
-                    key={index}
-                    to={link.path}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={cn(
-                      "flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                    )}
-                  >
-                    <div className="text-primary">{link.icon}</div>
-                    <span className="font-medium">{link.name}</span>
-                  </Link>
-                ))}
+                {navLinks.map((link, index) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <Link
+                      key={index}
+                      to={link.path}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors",
+                        isActive && "bg-accent text-foreground font-medium"
+                      )}
+                    >
+                      <div className="text-primary">{link.icon}</div>
+                      <span className="font-medium">{link.name}</span>
+                    </Link>
+                  );
+                })}
               </nav>
 
               {/* Contact Info */}
@@ -153,9 +171,10 @@ const NavBar = () => {
                 Close Menu
               </Button>
             </div>
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };
