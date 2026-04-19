@@ -26,8 +26,10 @@ const ExperiencePage = () => {
                         </p>
 
                         <div className="mt-8">
-                            <Button size="lg" className="px-10">
-                                Hire Me
+                            <Button size="lg" className="px-10" asChild>
+                                <a href="mailto:jyotipatra.subham@gmail.com">
+                                    Hire Me
+                                </a>
                             </Button>
                         </div>
                     </CardContent>

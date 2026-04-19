@@ -1,34 +1,37 @@
 import { GraduationCap, Calendar } from "lucide-react";
 import { Badge } from "../ui/badge";
-
-const educationData = [
-    {
-        degree: "Master of Computer Applications (MCA)",
-        duration: "Aug 2025 - Present",
-        gpa: "",
-        institution: "Kalinga Institute of Industrial Technology, Bhubaneswar",
-        institutionUrl: "https://www.kiit.ac.in/",
-        isCurrent: true
-    }, {
-        degree: "Bachelor of Science in Computer Science (BSCS)",
-        duration: "Aug 2022 - May 2025",
-        gpa: "7.03",
-        institution: "Fakir Mohan Autonomous College, Balasore",
-        institutionUrl: "https://www.fmcollege.nic.in/",
-        isCurrent: false
-    }, {
-        degree: "12th (PCM)",
-        duration: "Aug 2020 - May 2022",
-        gpa: "79 %",
-        institution: "Ramarani Institute of engineering and technology, Balasore",
-        institutionUrl: "",
-        isCurrent: false
-    }
-];
+import { useGetEducation } from "@/lib/api";
+import Loader from "@/components/custom/Loader";
 
 const EducationSection = () => {
+    const { data: educationData, isLoading } = useGetEducation();
+
+    if (isLoading) {
+        return (
+            <div className="flex w-full items-center justify-center py-10">
+                <Loader />
+            </div>
+        );
+    }
+
+    if (!educationData || educationData.length === 0) {
+        return (
+            <section className="w-full py-8 md:py-16">
+                <div className="mb-8 md:mb-10">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+                        Education
+                    </h2>
+                    <p className="text-muted-foreground mt-2 max-w-md">
+                        My academic background and formal learning journey.
+                    </p>
+                </div>
+                <p className="text-muted-foreground">No education listed.</p>
+            </section>
+        );
+    }
+
     return (
-        <section className="w-full py-8 md:py-16 px-2 sm:px-4 ">
+        <section className="w-full py-8 md:py-16">
             {/* Heading */}
             <div className="mb-8 md:mb-10">
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
@@ -60,9 +63,9 @@ const EducationSection = () => {
                                         </h3>
 
                                         <a
-                                            href={edu.institutionUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            href={edu.institutionUrl || "#"}
+                                            target={edu.institutionUrl ? "_blank" : undefined}
+                                            rel={edu.institutionUrl ? "noopener noreferrer" : undefined}
                                             className={`text-muted-foreground mt-1 hover:underline hover:text-foreground block text-sm sm:text-base ${!edu.institutionUrl ? "cursor-default hover:no-underline" : ""}`}
                                         >
                                             {edu.institution}

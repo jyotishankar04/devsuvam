@@ -8,21 +8,14 @@ const experiences = [
         period: "Jun 2025 - Aug 2025",
         works: [
             "Developed and optimized RESTful APIs using FASTAPI, improving response times by 30%",
-            "Implemented frontend components with Next.js, Tanstack Query, and Redix UI, enhancing user experience",
+            "Implemented frontend components with Next.js, Tanstack Query, and Radix UI, enhancing user experience",
             "Collaborated with cross-functional teams to deliver SaaS product features on schedule",
         ],
         skills: [
-            "FastAPI",
-            "Next.js",
-            "React",
-            "TypeScript",
-            "PostgreSQL",
-            "Tailwind CSS",
-            "Language: Python",
-            "Version Control: Git",
-            "Database: PostgreSQL",
+            "FastAPI", "Next.js", "React", "TypeScript", "PostgreSQL",
+            "Tailwind CSS", "Python", "Git",
         ],
-    }
+    },
 ];
 
 export default function ExperienceSection() {
@@ -34,11 +27,9 @@ export default function ExperienceSection() {
             </div>
 
             <div className="relative">
-                {/* Vertical timeline line */}
-
                 <div className="space-y-8 md:space-y-12">
-                    {experiences.map((exp, i) => (
-                        <div key={i} className="relative flex items-start">
+                    {experiences.map((exp) => (
+                        <div key={exp.company} className="relative flex items-start">
 
                             <div className="w-full">
                                 <div className="">
@@ -58,8 +49,8 @@ export default function ExperienceSection() {
                                             <div>
                                                 <h4 className="font-medium mb-3 text-sm text-muted-foreground">RESPONSIBILITIES</h4>
                                                 <ul className="space-y-2.5">
-                                                    {exp.works.map((work, idx) => (
-                                                        <li key={idx} className="text-foreground/90 text-sm flex">
+                                                    {exp.works.map((work) => (
+                                                        <li key={work} className="text-foreground/90 text-sm flex">
                                                             <span className="mr-3 text-muted-foreground">•</span>
                                                             {work}
                                                         </li>
@@ -71,9 +62,9 @@ export default function ExperienceSection() {
                                             <div>
                                                 <h4 className="font-medium mb-3 text-sm text-muted-foreground">TECHNOLOGIES</h4>
                                                 <div className="flex flex-wrap gap-2">
-                                                    {exp.skills.map((skill, idx) => (
+                                                    {exp.skills.map((skill) => (
                                                         <Badge
-                                                            key={idx}
+                                                            key={skill}
                                                             variant="secondary"
                                                             className="font-normal text-xs bg-secondary/50"
                                                         >
