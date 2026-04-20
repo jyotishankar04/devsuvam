@@ -69,7 +69,7 @@ export default function TwitterProfileCard({
       >
         {/* Banner */}
         <div className="relative h-32 md:h-40 overflow-hidden">
-          <img
+          <img loading="lazy"
             src={bannerImage}
             alt="Profile banner"
             className="h-full w-full object-cover"
@@ -93,7 +93,7 @@ export default function TwitterProfileCard({
             {/* Profile Image */}
             <div className="relative -mt-12">
               <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-white dark:border-black">
-                <img
+                <img loading="lazy"
                   src={profileImage}
                   alt={displayName}
                   className="h-full w-full object-cover"
@@ -107,16 +107,14 @@ export default function TwitterProfileCard({
             </div>
 
             {/* Follow Button */}
-            <a
+            <button
+              type="button"
               className={cn(
                 "mt-4 flex h-10 items-center gap-2 justify-center rounded-full px-4 font-semibold transition-all",
                 "bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200",
                 "shadow-sm hover:shadow-md"
               )}
-              href={`https://x.com/${username}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); window.open(`https://x.com/${username}`, '_blank', 'noopener,noreferrer'); }}
             >
               <div >
                 <UserPlus style={{
@@ -126,7 +124,7 @@ export default function TwitterProfileCard({
 
               </div>
               Follow
-            </a>
+            </button>
           </div>
 
           {/* Profile Info */}
@@ -157,16 +155,13 @@ export default function TwitterProfileCard({
               )}
 
               {website && (
-                <a
-                  href={`https://${website}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-blue-500 hover:underline"
-                  onClick={(e) => e.stopPropagation()}
+                <span
+                  className="flex items-center gap-1 text-blue-500 hover:underline cursor-pointer"
+                  onClick={(e) => { e.stopPropagation(); window.open(`https://${website}`, '_blank', 'noopener,noreferrer'); }}
                 >
                   <LinkIcon  />
                   <span>{website}</span>
-                </a>
+                </span>
               )}
 
               {joinedDate && (
@@ -195,7 +190,7 @@ export default function TwitterProfileCard({
             <div className="mt-6 space-y-3 border-t border-gray-200 pt-4 dark:border-gray-800">
               <div className="flex items-start gap-2">
                 <div className="h-8 w-8 overflow-hidden rounded-full">
-                  <img
+                  <img loading="lazy"
                     src={profileImage}
                     alt={displayName}
                     className="h-full w-full object-cover"

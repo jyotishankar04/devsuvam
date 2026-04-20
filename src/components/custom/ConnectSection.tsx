@@ -6,28 +6,31 @@ import {
 } from "lucide-react";
 import TweetCard from "../kokonutui/tweet-card";
 
-export default function ConnectSection() {
-    const socialLinks = [
-        {
-            name: "LinkedIn",
-            username: "jyotishankar-patra",
-            url: "https://linkedin.com/in/jyotishankar-patra",
-            icon: Linkedin,
-        },
-        {
-            name: "Instagram",
-            username: "@dev.suvam",
-            url: "https://instagram.com/dev.suvam",
-            icon: Instagram,
-        },
-        {
-            name: "Email",
-            username: "jyotipatra.subham@gmail.com",
-            url: "mailto:jyotipatra.subham@gmail.com",
-            icon: Mail,
-        },
-    ];
+const socialLinks = [
+    {
+        id: "1",
+        name: "LinkedIn",
+        url: "https://linkedin.com/in/jyotishankar-patra",
+        username: "@jyotishankar-patra",
+        icon: Linkedin,
+    },
+    {
+        id: "2",
+        name: "Instagram",
+        url: "https://instagram.com/devsuvam",
+        username: "@devsuvam",
+        icon: Instagram,
+    },
+    {
+        id: "3",
+        name: "Email",
+        url: "mailto:jyotipatra.subham@gmail.com",
+        username: "jyotipatra.subham@gmail.com",
+        icon: Mail,
+    },
+];
 
+export default function ConnectSection() {
     return (
         <section className="py-20">
             {/* Heading */}
@@ -43,7 +46,6 @@ export default function ConnectSection() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Primary Card */}
-
                 <div>
                     <TweetCard
                         username="devsuvam1"
@@ -73,7 +75,7 @@ Sharing tech updates, building in public"
                     <div className="space-y-4">
                         {socialLinks.map((link) => (
                             <a
-                                key={link.name}
+                                key={link.id}
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -102,12 +104,12 @@ Sharing tech updates, building in public"
                                             {link.name}
                                         </h4>
                                         <p className="text-sm text-muted-foreground">
-                                            {link.username}
+                                            {link.username || link.url}
                                         </p>
                                     </div>
                                 </div>
 
-                                <ExternalLink />
+                                <ExternalLink size={16} className="opacity-50 group-hover:opacity-100 transition-opacity" />
                             </a>
                         ))}
                     </div>
