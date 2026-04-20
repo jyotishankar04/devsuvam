@@ -17,10 +17,37 @@ import {
     ExternalLink,
 } from "lucide-react";
 import { GallerySection } from "@/components/custom/GalerySection";
+import { Link } from "react-router";
+
+const strengthsIconMap: Record<string, React.ElementType> = {
+    Code2,
+    Server,
+    Database,
+    CheckCircle2,
+};
+
+const about = {
+    name: "Jyotishankar Patra",
+    title: "Full Stack Software Developer (Backend-Focused)",
+    bio: "I'm a full stack software developer with more focus on backend development. I build scalable and reliable backend systems and also have skills in frontend development. I'm good at working with databases, creating APIs, and using modern tools to make efficient software. My experience comes from building full-stack products using modern tools like Next.js, PostgreSQL, Docker, and cloud infrastructure.",
+    email: "jyotipatra.subham@gmail.com",
+    phone: "+91-9861250893",
+    linkedin: "https://linkedin.com/in/jyotishankar-patra",
+    github: "https://github.com/jyotishankar04",
+    avatarUrl: "https://res.cloudinary.com/djby1yfko/image/upload/v1768664109/IMG_20251208_165303878_1_bg5nr2.jpg",
+    strengths: [
+        { icon: "Code2", title: "Full-Stack Development", desc: "Built multiple production-grade applications" },
+        { icon: "Server", title: "Backend Architecture", desc: "System design & microservices expertise" },
+        { icon: "Database", title: "Database Management", desc: "PostgreSQL, MongoDB, Redis, Prisma ORM" },
+        { icon: "CheckCircle2", title: "DevOps & Deployment", desc: "Docker, AWS, CI/CD, Cloudflare" },
+    ],
+};
 
 export default function AboutPage() {
+    const strengths = about.strengths || [];
+
     return (
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24 relative">
             {/* Subtle background glow */}
             <div className="pointer-events-none absolute inset-0 -z-10">
                 <div className="mx-auto h-75 max-w-3xl rounded-full bg-primary/5 blur-3xl" />
@@ -31,9 +58,9 @@ export default function AboutPage() {
                 {/* Avatar */}
                 <div className="relative">
                     <div className="relative h-36 w-36 overflow-hidden rounded-2xl border border-border bg-muted shadow-lg">
-                        <img
-                            src="https://res.cloudinary.com/djby1yfko/image/upload/v1768664109/IMG_20251208_165303878_1_bg5nr2.jpg"
-                            alt="Jyotishankar Patra"
+                        <img loading="lazy"
+                            src={about.avatarUrl}
+                            alt={about.name}
                             className="h-full w-full object-cover"
                         />
                     </div>
@@ -51,61 +78,74 @@ export default function AboutPage() {
                     </Badge>
 
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-                        Hi, I&apos;m <span className="text-primary">Jyotishankar Patra</span>
+                        Hi, I&apos;m <span className="text-primary">{about.name}</span>
                     </h1>
 
                     <p className="mt-3 text-xl text-muted-foreground">
-                        Full Stack Software Developer (Backend-Focused)
+                        {about.title}
                     </p>
 
                     <p className="mt-5 max-w-2xl text-base text-muted-foreground">
-                        I build scalable and reliable backend systems with expertise in modern tools.
-                        Passionate about system design, clean APIs, and production-ready applications.
+                        {about.bio}
                     </p>
 
                     {/* Contact Links */}
                     <div className="mt-6 flex flex-wrap gap-4 justify-center lg:justify-start">
-                        <a
-                            href="mailto:jyotipatra.subham@gmail.com"
-                            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            <Mail size={16} />
-                            jyotipatra.subham@gmail.com
-                        </a>
-                        <a
-                            href="tel:+919861250893"
-                            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            <Phone size={16} />
-                            +91-9861250893
-                        </a>
-                        <a
-                            href="https://linkedin.com/in/jyotishankar-patra"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            <Linkedin size={16} />
-                            LinkedIn
-                        </a>
-                        <a
-                            href="https://github.com/jyotishankar04"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            <Github size={16} />
-                            GitHub
-                        </a>
+                        {about.email && (
+                            <a
+                                href={`mailto:${about.email}`}
+                                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                                <Mail size={16} />
+                                {about.email}
+                            </a>
+                        )}
+                        {about.phone && (
+                            <a
+                                href={`tel:${about.phone}`}
+                                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                                <Phone size={16} />
+                                {about.phone}
+                            </a>
+                        )}
+                        {about.linkedin && (
+                            <a
+                                href={about.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                                <Linkedin size={16} />
+                                LinkedIn
+                            </a>
+                        )}
+                        {about.github && (
+                            <a
+                                href={about.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                                <Github size={16} />
+                                GitHub
+                            </a>
+                        )}
                     </div>
 
                     <div className="mt-7 flex flex-wrap gap-3 justify-center lg:justify-start">
-                        <Button size="lg" className="gap-2">
-                            Let&apos;s Connect
-                            <ArrowUpRight />
-                        </Button>
-                        <Button size="lg" variant="outline">
-                            View Projects
+                        {about.email && (
+                            <Button size="lg" className="gap-2" asChild>
+                                <a href={`mailto:${about.email}`}>
+                                    Let&apos;s Connect
+                                    <ArrowUpRight />
+                                </a>
+                            </Button>
+                        )}
+                        <Button size="lg" variant="outline" asChild>
+                            <Link to="/projects">
+                                View Projects
+                            </Link>
                         </Button>
                     </div>
                 </div>
@@ -124,11 +164,7 @@ export default function AboutPage() {
 
                         <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
                             <p>
-                                I&apos;m a <span className="font-medium text-foreground">full stack software developer</span> with more focus on backend development.
-                                I build scalable and reliable backend systems and also have skills in frontend development.
-                            </p>
-                            <p>
-                                I&apos;m good at working with databases, creating APIs, and using modern tools to make efficient software.
+                                {about.bio}
                             </p>
 
                             <div className="flex gap-3 rounded-xl border border-border bg-muted/30 p-4">
@@ -153,93 +189,40 @@ export default function AboutPage() {
                         </div>
                     </div>
 
-                    {/* Experience */}
-                    <div>
-                        <h3 className="text-xl font-semibold text-foreground mb-6">
-                            Professional Experience
-                        </h3>
-
-                        <Card className="border-border/60 bg-card/60">
-                            <CardContent className="p-6">
-                                <div className="flex justify-between items-start mb-4">
-                                    <div>
-                                        <h4 className="font-semibold text-foreground">Full Stack Developer Intern</h4>
-                                        <p className="text-primary">Ansmake Technology • Remote</p>
-                                    </div>
-                                    <span className="text-sm text-muted-foreground">Jun 2025 – Aug 2025</span>
-                                </div>
-                                <ul className="space-y-2 text-sm text-muted-foreground">
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 size={16}/>
-                                        Developed backend file upload system with vector embeddings for AI processing
-                                    </li>
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 size={16}/>
-                                        Built frontend using Next.js with dynamic sidebar, file listing tree, and chat interface
-                                    </li>
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 size={16}  />
-                                        Created REST APIs to connect frontend components with backend services
-                                    </li>
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 size={16} />
-                                        Implemented real-time chat functionality with responsive UI components
-                                    </li>
-                                </ul>
-                            </CardContent>
-                        </Card>
-                    </div>
-
                     {/* Strengths */}
-                    <div>
-                        <h3 className="text-xl font-semibold text-foreground mb-6">
-                            Technical Expertise
-                        </h3>
+                    {strengths.length > 0 && (
+                        <div>
+                            <h3 className="text-xl font-semibold text-foreground mb-6">
+                                Technical Expertise
+                            </h3>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            {[
-                                {
-                                    icon: Code2,
-                                    title: "Full-Stack Development",
-                                    desc: "Built multiple production-grade applications",
-                                },
-                                {
-                                    icon: Server,
-                                    title: "Backend Architecture",
-                                    desc: "System design & microservices expertise",
-                                },
-                                {
-                                    icon: Database,
-                                    title: "Database Management",
-                                    desc: "PostgreSQL, MongoDB, Redis, Prisma ORM",
-                                },
-                                {
-                                    icon: CheckCircle2,
-                                    title: "DevOps & Deployment",
-                                    desc: "Docker, AWS, CI/CD, Cloudflare",
-                                },
-                            ].map((item) => (
-                                <Card
-                                    key={item.title}
-                                    className="group border-border/60 bg-card/60 transition-all hover:-translate-y-1 hover:shadow-lg"
-                                >
-                                    <CardContent className="p-5 flex gap-4">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                            <item.icon />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-medium text-foreground">
-                                                {item.title}
-                                            </h4>
-                                            <p className="mt-1 text-sm text-muted-foreground">
-                                                {item.desc}
-                                            </p>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            ))}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                {strengths.map((item) => {
+                                    const IconComponent = strengthsIconMap[item.icon] || CheckCircle2;
+                                    return (
+                                        <Card
+                                            key={item.title}
+                                            className="group border-border/60 bg-card/60 transition-all hover:-translate-y-1 hover:shadow-lg"
+                                        >
+                                            <CardContent className="p-5 flex gap-4">
+                                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                                                    <IconComponent />
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-medium text-foreground">
+                                                        {item.title}
+                                                    </h4>
+                                                    <p className="mt-1 text-sm text-muted-foreground">
+                                                        {item.desc}
+                                                    </p>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* Side Card */}
@@ -247,18 +230,20 @@ export default function AboutPage() {
                     <Card className="sticky top-8 border-border bg-card shadow-sm">
                         <CardContent className="p-6 text-center">
                             <div className="mx-auto mb-4 h-20 w-20 overflow-hidden rounded-full border border-border">
-                                <img
+                                <img loading="lazy"
                                     src="https://res.cloudinary.com/djby1yfko/image/upload/v1768664054/20260112_134703-IMG_STYLE_sit7ue.jpg"
                                     alt="Profile"
                                     className="h-full w-full object-cover"
                                 />
                             </div>
 
-                            <a href="https://github.com/jyotishankar04" className="text-lg font-semibold text-foreground">
-                                @jyotishankar04
-                            </a>
+                            {about.github && (
+                                <a href={about.github} className="text-lg font-semibold text-foreground">
+                                    {about.github.replace("https://github.com/", "@")}
+                                </a>
+                            )}
                             <p className="text-sm text-muted-foreground mb-6">
-                                Full-Stack Developer
+                                {about.title}
                             </p>
 
                             <div className="space-y-5 text-left">
@@ -333,9 +318,11 @@ export default function AboutPage() {
                                 </div>
                             </div>
 
-                            <Button size="lg" className="mt-6 w-full">
-                                Let&apos;s Collaborate
-                            </Button>
+                            {about.email && (
+                                <Button size="lg" className="mt-6 w-full" asChild>
+                                    <a href={`mailto:${about.email}`}>Let&apos;s Collaborate</a>
+                                </Button>
+                            )}
                         </CardContent>
                     </Card>
 
