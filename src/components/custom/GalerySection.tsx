@@ -1,11 +1,10 @@
-"use client";
-
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+
 const posts = [
     {
-        id: 1,
+        id: "1",
         image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768675934/Snapchat-136706696_mwiu1y.jpg",
         caption: "Locking in. Quiet nights, loud goals.",
         mood: "Focused",
@@ -13,28 +12,28 @@ const posts = [
         featured: true,
     },
     {
-        id: 2,
+        id: "2",
         image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768675716/Snapchat-1197930273_bzrsrn.jpg",
         caption: "Sunlight fixes more than we think.",
         mood: "Calm",
         date: "Dec 2025",
     },
     {
-        id: 3,
+        id: "3",
         image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768664101/IMG_20251208_165343292_jlvexy.jpg",
         caption: "Head down. World muted.",
         mood: "Locked in",
         date: "Nov 2025",
     },
     {
-        id: 4,
+        id: "4",
         image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768676100/IMG_0032_zv1pf9.jpg",
-        caption: "Progress doesn’t need permission.",
+        caption: "Progress doesn't need permission.",
         mood: "Inspired",
         date: "Oct 2025",
     },
     {
-        id: 5,
+        id: "5",
         image: "https://res.cloudinary.com/djby1yfko/image/upload/v1768675939/Snapchat-1287290365_g0it96.jpg",
         caption: "Just showing up matters.",
         mood: "Reflective",
@@ -42,9 +41,8 @@ const posts = [
     },
 ];
 
-
 export function GallerySection() {
-    const [activePost, setActivePost] = useState<typeof posts[0] | null>(null);
+    const [activePost, setActivePost] = useState<(typeof posts)[0] | null>(null);
 
     return (
         <section className="mt-32">
@@ -80,7 +78,7 @@ export function GallerySection() {
                             `}
                         >
                             {/* Image */}
-                            <img
+                            <img loading="lazy"
                                 src={post.image}
                                 alt={post.caption}
                                 className="
@@ -99,9 +97,11 @@ export function GallerySection() {
 
                             {/* Content */}
                             <div className="relative z-10 flex h-full flex-col justify-end p-4">
-                                <Badge variant="secondary" className="mb-2 w-fit">
-                                    {post.mood}
-                                </Badge>
+                                {post.mood && (
+                                    <Badge variant="secondary" className="mb-2 w-fit">
+                                        {post.mood}
+                                    </Badge>
+                                )}
                                 <p className="text-sm text-foreground leading-snug line-clamp-2">
                                     {post.caption}
                                 </p>
@@ -116,7 +116,7 @@ export function GallerySection() {
                 <DialogContent className="max-w-md p-0 overflow-hidden">
                     {activePost && (
                         <div>
-                            <img
+                            <img loading="lazy"
                                 src={activePost.image}
                                 alt=""
                                 className="w-full object-cover"
@@ -132,9 +132,11 @@ export function GallerySection() {
                                     {activePost.caption}
                                 </p>
 
-                                <Badge variant="outline">
-                                    {activePost.mood}
-                                </Badge>
+                                {activePost.mood && (
+                                    <Badge variant="outline">
+                                        {activePost.mood}
+                                    </Badge>
+                                )}
                             </div>
                         </div>
                     )}
