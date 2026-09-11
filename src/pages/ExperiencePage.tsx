@@ -1,42 +1,35 @@
-import ExperienceSection from "@/components/custom/ExperienceSection";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Education } from "@/components/home/education";
+import { CallToAction } from "@/components/home/cta";
+import { MonoLabel, Panel, PanelDescription, PanelHeader, PanelTitle } from "@/components/layout/panel";
+import { StripeSeparator } from "@/components/layout/separator";
+import { WorkExperience } from "@/components/ncdai/work-experience";
+import { EXPERIENCES } from "@/data";
 
-const ExperiencePage = () => {
-    return (
-        <>
-            <ExperienceSection />
+export default function ExperiencePage() {
+  return (
+    <>
+      <Panel className="screen-line-top-none">
+        <PanelHeader className="pt-10">
+          <MonoLabel>Timeline</MonoLabel>
+          <PanelTitle asChild className="mt-2">
+            <h1>Experience</h1>
+          </PanelTitle>
+          <PanelDescription className="pt-2">
+            Where I've worked and what I shipped there. Expand a role for the details.
+          </PanelDescription>
+        </PanelHeader>
 
-            {/* CTA Card */}
-            <div className="relative my-16 flex justify-center">
-                {/* Background glow */}
-                <div className="pointer-events-none absolute -z-10 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+        <WorkExperience className="bg-transparent pr-2" experiences={EXPERIENCES} />
+      </Panel>
 
-                <Card className="relative w-full  overflow-hidden border-border bg-card">
-                    {/* Subtle gradient overlay */}
-                    <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-transparent" />
+      <StripeSeparator />
+      <Education />
 
-                    <CardContent className="relative p-2 text-center">
-                        <h3 className="text-xl font-semibold text-foreground">
-                            Let’s build something meaningful
-                        </h3>
-
-                        <p className="mt-4 text-base text-muted-foreground">
-                            I focus on building dependable software that scales.
-                        </p>
-
-                        <div className="mt-8">
-                            <Button size="lg" className="px-10" asChild>
-                                <a href="mailto:jyotipatra.subham@gmail.com">
-                                    Hire Me
-                                </a>
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
-        </>
-    );
-};
-
-export default ExperiencePage;
+      <StripeSeparator />
+      <CallToAction
+        title="Let's build something meaningful."
+        description="If you're hiring for backend or full-stack work, I'd love to hear about it."
+      />
+    </>
+  );
+}

@@ -1,60 +1,69 @@
 import { useState } from "react";
-import { ProjectList } from "@/components/custom/projects/ProjectList";
-import { useGetProjects } from "@/lib/api";
-import { ViewToggle } from "@/components/custom/ViewToggle";
-import Loader from "@/components/custom/Loader";
 
-type DisplayMode = "stack" | "linear";
+import { ProjectList } from "@/components/custom/projects/ProjectList";
+import type { ProjectLayout } from "@/components/custom/projects/ProjectCard";
+import { ViewToggle } from "@/components/custom/ViewToggle";
+import { CallToAction } from "@/components/home/cta";
+import {
+  MonoLabel,
+  Panel,
+  PanelDescription,
+  PanelHeader,
+  PanelTitle,
+  PanelTitleSup,
+} from "@/components/layout/panel";
+import { StripeSeparator } from "@/components/layout/separator";
+import { PROJECTS, sortedProjects } from "@/data";
+
+const STORAGE_KEY = "projects-view";
+
+const readLayout = (): ProjectLayout => {
+  try {
+    return localStorage.getItem(STORAGE_KEY) === "list" ? "list" : "grid";
+  } catch {
+    return "grid";
+  }
+};
 
 export default function ProjectsPage() {
-    const [displayMode, setDisplayMode] = useState<DisplayMode>("stack");
-    const { data: projects, isLoading } = useGetProjects();
+  const [layout, setLayout] = useState<ProjectLayout>(readLayout);
 
-    if (isLoading) {
-        return (
-            <div className="flex w-full items-center justify-center py-20">
-                <Loader />
-            </div>
-        );
+  const changeLayout = (next: ProjectLayout) => {
+    setLayout(next);
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // ignore
     }
+  };
 
-    if (!projects || projects.length === 0) {
-        return (
-            <section className="mx-auto max-w-6xl py-16">
-                <div className="mb-12">
-                    <h1 className="text-4xl font-bold text-foreground">
-                        Projects
-                    </h1>
-                    <p className="mt-3 text-muted-foreground">
-                        No projects listed yet.
-                    </p>
-                </div>
-            </section>
-        );
-    }
-
-    return (
-        <section className="mx-auto max-w-6xl py-16">
-            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                <div className="max-w-2xl">
-                    <h1 className="text-4xl font-bold text-foreground">
-                        Projects
-                    </h1>
-                    <p className="mt-3 text-muted-foreground">
-                        A collection of projects I&apos;ve built — from APIs to
-                        production-grade systems.
-                    </p>
-                </div>
-
-                <ViewToggle value={displayMode} onChange={setDisplayMode} showLabels />
+  return (
+    <>
+      <Panel className="screen-line-top-none">
+        <PanelHeader className="pt-10">
+          <MonoLabel>Work / Side projects</MonoLabel>
+          <div className="mt-2 flex items-end justify-between gap-4">
+            <PanelTitle asChild>
+              <h1>
+                Projects
+                <PanelTitleSup>{PROJECTS.length}</PanelTitleSup>
+              </h1>
+            </PanelTitle>
+            <div className="mb-1">
+              <ViewToggle value={layout} onChange={changeLayout} showLabels />
             </div>
+          </div>
+          <PanelDescription className="pt-2">
+            Things I've built — from AI-powered tools to full-stack products. Mostly backend-heavy,
+            always shipped.
+          </PanelDescription>
+        </PanelHeader>
 
-            <ProjectList
-                projects={projects}
-                displayMode={displayMode}
-                showAll
-                showFeatured
-            />
-        </section>
-    );
+        <ProjectList projects={sortedProjects()} displayMode={layout} />
+      </Panel>
+
+      <StripeSeparator />
+      <CallToAction />
+    </>
+  );
 }

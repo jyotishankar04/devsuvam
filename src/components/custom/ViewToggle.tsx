@@ -1,37 +1,50 @@
-import { LayoutGrid, List } from "lucide-react";
+import { LayoutGridIcon, ListIcon } from "lucide-react";
+import { motion } from "motion/react";
+
+import type { ProjectLayout } from "@/components/custom/projects/ProjectCard";
+import { sound } from "@/lib/sound";
 import { cn } from "@/lib/utils";
 
-type DisplayMode = "stack" | "linear";
-
 interface ViewToggleProps {
-  value: DisplayMode;
-  onChange: (mode: DisplayMode) => void;
+  value: ProjectLayout;
+  onChange: (value: ProjectLayout) => void;
   showLabels?: boolean;
 }
 
-export function ViewToggle({ value, onChange, showLabels = false }: ViewToggleProps) {
-  const modes: DisplayMode[] = ["stack", "linear"];
+const OPTIONS = [
+  { value: "grid", label: "Grid", icon: LayoutGridIcon },
+  { value: "list", label: "List", icon: ListIcon },
+] as const;
 
+export function ViewToggle({ value, onChange, showLabels = false }: ViewToggleProps) {
   return (
-    <div className="flex items-center rounded-xl bg-muted p-1">
-      {modes.map((mode) => {
-        const isActive = value === mode;
+    <div className="inline-flex items-center rounded-lg border border-line bg-muted/40 p-0.5">
+      {OPTIONS.map((option) => {
+        const active = value === option.value;
         return (
           <button
-            key={mode}
-            onClick={() => onChange(mode)}
+            key={option.value}
+            type="button"
+            onClick={() => {
+              if (!active) sound.click();
+              onChange(option.value);
+            }}
+            aria-pressed={active}
+            aria-label={`${option.label} view`}
             className={cn(
-              "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-all",
-              isActive
-                ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              "relative flex h-7 cursor-pointer items-center gap-1.5 rounded-md px-2 text-xs transition-colors",
+              active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
             )}
-            aria-label={`${mode} view`}
           >
-            {mode === "stack" ? <LayoutGrid size={16} /> : <List size={16} />}
-            {showLabels && (
-              <span className="hidden sm:inline capitalize">{mode}</span>
+            {active && (
+              <motion.span
+                layoutId="view-toggle-pill"
+                className="absolute inset-0 rounded-md bg-background shadow-xs ring-1 ring-border"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.35 }}
+              />
             )}
+            <option.icon className="relative size-3.5" />
+            {showLabels && <span className="relative">{option.label}</span>}
           </button>
         );
       })}

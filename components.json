@@ -21,6 +21,10 @@
   "registries": {
     "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
     "@kokonutui": "https://kokonutui.com/r/{name}.json",
-    "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json"
+    "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json",
+    "@ncdai": "https://chanhdai.com/r/{name}.json",
+    "@componentry": "https://componentry.dev/r/{name}.json",
+    "@rareui": "https://www.rareui.com/r/{name}.json",
+    "@magicui": "https://magicui.design/r/{name}.json"
   }
 }

@@ -1,101 +1,38 @@
-import type { Project } from "@/types";
-import { ProjectCard } from "./ProjectCard";
+import { motion } from "motion/react";
+
+import type { Project } from "@/data";
+import { cn } from "@/lib/utils";
+import { ProjectCard, type ProjectLayout } from "./ProjectCard";
 
 interface ProjectListProps {
-    projects: Project[];
-    showAll?: boolean;
-    limit?: number;
-    showFeatured?: boolean;
-    displayMode?: "linear" |  "stack" ;
+  projects: Project[];
+  displayMode?: ProjectLayout;
 }
 
-export const ProjectList = ({
-    projects,
-    showAll = false,
-    limit = 4,
-    showFeatured = true,
-    displayMode = "linear",
-}: ProjectListProps) => {
-    const featuredProjects = projects.filter((p) => p.featured);
-    const regularProjects = projects.filter((p) => !p.featured);
-
-    const displayedFeatured = showAll
-        ? featuredProjects
-        : featuredProjects.slice(0, Math.min(2, limit));
-
-    const remainingLimit = Math.max(0, limit - displayedFeatured.length);
-    const displayedRegular = showAll
-        ? regularProjects
-        : regularProjects.slice(0, remainingLimit);
-
-    const allDisplayed = [...displayedFeatured, ...displayedRegular];
-
-    
-
-    // ==========================================
-    // STACK - Layered card effect
-    // ==========================================
-    if (displayMode === "stack") {
-        return (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {allDisplayed.map((project) => (
-                    <ProjectCard
-                        key={project.id}
-                        project={project}
-                        layout="stack"
-                    />
-                ))}
-            </div>
-        );
-    }
-
-
-
-    // ==========================================
-    // LINEAR - Minimal list view
-    // ==========================================
-    if (displayMode === "linear") {
-        return (
-            <div className="flex flex-col divide-y divide-border">
-                {allDisplayed.map((project) => (
-                    <ProjectCard
-                        key={project.id}
-                        project={project}
-                        layout="linear"
-                    />
-                ))}
-            </div>
-        );
-    }
-
-    // ==========================================
-    // GRID - Default card grid
-    // ==========================================
-    return (
-        <div className="flex flex-col gap-8">
-            {showFeatured && displayedFeatured.length > 0 && (
-                <div className="flex flex-col gap-6">
-                    {displayedFeatured.map((project) => (
-                        <ProjectCard
-                            key={project.id}
-                            project={project}
-                            layout="featured"
-                        />
-                    ))}
-                </div>
-            )}
-
-            {displayedRegular.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {displayedRegular.map((project) => (
-                        <ProjectCard
-                            key={project.id}
-                            project={project}
-                            layout="card"
-                        />
-                    ))}
-                </div>
-            )}
-        </div>
-    );
+export const ProjectList = ({ projects, displayMode = "grid" }: ProjectListProps) => {
+  return (
+    <div
+      className={cn(
+        "grid gap-px bg-line",
+        displayMode === "grid" ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"
+      )}
+    >
+      {projects.map((project, index) => (
+        <motion.div
+          key={project.slug}
+          className="grid"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ delay: (index % 4) * 0.06, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <ProjectCard project={project} layout={displayMode} />
+        </motion.div>
+      ))}
+      {/* Keep the grid rectangular when the count is odd. */}
+      {displayMode === "grid" && projects.length % 2 === 1 && (
+        <div aria-hidden className="diagonal-stripes hidden bg-background sm:block" />
+      )}
+    </div>
+  );
 };

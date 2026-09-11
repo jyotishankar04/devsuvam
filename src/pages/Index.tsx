@@ -1,29 +1,43 @@
-import { BlogSection } from "@/components/custom/BlogSection";
-import ConnectSection from "@/components/custom/ConnectSection";
-import EducationSection from "@/components/custom/EducationSection";
-import ExperienceSection from "@/components/custom/ExperienceSection";
-import GitHubContributionGraph from "@/components/custom/GithubGraph";
-import HeroSection from "@/components/custom/HeroSection";
-import { Newsletter } from "@/components/custom/NewsLetter";
-import { ProjectSection } from "@/components/custom/ProjectsSection";
-import SkillsSection from "@/components/custom/SkillsSection";
+import { StripeSeparator } from "@/components/layout/separator";
+import { Blog } from "@/components/home/blog";
+import { CallToAction } from "@/components/home/cta";
+import { Education } from "@/components/home/education";
+import { Experience } from "@/components/home/experience";
+import { GitHubContributions } from "@/components/home/github-contributions";
+import { Overview } from "@/components/home/overview";
+import { ProfileHeader } from "@/components/home/profile-header";
+import { Projects } from "@/components/home/projects";
+import { SocialLinks } from "@/components/home/social-links";
+import { TechStack } from "@/components/home/tech-stack";
 
 const Index = () => {
   return (
-    <div className="w-full ">
-      <HeroSection />
-      <GitHubContributionGraph />
-      <ExperienceSection />
-      <ProjectSection
-        limit={4}
-        defaultDisplayMode="linear"
-      />
-      <EducationSection />
-      <SkillsSection />
-      <BlogSection />
-      <ConnectSection />
-      <Newsletter />
-    </div>
+    <>
+      <ProfileHeader />
+      <StripeSeparator />
+
+      <Overview />
+      <SocialLinks />
+      <GitHubContributions />
+      <StripeSeparator />
+
+      <Projects />
+      <StripeSeparator />
+
+      <Experience />
+      <StripeSeparator />
+
+      <TechStack />
+      <StripeSeparator />
+
+      <Blog />
+      <StripeSeparator />
+
+      <Education />
+      <StripeSeparator />
+
+      <CallToAction />
+    </>
   );
 };
 
