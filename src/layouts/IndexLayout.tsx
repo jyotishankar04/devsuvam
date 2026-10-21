@@ -12,8 +12,14 @@ const IndexLayout = () => {
       {/* overflow-x-clip (not hidden) keeps the 200vw hairlines from causing
           horizontal scroll without breaking the sticky header. */}
       <div className="flex min-h-dvh flex-col overflow-x-clip">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:bg-foreground focus:px-3 focus:py-1.5 focus:text-sm focus:text-background"
+        >
+          Skip to content
+        </a>
         <NavBar />
-        <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-2 sm:px-0">
+        <main id="main" tabIndex={-1} className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-2 outline-none sm:px-0">
           {/* Pseudo-element rails keep the column's vertical lines running
               down to the footer on short pages; they sit exactly under the
               panels' own borders. */}

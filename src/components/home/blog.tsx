@@ -28,7 +28,7 @@ export function Blog() {
         )}
       </PanelHeader>
 
-      {hasPosts ? <BlogList posts={sortedPosts().slice(0, 4)} /> : <BlogComingSoon />}
+      {hasPosts ? <BlogList posts={sortedPosts().slice(0, 4)} /> : <BlogComingSoon compact />}
     </Panel>
   )
 }

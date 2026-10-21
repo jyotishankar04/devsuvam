@@ -2,13 +2,22 @@ import { motion } from "motion/react";
 import { FaXTwitter } from "react-icons/fa6";
 
 import { SOCIAL_LINKS } from "@/data";
+import { cn } from "@/lib/utils";
 
-/** Empty state for the blog until the first X article is added to src/data/blogs.ts. */
-export function BlogComingSoon() {
+/**
+ * Empty state for the blog until the first X article is added to src/data/blogs.ts.
+ * `compact` is the shorter variant used as a teaser on the home page.
+ */
+export function BlogComingSoon({ compact = false }: { compact?: boolean }) {
   const x = SOCIAL_LINKS.find((link) => link.name.startsWith("X"));
 
   return (
-    <div className="relative flex flex-col items-center gap-3 overflow-hidden px-4 py-14 text-center">
+    <div
+      className={cn(
+        "relative flex flex-col items-center gap-3 overflow-hidden px-4 text-center",
+        compact ? "py-8" : "py-14"
+      )}
+    >
       <div aria-hidden className="diagonal-stripes absolute inset-0 mask-radial-from-10% mask-radial-to-70% opacity-60" />
 
       <span className="relative inline-flex items-center gap-2 rounded-full border border-line bg-background px-2.5 py-1 font-mono text-[0.6875rem] tracking-wide text-muted-foreground uppercase">
@@ -20,7 +29,10 @@ export function BlogComingSoon() {
       </span>
 
       <motion.p
-        className="relative font-handwritten text-4xl leading-none sm:text-5xl"
+        className={cn(
+          "relative font-handwritten leading-none",
+          compact ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl"
+        )}
         initial={{ clipPath: "inset(-20% 100% -20% 0)" }}
         whileInView={{ clipPath: "inset(-20% 0% -20% 0)" }}
         viewport={{ once: true }}

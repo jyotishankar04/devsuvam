@@ -335,6 +335,26 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Keep headings from leaving a lone word on the last line. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* A visible keyboard focus ring for plain links and controls. Lives in the base
+     layer, so components that style their own focus state still win. */
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  [role="button"]:focus-visible {
+    @apply rounded-sm outline-2 outline-offset-2 outline-ring;
+  }
+
   /* Thin scrollbar */
   ::-webkit-scrollbar {
     width: 5px;

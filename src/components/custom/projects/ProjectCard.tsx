@@ -78,7 +78,9 @@ function StatusPill({ project }: { project: Project }) {
   );
 }
 
-function Tags({ tags, max = 4 }: { tags: string[]; max?: number }) {
+// Three tags plus the "+N" count fit on one line even in half-width grid cards, which
+// keeps the tag rows of side-by-side cards on the same baseline.
+function Tags({ tags, max = 3 }: { tags: string[]; max?: number }) {
   if (!tags?.length) return null;
   return (
     <ul className="flex flex-wrap gap-1">

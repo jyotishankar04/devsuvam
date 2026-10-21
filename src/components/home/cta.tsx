@@ -31,39 +31,41 @@ export function CallToAction({
           <p className="text-sm text-balance text-muted-foreground">{description}</p>
         </div>
 
-        <div className="flex shrink-0 flex-wrap items-center gap-2">
-          <div className="flex items-center rounded-md border border-line">
-            <Button variant="ghost" size="sm" className="rounded-r-none" asChild>
-              <a href={`mailto:${USER.email}`} onClick={() => sound.click()}>
-                Email me
-                <ArrowUpRightIcon />
+        <div className="flex shrink-0 flex-col items-start gap-3 sm:items-end">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center rounded-md border border-line">
+              <Button variant="ghost" size="sm" className="rounded-r-none" asChild>
+                <a href={`mailto:${USER.email}`} onClick={() => sound.click()}>
+                  Email me
+                  <ArrowUpRightIcon />
+                </a>
+              </Button>
+              <CopyButton
+                text={USER.email}
+                variant="ghost"
+                size="sm"
+                className="h-8 w-8 rounded-l-none border-l border-line"
+                onCopySuccess={() => toast.success("Email copied to clipboard")}
+              />
+            </div>
+            <Button size="sm" asChild>
+              <a href={USER.resumeUrl} target="_blank" rel="noopener noreferrer" onClick={() => sound.click()}>
+                <FileTextIcon />
+                Resume
               </a>
             </Button>
-            <CopyButton
-              text={USER.email}
-              variant="ghost"
-              size="sm"
-              className="h-8 w-8 rounded-l-none border-l border-line"
-              onCopySuccess={() => toast.success("Email copied to clipboard")}
-            />
           </div>
-          <Button size="sm" asChild>
-            <a href={USER.resumeUrl} target="_blank" rel="noopener noreferrer" onClick={() => sound.click()}>
-              <FileTextIcon />
-              Resume
-            </a>
-          </Button>
-          <Button variant="outline" size="sm" asChild>
-            <a
-              href={USER.buyMeACoffeeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => sound.click()}
-            >
-              <CoffeeIcon />
-              Buy me a coffee
-            </a>
-          </Button>
+
+          <a
+            href={USER.buyMeACoffeeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sound.click()}
+            className="group inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <CoffeeIcon className="size-3.5 transition-transform group-hover:-rotate-12" />
+            <span className="link-underline">or buy me a coffee</span>
+          </a>
         </div>
       </div>
     </Panel>
