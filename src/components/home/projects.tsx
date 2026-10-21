@@ -23,7 +23,7 @@ export function Projects() {
         </Link>
       </PanelHeader>
 
-      <ProjectList projects={sortedProjects().slice(0, 4)} displayMode="grid" />
+      <ProjectList projects={sortedProjects().slice(0, 5)} displayMode="grid" />
     </Panel>
   )
 }

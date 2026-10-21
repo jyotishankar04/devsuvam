@@ -1,4 +1,4 @@
-import { ArrowUpRightIcon, FileTextIcon } from "lucide-react"
+import { ArrowUpRightIcon, CoffeeIcon, FileTextIcon } from "lucide-react"
 import { toast } from "sonner"
 
 import { Panel } from "@/components/layout/panel"
@@ -51,6 +51,17 @@ export function CallToAction({
             <a href={USER.resumeUrl} target="_blank" rel="noopener noreferrer" onClick={() => sound.click()}>
               <FileTextIcon />
               Resume
+            </a>
+          </Button>
+          <Button variant="outline" size="sm" asChild>
+            <a
+              href={USER.buyMeACoffeeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => sound.click()}
+            >
+              <CoffeeIcon />
+              Buy me a coffee
             </a>
           </Button>
         </div>

@@ -20,7 +20,7 @@ export const ProjectList = ({ projects, displayMode = "grid" }: ProjectListProps
       {projects.map((project, index) => (
         <motion.div
           key={project.slug}
-          className="grid"
+          className={cn("grid", project.pinned && displayMode === "grid" && "sm:col-span-2")}
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}

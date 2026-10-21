@@ -1,5 +1,6 @@
 import { ArrowUpRightIcon } from "lucide-react";
 import { motion } from "motion/react";
+import { useId, useState } from "react";
 
 import { CallToAction } from "@/components/home/cta";
 import {
@@ -27,8 +28,18 @@ function DailyDot() {
   );
 }
 
-/** Line drawing of a laptop, drawn in when it scrolls into view. */
-function LaptopDrawing() {
+const FASTFETCH_LINES = ["OS: Omarchy", "WM: Hyprland", "CPU: Ryzen AI 7"];
+
+/** Snaps an animation to whole steps, so the command appears one key at a time. */
+const typing = (t: number) => Math.floor(t * 9) / 9;
+
+/**
+ * Line drawing of a laptop, drawn in when it scrolls into view. While `active`,
+ * `fastfetch` types itself into the terminal, prints its output and lights the
+ * screen; when inactive it rests at an empty prompt.
+ */
+function LaptopDrawing({ active }: { active: boolean }) {
+  const clipId = useId();
   const draw = {
     initial: { pathLength: 0, opacity: 0 },
     whileInView: { pathLength: 1, opacity: 1 },
@@ -37,6 +48,17 @@ function LaptopDrawing() {
 
   return (
     <svg viewBox="0 0 240 150" fill="none" className="w-full max-w-64 text-foreground" aria-hidden>
+      <defs>
+        {/* Always shows the "$ " prompt; widens to reveal the typed command. */}
+        <clipPath id={clipId}>
+          <motion.rect
+            x="56" y="32" height="14"
+            initial={false}
+            animate={{ width: active ? 64 : 13 }}
+            transition={active ? { duration: 0.45, ease: typing } : { duration: 0 }}
+          />
+        </clipPath>
+      </defs>
       <motion.rect
         x="40" y="14" width="160" height="100" rx="6"
         stroke="currentColor" strokeWidth="1.5"
@@ -44,9 +66,46 @@ function LaptopDrawing() {
       />
       <motion.rect
         x="48" y="22" width="144" height="84" rx="2"
+        fill="currentColor"
         stroke="currentColor" strokeOpacity="0.35" strokeWidth="1"
-        {...draw} transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
+        {...draw}
+        animate={{ fillOpacity: active ? 0.07 : 0 }}
+        transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut", fillOpacity: { duration: 0.4 } }}
       />
+      <motion.g
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 1.1, duration: 0.5 }}
+        className="font-mono"
+        fill="currentColor"
+      >
+        <text x="58" y="42" fontSize="9" fillOpacity="0.7" clipPath={`url(#${clipId})`}>
+          $ fastfetch
+        </text>
+        {FASTFETCH_LINES.map((line, index) => (
+          <motion.text
+            key={line}
+            x="58" y={58 + index * 12} fontSize="8"
+            initial={false}
+            animate={{ fillOpacity: active ? 0.45 : 0 }}
+            transition={{ delay: active ? 0.55 + index * 0.12 : 0, duration: 0.2 }}
+          >
+            {line}
+          </motion.text>
+        ))}
+        {/* Cursor follows the typed command, then drops below the output. */}
+        <motion.rect
+          width="6" height="9" fillOpacity="0.6" className="animate-pulse"
+          initial={false}
+          animate={active ? { x: [70, 119, 119, 58], y: [34, 34, 34, 90] } : { x: 70, y: 34 }}
+          transition={
+            active
+              ? { duration: 0.95, times: [0, 0.47, 0.99, 1], ease: [typing, "linear", "linear"] }
+              : { duration: 0 }
+          }
+        />
+      </motion.g>
       <motion.path
         d="M20 124h200l-10 12H30z"
         stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"
@@ -57,33 +116,29 @@ function LaptopDrawing() {
         stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.5" strokeLinecap="round"
         {...draw} transition={{ duration: 0.4, delay: 1.2 }}
       />
-      {/* A tiny terminal on screen. */}
-      <motion.g
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 1.1, duration: 0.5 }}
-        className="font-mono"
-        fill="currentColor"
-      >
-        <text x="58" y="42" fontSize="9" fillOpacity="0.7">$ fastfetch</text>
-        <text x="58" y="58" fontSize="8" fillOpacity="0.45">OS: Omarchy</text>
-        <text x="58" y="70" fontSize="8" fillOpacity="0.45">WM: Hyprland</text>
-        <text x="58" y="82" fontSize="8" fillOpacity="0.45">CPU: Ryzen AI 7</text>
-        <rect x="58" y="90" width="6" height="9" fillOpacity="0.6" className="animate-pulse" />
-      </motion.g>
     </svg>
   );
 }
 
 function DailyDriver() {
+  const [active, setActive] = useState(false);
+
   return (
     <Panel id="daily-driver">
       <div className="grid gap-px bg-line sm:grid-cols-[1fr_1.15fr]">
-        <figure className="relative flex items-center justify-center bg-background px-6 py-10">
+        {/* Hover runs the terminal with a mouse; a click or tap toggles it. */}
+        <figure
+          className="relative flex cursor-pointer items-center justify-center bg-background px-6 py-10"
+          onPointerEnter={(e) => e.pointerType === "mouse" && setActive(true)}
+          onPointerLeave={(e) => e.pointerType === "mouse" && setActive(false)}
+          onClick={() => {
+            sound.click();
+            setActive((value) => !value);
+          }}
+        >
           <div aria-hidden className="diagonal-stripes absolute inset-0 mask-radial-from-10% mask-radial-to-75% opacity-60" />
           <div className="relative w-full">
-            <LaptopDrawing />
+            <LaptopDrawing active={active} />
           </div>
           <figcaption className="absolute bottom-2 left-3 font-mono text-[0.625rem] text-muted-foreground/60">
             Fig. 1 — daily driver
@@ -116,7 +171,7 @@ function SetupCell({ item, index }: { item: SetupItem; index: number }) {
   const content = (
     <>
       <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-line bg-muted/40 text-muted-foreground transition-colors group-hover:bg-background group-hover:text-foreground [&_svg]:size-4.5">
-        {item.icon ? <item.icon aria-hidden /> : <span className="font-mono text-xs">{item.name.slice(0, 2)}</span>}
+        {item.icon ? <item.icon aria-hidden style={item.color ? { color: item.color } : undefined} /> : <span className="font-mono text-xs">{item.name.slice(0, 2)}</span>}
       </div>
       <div className="min-w-0 flex-1">
         <h3 className="flex flex-wrap items-center gap-2 font-medium">

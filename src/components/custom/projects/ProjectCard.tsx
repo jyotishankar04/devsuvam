@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { ArrowUpRightIcon, GlobeIcon, PackageIcon } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { Link } from "react-router";
@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import { sound } from "@/lib/sound";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/data";
+import { ProjectLivePreview } from "./LivePreviewCard";
 
 export type ProjectLayout = "grid" | "list";
 
@@ -29,15 +30,17 @@ function ProjectLinks({ project, className }: { project: Project; className?: st
         </a>
       )}
       {project.liveUrl && (
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${project.title} live demo`}
-          className={linkClass}
-        >
-          <GlobeIcon />
-        </a>
+        <ProjectLivePreview project={project}>
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.title} live demo`}
+            className={linkClass}
+          >
+            <GlobeIcon />
+          </a>
+        </ProjectLivePreview>
       )}
       {project.packageUrl && (
         <a
@@ -55,6 +58,17 @@ function ProjectLinks({ project, className }: { project: Project; className?: st
 }
 
 function StatusPill({ project }: { project: Project }) {
+  if (project.pinned) {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full border border-foreground/25 bg-foreground/5 px-1.5 py-px font-mono text-[0.625rem] text-foreground uppercase">
+        <span className="relative flex size-1.5">
+          <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" />
+          <span className="relative inline-flex size-1.5 rounded-full bg-primary" />
+        </span>
+        Building now
+      </span>
+    );
+  }
   if (!project.featured) return null;
   return (
     <span className="inline-flex items-center gap-1 rounded-full border border-line px-1.5 py-px font-mono text-[0.625rem] text-muted-foreground uppercase">
@@ -92,10 +106,84 @@ function onSpotlightMove(e: MouseEvent<HTMLElement>) {
   e.currentTarget.style.setProperty("--spotlight-y", `${e.clientY - rect.top}px`);
 }
 
+/** Static screenshot by default; on hover, a looping scroll-through clip of the live site. */
+function ProjectMedia({ project, hovering }: { project: Project; hovering: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (hovering) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+      video.currentTime = 0;
+    }
+  }, [hovering]);
+
+  if (!project.image) return <div className="diagonal-stripes size-full rounded-md" />;
+
+  if (!project.video) {
+    return (
+      <img
+        src={project.image}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+    );
+  }
+
+  return (
+    <>
+      <img
+        src={project.image}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className={cn(
+          "size-full object-cover object-top transition-opacity duration-300",
+          hovering && "opacity-0"
+        )}
+      />
+      <video
+        ref={videoRef}
+        src={project.video}
+        poster={project.image}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className={cn(
+          "absolute inset-0 size-full object-cover object-top transition-opacity duration-300",
+          hovering ? "opacity-100" : "pointer-events-none opacity-0"
+        )}
+      />
+    </>
+  );
+}
+
+// onMouseEnter/Leave can silently fail to fire when a descendant portals elsewhere in the
+// DOM (e.g. the live-preview HoverCard), so track hover via the bubbling over/out events
+// instead, with a containment check to only react at the article's own boundary.
+function crossesContainerBoundary(e: MouseEvent<HTMLElement>) {
+  const related = e.relatedTarget as Node | null;
+  return !related || !e.currentTarget.contains(related);
+}
+
 function GridCard({ project }: { project: Project }) {
+  const [hovering, setHovering] = useState(false);
+
   return (
     <article
       onMouseMove={onSpotlightMove}
+      onMouseOver={(e) => {
+        if (crossesContainerBoundary(e)) setHovering(true);
+      }}
+      onMouseOut={(e) => {
+        if (crossesContainerBoundary(e)) setHovering(false);
+      }}
       className="group relative flex flex-col overflow-hidden bg-background p-2"
     >
       <div
@@ -107,18 +195,10 @@ function GridCard({ project }: { project: Project }) {
         }}
       />
 
-      <div className="relative aspect-1200/630 overflow-hidden rounded-lg border border-line bg-muted">
-        {project.image ? (
-          <img
-            src={project.image}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="size-full object-cover grayscale transition-[filter,scale] duration-500 group-hover:scale-[1.03] group-hover:grayscale-0"
-          />
-        ) : (
-          <div className="diagonal-stripes size-full" />
-        )}
+      <div className="relative aspect-1200/630 overflow-hidden rounded-lg border border-line bg-gradient-to-br from-sky-200/70 via-violet-200/50 to-rose-200/50 p-3 dark:from-sky-500/15 dark:via-violet-500/12 dark:to-rose-500/10">
+        <div className="relative size-full overflow-hidden rounded-md shadow-lg">
+          <ProjectMedia project={project} hovering={hovering} />
+        </div>
       </div>
 
       <div className="relative flex flex-1 flex-col gap-2 px-2 pt-3 pb-1">
@@ -156,7 +236,7 @@ function ListRow({ project }: { project: Project }) {
             alt=""
             loading="lazy"
             decoding="async"
-            className="size-full object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+            className="size-full object-cover"
           />
         )}
       </div>

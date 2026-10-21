@@ -1,30 +1,24 @@
 import type { IconType } from "react-icons"
+import { GenIcon } from "react-icons/lib"
 import {
-  LuActivity,
   LuGitBranch,
-  LuHeadphones,
   LuKeyboard,
   LuMonitor,
   LuMouse,
   LuMousePointer2,
-  LuShare2,
-  LuSmartphone,
-  LuSquareTerminal,
   LuTerminal,
 } from "react-icons/lu"
 import {
-  SiArchlinux,
   SiBeekeeperstudio,
+  SiBoat,
   SiBrave,
   SiBruno,
-  SiBun,
   SiClaude,
   SiDiscord,
   SiDocker,
   SiGithub,
   SiGooglechrome,
   SiLenovo,
-  SiMpv,
   SiNeovim,
   SiNotion,
   SiObsidian,
@@ -32,15 +26,32 @@ import {
   SiOneplus,
   SiOpenai,
   SiPnpm,
-  SiPostman,
   SiSpotify,
   SiTmux,
-  SiWayland,
-  SiWhatsapp,
-  SiZedindustries,
 } from "react-icons/si"
-import { TbDeviceAirpods, TbDeviceDesktop, TbDeviceIpad } from "react-icons/tb"
-import { VscVscode } from "react-icons/vsc"
+import {
+  TbDeviceDesktop,
+  TbDeviceIpad,
+} from "react-icons/tb"
+import {
+  VscVscode,
+} from "react-icons/vsc"
+
+/** Nothing's dot-matrix "N" — not in react-icons, so drawn here. */
+const NOTHING_DOTS = [
+  [0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
+  [1, 1], [2, 2], [3, 3],
+  [4, 0], [4, 1], [4, 2], [4, 3], [4, 4],
+]
+const NothingIcon: IconType = GenIcon({
+  tag: "svg",
+  attr: { viewBox: "0 0 24 24", fill: "currentColor" },
+  child: NOTHING_DOTS.map(([col, row]) => ({
+    tag: "circle",
+    attr: { cx: String(4 + col * 4), cy: String(4 + row * 4), r: "1.6" },
+    child: [],
+  })),
+})
 
 /**
  * The /setup page — gear, apps and tools, and what each one is for.
@@ -52,6 +63,8 @@ export type SetupItem = {
   description: string
   url?: string
   icon?: IconType
+  /** Brand colour for the icon; leave unset for monochrome logos. */
+  color?: string
   daily?: boolean
   /** Small spec chips shown under the description (hardware). */
   specs?: string[]
@@ -90,6 +103,7 @@ export const SETUP: SetupCategory[] = [
         badge: "Secondary",
         description: "Backup machine for side work, and the occasional game.",
         icon: SiLenovo,
+        color: "#E2231A",
         specs: ["Intel Core i5", "16 GB RAM"],
       },
       {
@@ -101,7 +115,7 @@ export const SETUP: SetupCategory[] = [
       {
         name: "CMF Phone 2 Pro",
         description: "Daily phone — checking mobile layouts, 2FA, and staying reachable.",
-        icon: LuSmartphone,
+        icon: NothingIcon,
         specs: ["by Nothing", "Nothing OS"],
         daily: true,
       },
@@ -116,19 +130,21 @@ export const SETUP: SetupCategory[] = [
         badge: "Primary",
         description: "Calls, commutes and deep-focus sessions with noise cancelling.",
         icon: SiOneplus,
+        color: "#F5010C",
         specs: ["Wireless earbuds", "ANC"],
         daily: true,
       },
       {
         name: "CMF Buds",
         description: "Second pair — music on the go.",
-        icon: TbDeviceAirpods,
+        icon: NothingIcon,
         specs: ["Wireless earbuds", "by Nothing"],
       },
       {
         name: "boAt Rockerz",
         description: "Long listening sessions at the desk.",
-        icon: LuHeadphones,
+        icon: SiBoat,
+        color: "#E20722",
         specs: ["Wireless headphones"],
       },
     ],
@@ -178,18 +194,14 @@ export const SETUP: SetupCategory[] = [
         description: "Extension-heavy projects and debugging.",
         url: "https://code.visualstudio.com",
         icon: VscVscode,
-      },
-      {
-        name: "Zed",
-        description: "Fast, lightweight editor for quick sessions.",
-        url: "https://zed.dev",
-        icon: SiZedindustries,
+        color: "#007ACC",
       },
       {
         name: "Neovim",
         description: "Quick edits without leaving the terminal.",
         url: "https://neovim.io",
         icon: SiNeovim,
+        color: "#57A143",
       },
       {
         name: "Ghostty",
@@ -203,6 +215,7 @@ export const SETUP: SetupCategory[] = [
         description: "Terminal sessions, splits and keeping servers running.",
         url: "https://github.com/tmux/tmux",
         icon: SiTmux,
+        color: "#1BB91F",
       },
     ],
   },
@@ -216,6 +229,7 @@ export const SETUP: SetupCategory[] = [
         description: "My main AI — research, thinking through designs, writing and explaining code.",
         url: "https://claude.ai",
         icon: SiClaude,
+        color: "#D97757",
         daily: true,
       },
       {
@@ -223,6 +237,7 @@ export const SETUP: SetupCategory[] = [
         description: "Claude as a coding agent in the terminal — refactors, reviews and debugging.",
         url: "https://claude.com/claude-code",
         icon: SiClaude,
+        color: "#D97757",
         daily: true,
       },
       {
@@ -230,12 +245,6 @@ export const SETUP: SetupCategory[] = [
         description: "OpenAI's coding agent — a second opinion on tricky changes.",
         url: "https://openai.com/codex",
         icon: SiOpenai,
-      },
-      {
-        name: "OpenCode",
-        description: "Open-source terminal coding agent for trying different models.",
-        url: "https://opencode.ai",
-        icon: LuSquareTerminal,
       },
     ],
   },
@@ -248,19 +257,15 @@ export const SETUP: SetupCategory[] = [
         description: "Local Postgres/Redis and containerised services.",
         url: "https://www.docker.com",
         icon: SiDocker,
+        color: "#2496ED",
         daily: true,
-      },
-      {
-        name: "lazydocker",
-        description: "Terminal UI for containers, logs and stats.",
-        url: "https://github.com/jesseduffield/lazydocker",
-        icon: SiDocker,
       },
       {
         name: "lazygit",
         description: "Fast staging, rebasing and history in the terminal.",
         url: "https://github.com/jesseduffield/lazygit",
         icon: LuGitBranch,
+        color: "#F05032",
       },
       {
         name: "GitHub CLI",
@@ -269,35 +274,26 @@ export const SETUP: SetupCategory[] = [
         icon: SiGithub,
       },
       {
-        name: "Postman",
-        description: "Designing and testing REST APIs.",
-        url: "https://www.postman.com",
-        icon: SiPostman,
-      },
-      {
         name: "Bruno",
         description: "Git-friendly API client — request collections live alongside the code.",
         url: "https://www.usebruno.com",
         icon: SiBruno,
+        color: "#F4AA41",
       },
       {
         name: "Beekeeper Studio",
         description: "Database client for browsing tables and running SQL queries.",
         url: "https://www.beekeeperstudio.io",
         icon: SiBeekeeperstudio,
+        color: "#FAD83B",
       },
       {
         name: "Node.js · pnpm",
         description: "Runtime and package manager for most projects.",
         url: "https://pnpm.io",
         icon: SiPnpm,
+        color: "#F69220",
         daily: true,
-      },
-      {
-        name: "Bun",
-        description: "Scripts and quick experiments.",
-        url: "https://bun.sh",
-        icon: SiBun,
       },
     ],
   },
@@ -309,6 +305,7 @@ export const SETUP: SetupCategory[] = [
         description: "Development and DevTools.",
         url: "https://www.google.com/chrome",
         icon: SiGooglechrome,
+        color: "#4285F4",
         daily: true,
       },
       {
@@ -316,6 +313,7 @@ export const SETUP: SetupCategory[] = [
         description: "Personal browsing with built-in ad blocking.",
         url: "https://brave.com",
         icon: SiBrave,
+        color: "#FB542B",
       },
     ],
   },
@@ -333,67 +331,27 @@ export const SETUP: SetupCategory[] = [
         description: "Notes, learning logs and drafts for blog posts.",
         url: "https://obsidian.md",
         icon: SiObsidian,
+        color: "#7C3AED",
       },
       {
         name: "Spotify",
         description: "Music while coding.",
         url: "https://open.spotify.com",
         icon: SiSpotify,
+        color: "#1DB954",
       },
       {
         name: "Discord",
         description: "Developer communities.",
         url: "https://discord.com",
         icon: SiDiscord,
-      },
-      {
-        name: "WhatsApp",
-        description: "Staying in touch.",
-        url: "https://www.whatsapp.com",
-        icon: SiWhatsapp,
-      },
-      {
-        name: "LocalSend",
-        description: "Moving files between phone and laptop over Wi-Fi.",
-        url: "https://localsend.org",
-        icon: LuShare2,
+        color: "#5865F2",
       },
       {
         name: "OBS Studio",
         description: "Screen recording for demos.",
         url: "https://obsproject.com",
         icon: SiObsstudio,
-      },
-      {
-        name: "mpv",
-        description: "Video playback.",
-        url: "https://mpv.io",
-        icon: SiMpv,
-      },
-    ],
-  },
-  {
-    title: "System",
-    description: "The desktop everything above runs on.",
-    items: [
-      {
-        name: "Omarchy",
-        description: "Opinionated Arch Linux setup — the base of the whole machine.",
-        url: "https://omarchy.org",
-        icon: SiArchlinux,
-        daily: true,
-      },
-      {
-        name: "Hyprland",
-        description: "Tiling Wayland compositor, keyboard-driven windows.",
-        url: "https://hypr.land",
-        icon: SiWayland,
-      },
-      {
-        name: "btop",
-        description: "Keeping an eye on CPU, memory and processes.",
-        url: "https://github.com/aristocratos/btop",
-        icon: LuActivity,
       },
     ],
   },

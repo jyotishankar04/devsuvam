@@ -9,27 +9,61 @@ export type Project = {
   description: string
   tags: string[]
   image: string
+  /** Looping scroll-through clip of the live site, shown on card hover in place of the static image. */
+  video?: string
   liveUrl?: string
   githubUrl?: string
   /** npm (or other registry) page for packages/CLIs. */
   packageUrl?: string
   featured?: boolean
+  /** The current flagship project — sorted first and visually highlighted everywhere. At most one at a time. */
+  pinned?: boolean
   content?: string
 }
 
-/** GitHub's auto-generated social card for a repo — used when there's no screenshot. */
-const ghCard = (repo: string) => `https://opengraph.githubassets.com/1/jyotishankar04/${repo}`
-
 export const PROJECTS: Project[] = [
   // ── On the resume ──────────────────────────────────────────────
+  {
+    slug: "savedly",
+    title: "Savedly",
+    description:
+      "Open-source second brain — save links, notes, screenshots and PDFs, then find them again by keyword or meaning and ask questions of what you saved. Self-hostable.",
+    tags: ["Next.js", "TypeScript", "Express.js", "PostgreSQL", "pgvector", "Drizzle", "BullMQ", "LangGraph"],
+    image: "/projects/savedly.png",
+    video: "/projects/savedly.mp4",
+    liveUrl: "https://savedly.app",
+    githubUrl: "https://github.com/jyotishankar04/savedly",
+    featured: true,
+    pinned: true,
+    content: `## Overview
+
+Savedly is an open-source "second brain" — send it a link, note, image or document and it's read, summarized, tagged and made searchable automatically, the same pipeline every time. Ask it a question in plain English and it answers from what you've actually saved, citing the memory it came from.
+
+Free and self-hostable with every feature unlocked, using your own AI key (OpenAI, Anthropic, Groq, Google, or any OpenAI-compatible endpoint).
+
+## Highlights
+
+- **Automatic enrichment** — captures are read, summarized, tagged and embedded on the way in, with no manual tagging required.
+- **Hybrid search** — keyword and semantic (meaning-based) search merged into a single ranked list.
+- **Ask Savedly** — a chat assistant over saved content that can create, edit, organize and delete memories directly.
+- **Collections, sharing and a PIN-gated vault**, plus Google Calendar / Outlook sync for AI-detected events.
+
+## Tech Stack
+
+- **Server:** Express, TypeScript, Drizzle ORM, PostgreSQL with pgvector, BullMQ, LangGraph
+- **Client:** Next.js (App Router), React, Tailwind CSS
+- **Extension:** Vite, React, Chrome Manifest V3`,
+  },
   {
     slug: "bringbucket",
     title: "BYOC / BringBucket",
     description:
       "Bring-your-own-cloud storage SaaS — connect your own AWS S3 or Cloudflare R2 buckets and manage files from one workspace dashboard.",
     tags: ["Next.js", "TypeScript", "Express.js", "PostgreSQL", "Prisma", "AWS S3", "Cloudflare R2"],
-    image: ghCard("BYOC"),
+    image: "/projects/bringbucket.png",
+    video: "/projects/bringbucket.mp4",
     githubUrl: "https://github.com/jyotishankar04/BYOC",
+    liveUrl: "https://bringbucket.vercel.app",
     featured: true,
     content: `## Overview
 
@@ -53,7 +87,8 @@ BringBucket is a BYOC ("bring your own cloud") storage SaaS platform. Users conn
     description:
       "TypeScript backend boilerplate generator for Express, Fastify and Hono — modular architecture with CLI-based project scaffolding.",
     tags: ["TypeScript", "CLI", "Express", "Fastify", "Hono", "Open Source"],
-    image: ghCard("startxkit"),
+    image: "/projects/startxkit.png",
+    video: "/projects/startxkit.mp4",
     githubUrl: "https://github.com/jyotishankar04/startxkit",
     liveUrl: "https://startxkit.js.org",
     packageUrl: "https://npmx.dev/package/startxkit",
@@ -69,7 +104,8 @@ Published on npm — see the package page for usage.`,
     description:
       "An Odia keyword-based programming language that lets you write code in Odia.",
     tags: ["Programming Language", "npm", "Open Source"],
-    image: ghCard("odialang"),
+    image: "/projects/odialang.png",
+    video: "/projects/odialang.mp4",
     liveUrl: "https://odialang.js.org",
     githubUrl: "https://github.com/jyotishankar04/odialang",
     packageUrl: "https://npmx.dev/package/@devsuvam/odialang",
@@ -90,7 +126,6 @@ Published on npm as \`@devsuvam/odialang\`.`,
       "https://res.cloudinary.com/djby1yfko/image/upload/v1746005123/Screenshot_from_2025-03-28_20-20-43_xnnmqe.png",
     liveUrl: "https://quickbrainai.netlify.app",
     githubUrl: "https://github.com/jyotishankar04/QuickBrainAI",
-    featured: true,
     content: `## Overview
 
 QuickBrain AI is an AI-powered note-taking and semantic search system that lets users retrieve relevant notes using natural language queries instead of exact keyword matching.
@@ -104,116 +139,14 @@ QuickBrain AI is an AI-powered note-taking and semantic search system that lets 
 
 - **Backend:** Node.js, Express.js, PostgreSQL, Prisma
 - **AI:** LangChain, Pinecone, Gemini AI`,
-  },
-  // ── More projects ──────────────────────────────────────────────
-  {
-    slug: "quizzify",
-    title: "Quizzify",
-    description:
-      "Interactive Quiz Platform with AI question generation (Gemini API) and real-time feedback system.",
-    tags: ["React", "Node.js", "PostgreSQL", "AI", "JWT", "Tailwind CSS"],
-    image:
-      "https://res.cloudinary.com/djby1yfko/image/upload/v1741372603/Screenshot_from_2025-03-08_00-05-22_tsohbh.png",
-    githubUrl: "https://github.com/jyotishankar04/Quizzify",
-    content: `## Overview
-
-Quizzify is an interactive quiz platform with AI-powered question generation using the Gemini API and real-time feedback.
-
-## Key Features
-
-- **AI Question Generation** — Dynamic quiz creation via Gemini API
-- **Real-time Scoring** — Instant feedback on answers
-- **User Authentication** — JWT-based auth system
-- **PostgreSQL Backend** — Reliable data storage with Prisma ORM
-
-## Tech Stack
-
-- **Frontend:** React, Tailwind CSS
-- **Backend:** Node.js, Express
-- **Database:** PostgreSQL, Prisma
-- **AI:** Google Gemini API`,
-  },
-  {
-    slug: "watch-ecommerce",
-    title: "Watch E-commerce",
-    description:
-      "End-to-end e-commerce platform with Next.js, Express, and PostgreSQL with PhonePe payment integration.",
-    tags: ["Next.js", "Express", "PostgreSQL", "E-commerce", "Payment", "Tailwind CSS"],
-    image:
-      "https://res.cloudinary.com/djby1yfko/image/upload/v1741372858/Screenshot_from_2025-03-08_00-10-46_yauyzv.png",
-    githubUrl: "https://github.com/jyotishankar04/JustWatches",
-    content: `## Overview
-
-A full-featured e-commerce platform for luxury watches built with Next.js and Express, featuring PhonePe payment integration.
-
-## Key Features
-
-- **Product Catalog** — Browse and search watches by category
-- **Shopping Cart** — Add, remove, and manage items
-- **PhonePe Integration** — Seamless UPI payments
-- **Admin Dashboard** — Manage products and orders
-
-## Tech Stack
-
-- **Frontend:** Next.js, Tailwind CSS
-- **Backend:** Express, Node.js
-- **Database:** PostgreSQL
-- **Payments:** PhonePe API`,
-  },
-  {
-    slug: "nexgpt",
-    title: "NexGPT",
-    description: "Chat bot project using Google Gemini API with Cloudflare integration.",
-    tags: ["Next.js", "AI", "Gemini", "Cloudflare"],
-    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=600&fit=crop",
-    githubUrl: "https://github.com/jyotishankar04/s-gpt",
-    content: `## Overview
-
-NexGPT is a chatbot project using Google Gemini API with Cloudflare integration for fast and reliable AI conversations.
-
-## Key Features
-
-- **AI Chat** — Conversational AI powered by Gemini
-- **Cloudflare Integration** — Edge-optimized performance
-- **Modern UI** — Clean Next.js interface
-
-## Tech Stack
-
-- **Frontend:** Next.js, React
-- **AI:** Google Gemini API
-- **Edge:** Cloudflare Workers`,
-  },
-  {
-    slug: "expense-tracker",
-    title: "Expense Mate",
-    description:
-      "A simple expense tracker app using Next.js and Postgres with Cloudflare integration.",
-    tags: ["Next.js", "PostgreSQL", "Finance", "Cloudflare"],
-    image:
-      "https://res.cloudinary.com/djby1yfko/image/upload/v1741373061/Screenshot_from_2025-03-08_00-14-08_y7xft0.png",
-    githubUrl: "https://github.com/jyotishankar04/expense-tracker",
-    content: `## Overview
-
-Expense Mate is a simple yet powerful expense tracking application built with Next.js and PostgreSQL.
-
-## Key Features
-
-- **Track Expenses** — Log and categorize daily expenses
-- **Visual Reports** — Charts and summaries of spending patterns
-- **Budget Management** — Set and track monthly budgets
-
-## Tech Stack
-
-- **Frontend:** Next.js, React
-- **Backend:** PostgreSQL, Cloudflare
-- **Deployment:** Cloudflare Pages`,
-  },
+  }
 ]
 
-/** Featured first, original order otherwise. */
+/** Pinned first, then featured, then the rest in original order. */
 export const sortedProjects = () => [
-  ...PROJECTS.filter((p) => p.featured),
-  ...PROJECTS.filter((p) => !p.featured),
+  ...PROJECTS.filter((p) => p.pinned),
+  ...PROJECTS.filter((p) => !p.pinned && p.featured),
+  ...PROJECTS.filter((p) => !p.pinned && !p.featured),
 ]
 
 export const getProject = (slug?: string) => PROJECTS.find((p) => p.slug === slug)

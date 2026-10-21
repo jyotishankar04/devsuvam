@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router";
 import { Streamdown } from "streamdown";
 
 import { MonoLabel, Panel, PanelContent, PanelHeader } from "@/components/layout/panel";
+import { ProjectLivePreview } from "@/components/custom/projects/LivePreviewCard";
 import { StripeSeparator } from "@/components/layout/separator";
 import { Button } from "@/components/ui/button";
 import { getProject, sortedProjects, type Project } from "@/data";
@@ -80,12 +81,21 @@ export default function ProjectPage() {
           </Link>
 
           <motion.h1
-            className="mt-4 text-3xl font-medium tracking-tight text-balance sm:text-4xl"
+            className="mt-4 flex flex-wrap items-center gap-3 text-3xl font-medium tracking-tight text-balance sm:text-4xl"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
             {project.title}
+            {project.pinned && (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-foreground/25 bg-foreground/5 px-2.5 py-1 align-middle font-mono text-xs text-foreground uppercase">
+                <span className="relative flex size-1.5">
+                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex size-1.5 rounded-full bg-primary" />
+                </span>
+                Building now
+              </span>
+            )}
           </motion.h1>
           <p className="mt-3 text-balance text-muted-foreground">{project.description}</p>
 
@@ -117,11 +127,13 @@ export default function ProjectPage() {
                 </Button>
               )}
               {project.liveUrl && (
-                <Button asChild size="sm">
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                    <GlobeIcon /> Live demo
-                  </a>
-                </Button>
+                <ProjectLivePreview project={project}>
+                  <Button asChild size="sm">
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <GlobeIcon /> Live demo
+                    </a>
+                  </Button>
+                </ProjectLivePreview>
               )}
             </div>
           </div>
@@ -129,14 +141,16 @@ export default function ProjectPage() {
 
         {project.image && (
           <figure className="screen-line-bottom relative p-2">
-            <motion.img
-              src={project.image}
-              alt={project.title}
-              className="w-full rounded-lg border border-line object-cover"
-              initial={{ opacity: 0, scale: 0.99, filter: "blur(6px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            />
+            <div className="rounded-lg border border-line bg-gradient-to-br from-sky-200/70 via-violet-200/50 to-rose-200/50 p-4 sm:p-6 dark:from-sky-500/15 dark:via-violet-500/12 dark:to-rose-500/10">
+              <motion.img
+                src={project.image}
+                alt={project.title}
+                className="w-full rounded-md object-cover object-top shadow-lg"
+                initial={{ opacity: 0, scale: 0.99, filter: "blur(6px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              />
+            </div>
             <figcaption className="absolute right-4 bottom-4 rounded bg-background/80 px-1.5 py-0.5 font-mono text-[0.625rem] text-muted-foreground backdrop-blur">
               Fig. 1 — {project.title}
             </figcaption>

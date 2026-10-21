@@ -1,12 +1,34 @@
 import { useRef } from "react"
 import { BadgeCheckIcon } from "lucide-react"
 import { motion, useInView, usePageInView } from "motion/react"
+import { Link } from "react-router"
 
 import { useTheme } from "@/components/theme-provider"
 import { DotGridSpotlight } from "@/components/ncdai/dot-grid-spotlight"
 import { TextFlip } from "@/components/ncdai/text-flip"
-import { USER } from "@/data"
+import { PROJECTS, USER } from "@/data"
+import { sound } from "@/lib/sound"
 import { cn } from "@/lib/utils"
+
+const PINNED_PROJECT = PROJECTS.find((project) => project.pinned)
+
+function BuildingBadge() {
+  if (!PINNED_PROJECT) return null
+
+  return (
+    <Link
+      to={`/projects/${PINNED_PROJECT.slug}`}
+      onClick={() => sound.click()}
+      className="inline-flex items-center gap-1.5 rounded-full border border-line px-2 py-1 font-mono text-xs text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+    >
+      <span className="relative flex size-1.5">
+        <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" />
+        <span className="relative inline-flex size-1.5 rounded-full bg-primary" />
+      </span>
+      Building {PINNED_PROJECT.title}
+    </Link>
+  )
+}
 
 const DOT_COLORS = {
   dark: { dot: "rgba(255, 255, 255, 0.09)", active: "rgba(255, 255, 255, 0.55)" },
@@ -101,7 +123,7 @@ export function ProfileHeader() {
 
       <div className="flex flex-col">
         <div className="z-1 mt-auto border-t border-line">
-          <div className="flex items-center gap-2 pl-4">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 pl-4">
             <motion.h1
               className="-translate-y-px py-1 text-[1.75rem]/none font-medium tracking-tight sm:text-[2rem]/none"
               initial={{ opacity: 0, y: 8 }}
@@ -114,6 +136,13 @@ export function ProfileHeader() {
               className="size-5 shrink-0 fill-info text-background select-none"
               aria-label="Verified"
             />
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <BuildingBadge />
+            </motion.div>
           </div>
 
           <FlipSentences className="flex h-12.5 items-center border-t border-line py-1 pl-4 sm:h-9" />

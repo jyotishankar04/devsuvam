@@ -19,9 +19,9 @@ export const USER = {
   email: "jyotishankar.dev@gmail.com",
   phone: "+91-9861250893",
   avatar: "/dp.png",
-  resumeUrl:
-    "https://res.cloudinary.com/djby1yfko/image/upload/v1768676198/Jyotishankars_resume_twuz3f.pdf",
+  resumeUrl: "https://drive.google.com/file/d/1M0ESfVfTqpyedf4APVfKUHLKUeO93Xtv/view?usp=sharing",
   githubUrl: "https://github.com/jyotishankar04",
+  buyMeACoffeeUrl: "https://buymeacoffee.com/devsuvam1",
   current: {
     title: "MCA Student",
     company: "KIIT University",

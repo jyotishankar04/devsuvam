@@ -1,32 +1,20 @@
-import type { ReactNode } from "react";
+import { ArrowUpRightIcon, CoffeeIcon } from "lucide-react";
 import { Link } from "react-router";
 
 import { NAV_LINKS, SOCIAL_LINKS, USER } from "@/data";
 import { useLocalTime } from "@/hooks/use-local-time";
-import { cn } from "@/lib/utils";
-
-const STACK = ["React 19 · Vite", "Tailwind CSS v4", "Motion · Lenis", "shadcn/ui"];
-
-const INSPIRED_BY = ["chanhdai.com", "shadcn/ui", "Magic UI", "Componentry"];
+import { sound } from "@/lib/sound";
 
 const buildDate = new Date(__BUILD_DATE__).toISOString().slice(0, 10);
 
-function Field({
-  label,
-  children,
-  className,
-}: {
-  label: string;
-  children: ReactNode;
-  className?: string;
-}) {
+const iconLinkClass =
+  "flex size-8 items-center justify-center rounded-md border border-line text-muted-foreground transition-colors hover:bg-accent hover:text-foreground [&_svg]:size-4";
+
+function SectionLabel({ children }: { children: string }) {
   return (
-    <div className={cn("flex flex-col gap-1 bg-background px-4 py-3", className)}>
-      <dt className="text-[0.6875rem] tracking-wide text-muted-foreground uppercase">
-        {label}
-      </dt>
-      <dd className="text-sm">{children}</dd>
-    </div>
+    <p className="mb-3 font-mono text-[0.6875rem] tracking-wide text-muted-foreground uppercase">
+      {children}
+    </p>
   );
 }
 
@@ -34,7 +22,6 @@ function Field({
 export default function Footer() {
   const time = useLocalTime(USER.timeZone);
   const year = new Date().getFullYear();
-  const x = SOCIAL_LINKS.find((link) => link.name.startsWith("X"));
 
   return (
     <footer className="mt-auto">
@@ -43,101 +30,113 @@ export default function Footer() {
       </div>
 
       <div className="border-x border-line">
-        <div className="screen-line-bottom flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-3">
-          <span className="font-mono text-sm font-medium">{USER.displayName}</span>
-          <span className="text-sm text-muted-foreground">{USER.title}</span>
+        <div className="screen-line-bottom flex flex-wrap items-center gap-x-4 gap-y-3 px-4 py-4">
+          <Link
+            to="/"
+            onClick={() => sound.click()}
+            className="group mr-auto flex min-w-0 items-center gap-3"
+          >
+            <img
+              src={USER.avatar}
+              alt=""
+              className="size-10 shrink-0 rounded-full border border-line object-cover transition-transform duration-300 group-hover:rotate-[-8deg]"
+            />
+            <span className="min-w-0">
+              <span className="block truncate font-medium tracking-tight">{USER.displayName}</span>
+              <span className="block truncate text-sm text-muted-foreground">{USER.title}</span>
+            </span>
+          </Link>
+
+          <div className="flex items-center gap-1.5">
+            {SOCIAL_LINKS.slice(0, 3).map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.name}
+                className={iconLinkClass}
+              >
+                <link.icon />
+              </a>
+            ))}
+            <a
+              href={USER.buyMeACoffeeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Buy me a coffee"
+              className={iconLinkClass}
+            >
+              <CoffeeIcon />
+            </a>
+          </div>
         </div>
 
-        <dl className="grid grid-cols-2 gap-px bg-line font-mono md:grid-cols-4">
-          <Field label="Crafted by">
-            {x ? (
-              <a className="link-underline" href={x.url} target="_blank" rel="noopener noreferrer">
-                {x.handle}
-              </a>
-            ) : (
-              USER.firstName
-            )}
-          </Field>
-          <Field label="Location">{USER.location}</Field>
-          <Field label="Local time">
-            <time className="tabular-nums">{time}</time>{" "}
-            <span className="text-muted-foreground">IST</span>
-          </Field>
-          <Field label="Build">
-            <time dateTime={buildDate}>{buildDate}</time>
-          </Field>
-
-          <Field label="Pages" className="col-span-1">
-            <ul className="flex flex-col gap-0.5 font-sans">
-              {NAV_LINKS.map((link) => (
+        <div className="grid gap-px bg-line sm:grid-cols-2">
+          <nav aria-label="Footer" className="bg-background px-4 py-4">
+            <SectionLabel>Pages</SectionLabel>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+              {NAV_LINKS.map((link, index) => (
                 <li key={link.path}>
-                  <Link className="link" to={link.path}>
-                    {link.label}
+                  <Link
+                    to={link.path}
+                    onClick={() => sound.click()}
+                    className="group flex items-baseline gap-2 text-sm transition-colors hover:text-foreground"
+                  >
+                    <span aria-hidden className="font-mono text-xs text-muted-foreground/60">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="link">{link.label}</span>
                   </Link>
                 </li>
               ))}
             </ul>
-          </Field>
-          <Field label="Elsewhere" className="col-span-1">
-            <ul className="flex flex-col gap-0.5 font-sans">
+          </nav>
+
+          <div className="bg-background px-4 py-4">
+            <SectionLabel>Elsewhere</SectionLabel>
+            <ul className="flex flex-col gap-1.5">
               {SOCIAL_LINKS.map((link) => (
                 <li key={link.name}>
-                  <a className="link" href={link.url} target="_blank" rel="noopener noreferrer">
-                    {link.name}
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 text-sm"
+                  >
+                    <link.icon className="size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+                    <span className="link">{link.name}</span>
+                    <span className="min-w-0 truncate font-mono text-xs text-muted-foreground/70">
+                      {link.handle}
+                    </span>
+                    <ArrowUpRightIcon className="ml-auto size-3.5 shrink-0 text-muted-foreground/0 transition-all group-hover:-translate-y-px group-hover:translate-x-px group-hover:text-muted-foreground" />
                   </a>
                 </li>
               ))}
             </ul>
-          </Field>
-          <Field label="Stack" className="col-span-1">
-            <ul className="flex flex-col gap-0.5">
-              {STACK.map((entry) => (
-                <li key={entry}>{entry}</li>
-              ))}
-            </ul>
-          </Field>
-          <Field label="Typeface" className="col-span-1">
-            <ul className="flex flex-col gap-0.5">
-              <li className="font-sans">Geist</li>
-              <li>Geist Mono</li>
-              <li className="font-handwritten text-base leading-tight">Caveat</li>
-            </ul>
-          </Field>
+          </div>
+        </div>
 
-          <Field className="col-span-2 md:col-span-4" label="Inspired by">
-            <ol className="-mx-4 grid grid-cols-2 gap-x-px gap-y-0.5 font-sans md:grid-cols-4">
-              {INSPIRED_BY.map((name, index) => (
-                <li className="flex gap-2 px-4" key={name}>
-                  <span className="font-mono text-muted-foreground/80" aria-hidden>
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  {name}
-                </li>
-              ))}
-            </ol>
-          </Field>
-        </dl>
+        <div aria-hidden className="@container relative overflow-hidden border-t border-line select-none">
+          <p className="translate-y-[22%] bg-gradient-to-b from-foreground/15 to-foreground/0 bg-clip-text text-center text-[15cqw] leading-none font-semibold tracking-tighter whitespace-nowrap text-transparent">
+            {USER.firstName}
+          </p>
+        </div>
       </div>
 
-      <div className="screen-line-top h-4 border-x border-line" />
-
-      <div className="screen-line-top screen-line-bottom flex items-center gap-3 border-x border-line px-4 py-3 text-sm text-muted-foreground">
-        <Link to="/" className="mr-auto flex items-center gap-2 transition-colors hover:text-foreground">
-          <img src={USER.avatar} alt="" className="size-5 rounded-full border border-line" />
-          <span>© {year} {USER.displayName}</span>
-        </Link>
-        {SOCIAL_LINKS.slice(0, 3).map((link) => (
-          <a
-            key={link.name}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={link.name}
-            className="transition-colors hover:text-foreground"
-          >
-            <link.icon className="size-4" />
-          </a>
-        ))}
+      <div className="screen-line-top screen-line-bottom flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-x border-line px-4 py-3 font-mono text-xs text-muted-foreground">
+        <span>
+          © {year} {USER.displayName}
+        </span>
+        <span className="flex flex-wrap items-center gap-x-2">
+          <span>{USER.location}</span>
+          <span aria-hidden className="text-muted-foreground/40">·</span>
+          <time className="tabular-nums">{time} IST</time>
+          <span aria-hidden className="text-muted-foreground/40">·</span>
+          <span>
+            build <time dateTime={buildDate}>{buildDate}</time>
+          </span>
+        </span>
       </div>
 
       <div className="h-8 border-x border-line" />
